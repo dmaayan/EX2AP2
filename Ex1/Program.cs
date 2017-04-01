@@ -13,6 +13,9 @@ namespace Ex1
             Console.WriteLine("Hello World nevo");
             Console.WriteLine("Hello World nevo");
 
+            Console.WriteLine("Hello erg nevo");
+
+
 
         }
     }
