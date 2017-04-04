@@ -8,10 +8,6 @@ namespace SearchAlgorithmsLib
 {
     public abstract class Searcher<T> : ISearcher<T>
     {
-        public Solution search(ISearchable<T> searchable)
-        {
-
-            return new Solution();
-        }
+        public abstract Solution<T> search(ISearchable<T> searchable);
     }
 }

@@ -9,6 +9,6 @@ namespace SearchAlgorithmsLib
     public interface ISearcher<T>
     {
         // the search method
-        Solution search(ISearchable<T> searchable);
+        Solution<T> search(ISearchable<T> searchable);
     }
 }
