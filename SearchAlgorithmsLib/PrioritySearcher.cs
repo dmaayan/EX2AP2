@@ -4,20 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Priority_Queue;
+
 namespace SearchAlgorithmsLib
 {
-    public abstract class Searcher<T> : ISearcher<T>
+    public abstract class PrioritySearcher<T> : ISearcher<T>
     {
+        private SimplePriorityQueue<State<T>> openList;
         private int evaluatedNodes;
-        public Searcher()
+        public PrioritySearcher()
         {
-         //**   openList = new MyPriorityQueue<State>();
+            openList = new SimplePriorityQueue<State<T>>();
             evaluatedNodes = 0;
         }
         protected State<T> popOpenList()
         {
             evaluatedNodes++;
-           //** return openList.poll();
+            return openList.poll();
         }
         // a property of openList 
         public int OpenListSize
