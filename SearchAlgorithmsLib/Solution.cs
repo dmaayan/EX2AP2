@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace SearchAlgorithmsLib
 {
-    public class Solution
+    public class Solution<T>
     {
+        private List<State<T>> solution;
+
+        public Solution(List<State<T>> solution)
+        {
+            this.solution = solution;
+        }
     }
 }
