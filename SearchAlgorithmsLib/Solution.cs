@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace SearchAlgorithmsLib
 {
-    public interface ISearchable<T>
+    public class Solution
     {
-        State<T> getInitialState();
-        State<T> getGoalState();
-        List<State<T>> getAllPossibleStates(State<T> s);
-
     }
 }
