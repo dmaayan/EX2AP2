@@ -9,47 +9,47 @@ namespace SearchAlgorithmsLib
     public class DFSAlgo<T> : Searcher<T>
     {
         private HashSet<State<T>> visited;
-        private Dictionary<State<T>, State<T>> closed;
 
         public override Solution<T> search(ISearchable<T> searchable)
         {
             visited = new HashSet<State<T>>();
-            closed = new Dictionary<State<T>, State<T>>();
-            State<T> v = searchable.getInitialState();
+            State<T> state = searchable.getInitialState();
             State<T> goal = searchable.getGoalState();
-            Stack<State<T>> S = new Stack<State<T>>();
-            S.Push(v);
-            closed.Add(v, null);
-            while (S.Count > 0)
+            Stack<State<T>> stack = new Stack<State<T>>();
+
+            stack.Push(state);
+            state.CameFrom = null;
+            while (stack.Count > 0)
             {
-                v = S.Pop();
-                if (goal.Equals(v))
+                increaseEvaluatedNodes();
+                state = stack.Pop();
+                if (goal.Equals(state))
                 {
                     return Backtrace(goal);
                 }
-                if (!visited.Contains(v))
+                if (!visited.Contains(state))
                 {
-                    visited.Add(v);
-                    foreach (State<T> w in searchable.getAllPossibleStates(v))
+                    visited.Add(state);
+                    foreach (State<T> neighbour in searchable.getAllPossibleStates(state))
                     {
-                        S.Push(w);
-                        closed.Add(w, v);
+                        stack.Push(neighbour);
+                        neighbour.CameFrom = state;
                     }
                 }
             }
             return null;
         }
 
-        private Solution Backtrace(State<T> goal)
+        private Solution<T> Backtrace(State<T> goal)
         {
             List<State<T>> solution = new List<State<T>>();
-            State<T> v = goal;
-            while (v != null)
+            State<T> state = goal;
+            while (state != null)
             {
-                solution.Add(v);
-                v = closed[v];
+                solution.Add(state);
+                state = state.CameFrom;
             }
-            return new Solution(solution);
+            return new Solution<T>(solution);
         }
     }
 }

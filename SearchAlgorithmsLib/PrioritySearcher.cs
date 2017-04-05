@@ -8,31 +8,52 @@ using Priority_Queue;
 
 namespace SearchAlgorithmsLib
 {
-    public abstract class PrioritySearcher<T> : ISearcher<T>
+    public abstract class PrioritySearcher<T> : Searcher<T>
     {
         private SimplePriorityQueue<State<T>> openList;
-        private int evaluatedNodes;
+
         public PrioritySearcher()
         {
             openList = new SimplePriorityQueue<State<T>>();
-            evaluatedNodes = 0;
         }
+        //**   לבדוק מה באמת מחזיר - רפרנס או העתק
+
+        public SimplePriorityQueue<State<T>> OpenList
+        {
+            get { return openList; }
+        }
+
         protected State<T> popOpenList()
         {
-            evaluatedNodes++;
-            return openList.poll();
+            increaseEvaluatedNodes();
+            return openList.Dequeue();
         }
         // a property of openList 
         public int OpenListSize
-        { // it is a read-only property :) 
+        {
             get { return openList.Count; }
         }
 
-        // ISearcher’s methods:
-        public int getNumberOfNodesEvaluated()
+        public void addToOpenList(State<T> state)
         {
-            return evaluatedNodes;
+            openList.Enqueue(state, (float)(state.Cost));
         }
-        public abstract Solution search(ISearchable<T> searchable);
+
+        public void updateStateIfPathBetter(State<T> current)
+        {
+            foreach (State<T> state in openList)
+            {
+                if (state.Equals(current))
+                {
+                    if (current.Cost < state.Cost)
+                    {
+                        state.CameFrom = current.CameFrom;
+                        openList.UpdatePriority(state, (float)current.Cost);
+                    }
+                }
+            }
+        }
+
+        public override abstract Solution<T> search(ISearchable<T> searchable);
     }
 }

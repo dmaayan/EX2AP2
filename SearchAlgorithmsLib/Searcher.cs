@@ -11,18 +11,12 @@ namespace SearchAlgorithmsLib
         private int evaluatedNodes;
         public Searcher()
         {
-         //**   openList = new MyPriorityQueue<State>();
             evaluatedNodes = 0;
         }
-        protected State<T> popOpenList()
+
+        protected void increaseEvaluatedNodes()
         {
             evaluatedNodes++;
-           //** return openList.poll();
-        }
-        // a property of openList 
-        public int OpenListSize
-        { // it is a read-only property :) 
-            get { return openList.Count; }
         }
 
         // ISearcher’s methods:
@@ -30,6 +24,6 @@ namespace SearchAlgorithmsLib
         {
             return evaluatedNodes;
         }
-        public abstract Solution search(ISearchable<T> searchable);
+        public abstract Solution<T> search(ISearchable<T> searchable);
     }
 }
