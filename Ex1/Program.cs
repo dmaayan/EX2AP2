@@ -11,9 +11,22 @@ namespace Ex1
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World nevo");
-            Console.WriteLine("branch maayan create !!!!!");
 
-            Console.WriteLine("Hello erg nevo");
+            HashSet<string> hash = new HashSet<string>();
+
+            string a = "a";
+            string b = "a";
+            string c = "a";
+
+            hash.Add(a);
+            hash.Add(b);
+            hash.Add(c);
+
+            int aa = a.GetHashCode();
+
+            Console.WriteLine(aa);
+            string p = Console.ReadLine();
+
 
 
 

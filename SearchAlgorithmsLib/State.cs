@@ -23,7 +23,6 @@ namespace SearchAlgorithmsLib
             set { cost = value; }
         }
 
-        // ***  לבדוק אם זה מחזיר רפרנס או העתק
         public State<T> CameFrom
         {
             get { return cameFrom; }
@@ -35,9 +34,29 @@ namespace SearchAlgorithmsLib
             return state;
         }
 
-        public bool Equals(State<T> s) // we overload Object's Equals method
+        // overload Object's Equals method
+        public bool Equals(State<T> s) 
         {
             return state.Equals(s.getState());
         }
+
+    
+        public static class StatePool
+        {
+            // Dictionary<TKey, TValue>
+            private static Dictionary<T, State<T>> pool = new Dictionary<T, State<T>>();
+
+            public static State<T> getState(T state)
+            {
+                // if the state doesn't exist, add it to the pool  
+                if (!pool.ContainsKey(state))
+                {
+                    pool.Add(state, new State<T>(state));
+                }
+                return pool[state];
+            }
+
+        }
+
     }
 }

@@ -50,6 +50,7 @@ namespace SearchAlgorithmsLib
                         state.CameFrom = current.CameFrom;
                         openList.UpdatePriority(state, (float)current.Cost);
                     }
+                    break;
                 }
             }
         }
