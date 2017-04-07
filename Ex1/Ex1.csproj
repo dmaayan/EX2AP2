@@ -34,10 +34,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MazeGeneratorLib">
-      <HintPath>D:\Maayan\Documents\studies\שנה ב\תכנות מתקדם 2\MazeGeneratorLib.dll</HintPath>
+      <HintPath>..\SearchAlgorithmsLib\MazeGeneratorLib.dll</HintPath>
     </Reference>
     <Reference Include="MazeLib">
-      <HintPath>D:\Maayan\Documents\studies\שנה ב\תכנות מתקדם 2\MazeLib.dll</HintPath>
+      <HintPath>..\SearchAlgorithmsLib\MazeLib.dll</HintPath>
     </Reference>
     <Reference Include="Priority Queue, Version=4.0.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\OptimizedPriorityQueue.4.0.4\lib\net45\Priority Queue.dll</HintPath>
@@ -52,7 +52,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MazeAdapter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
