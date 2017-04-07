@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MazeGeneratorLib;
+using MazeLib;
+using SearchAlgorithmsLib;
 
 namespace Ex1
 {
@@ -10,12 +13,24 @@ namespace Ex1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World nevo");
-            Console.WriteLine("branch maayan create !!!!!");
-
-            Console.WriteLine("Hello erg nevo");
+            CompareSolvers();
+            Console.ReadLine();
 
 
+        }
+
+        public static void CompareSolvers()
+        {
+            DFSMazeGenerator mazeGenerator = new DFSMazeGenerator();
+            Maze maze = mazeGenerator.Generate(100, 100);
+            Console.WriteLine(maze.ToString());
+            MazeAdapter<Position> mazeAdapter = new MazeAdapter<Position>(maze);
+            BFS<Position> bfs = new BFS<Position>();
+            DFSAlgo<Position> dfs = new DFSAlgo<Position>();
+            bfs.search(mazeAdapter);
+            dfs.search(mazeAdapter);
+            Console.WriteLine("BFS evaluated nodes: " + bfs.getNumberOfNodesEvaluated());
+            Console.WriteLine("DFS evaluated nodes: " + dfs.getNumberOfNodesEvaluated());
 
         }
     }
