@@ -40,7 +40,11 @@ namespace SearchAlgorithmsLib
             return state.Equals(s.getState());
         }
 
-    
+        public override int GetHashCode()
+        {
+            return state.ToString().GetHashCode();
+        }
+
         public static class StatePool
         {
             // Dictionary<TKey, TValue>

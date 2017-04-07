@@ -22,9 +22,9 @@ namespace Ex1
         public static void CompareSolvers()
         {
             DFSMazeGenerator mazeGenerator = new DFSMazeGenerator();
-            Maze maze = mazeGenerator.Generate(100, 100);
+            Maze maze = mazeGenerator.Generate(15, 15);
             Console.WriteLine(maze.ToString());
-            MazeAdapter<Position> mazeAdapter = new MazeAdapter<Position>(maze);
+            MazeAdapter mazeAdapter = new MazeAdapter(maze);
             BFS<Position> bfs = new BFS<Position>();
             DFSAlgo<Position> dfs = new DFSAlgo<Position>();
             bfs.search(mazeAdapter);

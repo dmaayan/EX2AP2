@@ -19,12 +19,16 @@ namespace Ex1
 
         public State<Position> getInitialState()
         {
-            return State<Position>.StatePool.getState(maze.InitialPos);
+            State<Position> state = State<Position>.StatePool.getState(maze.InitialPos);
+            state.Cost = 0;
+            return state;
         }
 
         public State<Position> getGoalState()
         {
-            return State<Position>.StatePool.getState(maze.GoalPos);
+            State<Position> state = State<Position>.StatePool.getState(maze.GoalPos);
+            state.Cost = 1;
+            return state;
         }
 
         public List<State<Position>> getAllPossibleStates(State<Position> position)
@@ -33,22 +37,31 @@ namespace Ex1
 
             int row = position.getState().Row;
             int col = position.getState().Col;
+            State<Position> state;
 
-            if ((maze.Rows > row) && (maze[row + 1, col] == CellType.Free))
+            if ((maze.Rows > row + 1) && (maze[row + 1, col] == CellType.Free))
             {
-                neighbors.Add(State<Position>.StatePool.getState(new Position(row + 1, col)));
+                state = State<Position>.StatePool.getState(new Position(row + 1, col));
+                state.Cost = 1;
+                neighbors.Add(state);
             }
-            if ((row > 0) && (maze[row - 1, col] == CellType.Free))
+            if ((row > 1) && (maze[row - 1, col] == CellType.Free))
             {
-                neighbors.Add(State<Position>.StatePool.getState(new Position(row - 1, col)));
+                state = State<Position>.StatePool.getState(new Position(row - 1, col));
+                state.Cost = 1;
+                neighbors.Add(state);
             }
-            if ((col > 0) && (maze[row, col - 1] == CellType.Free))
+            if ((col > 1) && (maze[row, col - 1] == CellType.Free))
             {
-                neighbors.Add(State<Position>.StatePool.getState(new Position(row, col - 1)));
+                state = State<Position>.StatePool.getState(new Position(row, col - 1));
+                state.Cost = 1;
+                neighbors.Add(state);
             }
-            if ((maze.Cols > col) && (maze[row, col + 1] == CellType.Free))
+            if ((maze.Cols > col + 1) && (maze[row, col + 1] == CellType.Free))
             {
-                neighbors.Add(State<Position>.StatePool.getState(new Position(row, col + 1)));
+                state = State<Position>.StatePool.getState(new Position(row, col + 1));
+                state.Cost = 1;
+                neighbors.Add(state);
             }
             return neighbors;
         }

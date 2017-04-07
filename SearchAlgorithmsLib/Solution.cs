@@ -13,6 +13,7 @@ namespace SearchAlgorithmsLib
         public Solution(List<State<T>> solution)
         {
             this.solution = solution;
+            Console.WriteLine(solution.ToString());
         }
     }
 }
