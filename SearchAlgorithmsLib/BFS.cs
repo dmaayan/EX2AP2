@@ -19,7 +19,6 @@ namespace SearchAlgorithmsLib
             while (OpenListSize > 0)
             {
                 State<T> state = popOpenList();         // removes the best state
-                UpdatedStates.Add(state, new KeyValuePair<State<T>, double>(state.CameFrom, state.Cost));
                 closed.Add(state);                      // add it to the closed hash
 
                 if (state.Equals(goal))
@@ -32,11 +31,12 @@ namespace SearchAlgorithmsLib
                 { 
                     if (!closed.Contains(s) && !OpenList.Contains(s))
                     {
+                        //***lock
                         s.CameFrom = state;  
                         addToOpenList(s);
                     }
                     // the cost of the new way is better
-                    else if (OpenList.Contains(s) )
+                    else if (OpenList.Contains(s))
                     {
                         s.CameFrom = state;
                         updateStateIfPathBetter(s);

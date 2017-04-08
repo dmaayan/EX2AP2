@@ -43,24 +43,21 @@ namespace SearchAlgorithmsLib
         public void addToOpenList(State<T> state)
         {
             openList.Enqueue(state, (float)(state.Cost));
+            UpdatedStates.Add(state, new KeyValuePair<State<T>, double>(state.CameFrom, state.Cost));
         }
 
         public void updateStateIfPathBetter(State<T> current)
         {
-            foreach (State<T> state in openList)
+            State<T> state = openList.Where(elem => current.Equals(elem)).First();
+
+            double costOfState = updatedStates[state].Value;
+            if (current.Cost < costOfState)
             {
-                if (state.Equals(current))
-                {
-                    double costOfState = updatedStates[state].Value;
-                    if (current.Cost < costOfState)
-                    {
-                        updatedStates[state] = new KeyValuePair<State<T>, double>
-                                               (updatedStates[current].Key, current.Cost);
-                        openList.UpdatePriority(state, (float)current.Cost);
-                    }
-                    break;
-                }
+                updatedStates[state] = new KeyValuePair<State<T>, double>
+                                       (updatedStates[current].Key, updatedStates[current].Value);
+                openList.UpdatePriority(state, (float)updatedStates[current].Value);
             }
+
         }
 
         public override abstract Solution<T> search(ISearchable<T> searchable);

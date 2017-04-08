@@ -15,14 +15,12 @@ namespace Ex1
         {
             CompareSolvers();
             Console.ReadLine();
-
-
         }
 
         public static void CompareSolvers()
         {
             DFSMazeGenerator mazeGenerator = new DFSMazeGenerator();
-            Maze maze = mazeGenerator.Generate(100, 100);
+            Maze maze = mazeGenerator.Generate(20, 20);
             Console.WriteLine(maze.ToString());
             MazeAdapter mazeAdapter = new MazeAdapter(maze);
             BFS<Position> bfs = new BFS<Position>();

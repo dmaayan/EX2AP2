@@ -19,6 +19,8 @@ namespace SearchAlgorithmsLib
 
             stack.Push(state);
             state.CameFrom = null;
+            Parents.Add(state, null);
+
             while (stack.Count > 0)
             {
                 increaseEvaluatedNodes();
@@ -30,10 +32,12 @@ namespace SearchAlgorithmsLib
                 if (!visited.Contains(state))
                 {
                     visited.Add(state);
-                    foreach (State<T> neighbour in searchable.getAllPossibleStates(state).Where(elem => !visited.Contains(elem)))
+                    foreach (State<T> neighbour in searchable.getAllPossibleStates(state).Where
+                                                   (elem => !visited.Contains(elem)))
                     {
                         stack.Push(neighbour);
                         neighbour.CameFrom = state;
+                        Parents.Add(neighbour, state);
                     }
                 }
             }
@@ -47,7 +51,7 @@ namespace SearchAlgorithmsLib
             while (state != null)
             {
                 solution.Add(state);
-                state = state.CameFrom;
+                state = Parents[state];
             }
             return new Solution<T>(solution);
         }
