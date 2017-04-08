@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SearchAlgorithmsLib
 {
-    public class DFSAlgo<T> : Searcher<T>
+    public class DFSAlgo<T> : NonPrioritySearcher<T>
     {
         private HashSet<State<T>> visited;
 
@@ -30,7 +30,7 @@ namespace SearchAlgorithmsLib
                 if (!visited.Contains(state))
                 {
                     visited.Add(state);
-                    foreach (State<T> neighbour in searchable.getAllPossibleStates(state))
+                    foreach (State<T> neighbour in searchable.getAllPossibleStates(state).Where(elem => !visited.Contains(elem)))
                     {
                         stack.Push(neighbour);
                         neighbour.CameFrom = state;

@@ -42,25 +42,25 @@ namespace Ex1
             if ((maze.Rows > row + 1) && (maze[row + 1, col] == CellType.Free))
             {
                 state = State<Position>.StatePool.getState(new Position(row + 1, col));
-                state.Cost = 1;
+                state.Cost = position.Cost + 1;
                 neighbors.Add(state);
             }
-            if ((row > 1) && (maze[row - 1, col] == CellType.Free))
+            if ((row > 0) && (maze[row - 1, col] == CellType.Free))
             {
                 state = State<Position>.StatePool.getState(new Position(row - 1, col));
-                state.Cost = 1;
+                state.Cost = position.Cost + 1;
                 neighbors.Add(state);
             }
-            if ((col > 1) && (maze[row, col - 1] == CellType.Free))
+            if ((col > 0) && (maze[row, col - 1] == CellType.Free))
             {
                 state = State<Position>.StatePool.getState(new Position(row, col - 1));
-                state.Cost = 1;
+                state.Cost = position.Cost + 1;
                 neighbors.Add(state);
             }
             if ((maze.Cols > col + 1) && (maze[row, col + 1] == CellType.Free))
             {
                 state = State<Position>.StatePool.getState(new Position(row, col + 1));
-                state.Cost = 1;
+                state.Cost = position.Cost + 1;
                 neighbors.Add(state);
             }
             return neighbors;

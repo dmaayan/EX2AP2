@@ -10,7 +10,7 @@ namespace SearchAlgorithmsLib
     {
         // Searcher's abstract method overriding 
         public override Solution<T> search(ISearchable<T> searchable)
-        { 
+        {
             addToOpenList(searchable.getInitialState()); 
             HashSet<State<T>> closed = new HashSet<State<T>>();
 
@@ -18,7 +18,8 @@ namespace SearchAlgorithmsLib
 
             while (OpenListSize > 0)
             {
-                State<T> state = popOpenList();         // removes the best state 
+                State<T> state = popOpenList();         // removes the best state
+                UpdatedStates.Add(state, new KeyValuePair<State<T>, double>(state.CameFrom, state.Cost));
                 closed.Add(state);                      // add it to the closed hash
 
                 if (state.Equals(goal))
@@ -31,7 +32,7 @@ namespace SearchAlgorithmsLib
                 { 
                     if (!closed.Contains(s) && !OpenList.Contains(s))
                     {
-                        s.CameFrom = state;  // ** לבדוק אם באמת צריך את זה
+                        s.CameFrom = state;  
                         addToOpenList(s);
                     }
                     // the cost of the new way is better

@@ -42,7 +42,7 @@ namespace SearchAlgorithmsLib
 
         public override int GetHashCode()
         {
-            return state.ToString().GetHashCode();
+            return String.Intern(state.ToString()).GetHashCode();
         }
 
         public static class StatePool

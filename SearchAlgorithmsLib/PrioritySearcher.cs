@@ -11,16 +11,22 @@ namespace SearchAlgorithmsLib
     public abstract class PrioritySearcher<T> : Searcher<T>
     {
         private SimplePriorityQueue<State<T>> openList;
+        private Dictionary<State<T>, KeyValuePair<State<T>, double>> updatedStates;
 
         public PrioritySearcher()
         {
             openList = new SimplePriorityQueue<State<T>>();
+            updatedStates = new Dictionary<State<T>, KeyValuePair<State<T>, double>>();
         }
-        //**   לבדוק מה באמת מחזיר - רפרנס או העתק
 
         public SimplePriorityQueue<State<T>> OpenList
         {
             get { return openList; }
+        }
+
+        public Dictionary<State<T>, KeyValuePair<State<T>, double>> UpdatedStates
+        {
+            get { return updatedStates; }
         }
 
         protected State<T> popOpenList()
@@ -45,9 +51,11 @@ namespace SearchAlgorithmsLib
             {
                 if (state.Equals(current))
                 {
-                    if (current.Cost < state.Cost)
+                    double costOfState = updatedStates[state].Value;
+                    if (current.Cost < costOfState)
                     {
-                        state.CameFrom = current.CameFrom;
+                        updatedStates[state] = new KeyValuePair<State<T>, double>
+                                               (updatedStates[current].Key, current.Cost);
                         openList.UpdatePriority(state, (float)current.Cost);
                     }
                     break;
