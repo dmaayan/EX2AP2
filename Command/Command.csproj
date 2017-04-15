@@ -31,10 +31,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MazeGeneratorLib">
-      <HintPath>D:\Maayan\Documents\studies\שנה ב\תכנות מתקדם 2\MazeGeneratorLib.dll</HintPath>
+      <HintPath>..\SearchAlgorithmsLib\MazeGeneratorLib.dll</HintPath>
     </Reference>
     <Reference Include="MazeLib">
-      <HintPath>D:\Maayan\Documents\studies\שנה ב\תכנות מתקדם 2\MazeLib.dll</HintPath>
+      <HintPath>..\SearchAlgorithmsLib\MazeLib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,12 +46,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\Command.cs" />
     <Compile Include="Controller.cs" />
-    <Compile Include="GenerateMazeCommand.cs" />
-    <Compile Include="ICommand.cs" />
+    <Compile Include="Commands\CloseGameCommand.cs" />
+    <Compile Include="Commands\GenerateMazeCommand.cs" />
+    <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="IController.cs" />
     <Compile Include="IModel.cs" />
+    <Compile Include="IView.cs" />
+    <Compile Include="Commands\JoinGameCommand.cs" />
+    <Compile Include="Commands\ListGameNamesCommand.cs" />
     <Compile Include="Model.cs" />
+    <Compile Include="Commands\PlayCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Commands\RunBFSCommand.cs" />
+    <Compile Include="Commands\RunDFSCommand.cs" />
+    <Compile Include="Commands\SolveMazeCommand.cs" />
+    <Compile Include="Commands\StartMazeGameCommand.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Client\Client.csproj">
+      <Project>{b48b28b0-bb60-455b-abd4-1561f8a95470}</Project>
+      <Name>Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ex1\Ex1.csproj">
+      <Project>{82414EB6-207B-4A85-8E4F-57CFEA38C5DE}</Project>
+      <Name>Ex1</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SearchAlgorithmsLib\SearchAlgorithmsLib.csproj">
+      <Project>{dd7b007a-d5dd-4144-a43e-8af6678c2076}</Project>
+      <Name>SearchAlgorithmsLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

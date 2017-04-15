@@ -29,7 +29,8 @@ namespace Client
                 int result = reader.ReadInt32();
                 Console.WriteLine("Result = {0}", result);
             }
-            client.Close();
+            client.Close();
+
         }
     }
 }
