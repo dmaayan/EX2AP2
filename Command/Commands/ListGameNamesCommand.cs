@@ -1,18 +1,16 @@
 ﻿using System.Net.Sockets;
+using Newtonsoft.Json;
 
-namespace Command
+namespace MVC
 {
-    internal class ListGameNamesCommand : Command
+    public class ListGameNamesCommand : Command
     {
 
-        public ListGameNamesCommand(IModel model) : base(model)
-        {
-        }
+        public ListGameNamesCommand(IModel model) : base(model) { }
 
         public override string Execute(string[] args, TcpClient client)
         {
-            
-            return "";
+            return JsonConvert.SerializeObject(Model.GetAllNames());
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Command;
+﻿using MVC;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,8 +15,11 @@ namespace Server
         static void Main(string[] args)
         {
             Controller c = new Controller();
+            IModel model = new Model();
             IClientHandler ic = new ClientHandler(c);
-            Server server = new Server(int.Parse(args[1]), ic);
+            c.Model = model;
+            c.View = ic;
+            Server server = new Server(int.Parse(args[0]), ic);
             server.Start();
             server.Stop();
             //IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8000);

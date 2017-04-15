@@ -1,3 +1,4 @@
+
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,21 +14,25 @@ namespace Client
     {
         static void Main(string[] args)
         {
-            IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8000);
+            IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8080);
             TcpClient client = new TcpClient();
             client.Connect(ep);
-            Console.WriteLine("You are connected");
+            Console.WriteLine("You are connected!");
             using (NetworkStream stream = client.GetStream())
-            using (BinaryReader reader = new BinaryReader(stream))
-            using (BinaryWriter writer = new BinaryWriter(stream))
+            using (StreamReader reader = new StreamReader(stream))
+            using (StreamWriter writer = new StreamWriter(stream))
             {
-                // Send data to server
-                Console.Write("Please enter a number: ");
-                int num = int.Parse(Console.ReadLine());
-                writer.Write(num);
-                // Get result from server
-                int result = reader.ReadInt32();
-                Console.WriteLine("Result = {0}", result);
+                string command = "";
+                while (!command.Contains("close"))
+                {
+                    // Send data to server
+                    Console.Write("Please enter a command: ");
+                    command = Console.ReadLine();
+                    writer.WriteLine(command);
+                    // Get result from server
+                    string result = reader.ReadLine();
+                    Console.WriteLine("Result = {0}", result);
+                }
             }
             client.Close();
 

@@ -6,34 +6,32 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Command
+namespace MVC
 {
     public class Controller : IController
     {
         private Dictionary<string, ICommand> commands;
         private IModel model;
-        private IView view;
+        private IClientHandler view;
 
         public Controller()
         {
-            model = new Model();
             commands = new Dictionary<string, ICommand>();
             commands.Add("generate", new GenerateMazeCommand(model));
             commands.Add("solve", new SolveMazeCommand(model));
-            commands.Add("start", new StartMazeGameCommand(model));
+            commands.Add("start", new StartGameCommand(model));
             commands.Add("list", new ListGameNamesCommand(model));
             commands.Add("join", new JoinGameCommand(model));
             commands.Add("play", new PlayCommand(model));
             commands.Add("close", new CloseGameCommand(model));
-
-            // more commands...
         }
+
         public IModel Model
         {
             set { model = value; }
         }
 
-        public IView View
+        public IClientHandler View
         {
             set { view = value; }
         }
@@ -48,7 +46,12 @@ namespace Command
             }
             string[] args = arr.Skip(1).ToArray();
             ICommand command = commands[commandKey];
-            return command.Execute(args, client);
+            string result = command.Execute(args, client);
+            if (result == null)
+            {
+                return "Incorrect Command";
+            }
+            return result;
         }
     }
 }

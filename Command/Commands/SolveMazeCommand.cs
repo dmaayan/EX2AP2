@@ -2,17 +2,17 @@
 using System.Net.Sockets;
 using System.Linq;
 
-namespace Command
+namespace MVC
 {
-    internal class SolveMazeCommand : Command
+    public class SolveMazeCommand : Command
     {
         private Dictionary<string, ICommand> commands;
 
         public SolveMazeCommand(IModel model) : base(model)
         {
             commands = new Dictionary<string, ICommand>();
-            commands.Add("DFS", new RunDFSCommand(model));
-            commands.Add("BFS", new RunBFSCommand(model));
+            commands.Add("0", new RunBFSCommand(model));
+            commands.Add("1", new RunDFSCommand(model));
         }
 
         public override string Execute(string[] args, TcpClient client)

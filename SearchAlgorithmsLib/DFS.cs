@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SearchAlgorithmsLib
 {
-    public class DFSAlgo<T> : NonPrioritySearcher<T>
+    public class DFS<T> : NonPrioritySearcher<T>
     {
         private HashSet<State<T>> visited;
 
@@ -53,7 +53,7 @@ namespace SearchAlgorithmsLib
                 solution.Add(state);
                 state = Parents[state];
             }
-            return new Solution<T>(solution);
+            return new Solution<T>(solution, getNumberOfNodesEvaluated());
         }
     }
 }

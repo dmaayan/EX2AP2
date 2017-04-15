@@ -5,9 +5,9 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
-using Command;
+using MVC;
 
-namespace Server
+namespace MVC
 {
     public class ClientHandler : IClientHandler
     {
@@ -35,11 +35,12 @@ namespace Server
                             commandLine = reader.ReadLine();
                             Console.WriteLine("Got command: {0}", commandLine);
                             string result = controller.ExecuteCommand(commandLine, client);
-                            writer.Write(result);
+                            writer.WriteLine(result);
                         }
                         //**לשנות את האקספשין 
-                        catch (SocketException)
+                        catch (IOException e)
                         {
+                            Console.WriteLine(e);
                             break;
                         }
                     }

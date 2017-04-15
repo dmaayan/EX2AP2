@@ -5,7 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Command
+namespace MVC
 {
     public abstract class Command : ICommand
     {

@@ -8,9 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Command
+namespace MVC
 {
     public delegate Solution<Position> searchAlgo(ISearchable<Position> searchable);
+
     public interface IModel
     {
         Maze GenerateMaze(string name, int rows, int cols);
@@ -21,11 +22,13 @@ namespace Command
 
         Maze JoinGame(string name, TcpClient client);
 
-        Maze PlayGame(string name, TcpClient client);
+        Maze PlayGame(Direction move, TcpClient client);
 
         void CloseGame(string name);
 
         Solution<Position> SolveMaze(string name, searchAlgo search);
+
+        string[] GetAllNames();
 
     }
 }

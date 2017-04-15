@@ -10,7 +10,7 @@ using SearchAlgorithmsLib;
 using System.Net.Sockets;
 using Client;
 
-namespace Command
+namespace MVC
 {
     public class Model : IModel
     {
@@ -21,6 +21,9 @@ namespace Command
         private Dictionary<Player, Maze> playersToMaze;
         private Dictionary<TcpClient, Player> clientToPlayer;
 
+        /// <summary>
+        /// constructor
+        /// </summary>
         public Model()
         {
             mazes = new Dictionary<string, Maze>();
@@ -31,35 +34,58 @@ namespace Command
             clientToPlayer = new Dictionary<TcpClient, Player>();
         }
 
+        /// <summary>
+        /// Generate a Maze, if the maze exist close it and create new maze
+        /// </summary>
+        /// <param name="name">the name of the maze </param>
+        /// <param name="rows">the rows of the maze </param>
+        /// <param name="cols">the cols of the maze </param>
+        /// <returns>the new maze</returns>
         public Maze GenerateMaze(string name, int rows, int cols)
         {
             DFSMazeGenerator mazeGenerator = new DFSMazeGenerator();
             Maze maze = mazeGenerator.Generate(rows, cols);
             maze.Name = name;
+            // if the maze exist close it
             if (mazes.ContainsKey(name))
             {
                 CloseGame(name);
             }
+            // create new maze
             mazes.Add(name, maze);
             return maze;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name">the name of the maze</param>
+        /// <param name="searcher">the algorithem to solve with</param>
+        /// <returns>the solution to the maze</returns>
         public Solution<Position> SolveMaze(string name, searchAlgo searcher)
         {
+            // checks if the maze exist
             if (!mazes.ContainsKey(name))
             {
                 return null;
             }
+            // checks if the solution exist
             if (solved.ContainsKey(name))
             {
                 return solved[name];
             }
+            // solve the maze and return the solution
             Maze maze = mazes[name];
             MazeAdapter mazeAdapter = new MazeAdapter(maze);
-            solved.Add(name, searcher(mazeAdapter));
-            return solved[name];
+            Solution<Position> solution = searcher(mazeAdapter);
+            solved.Add(name, solution);
+            return solution;
         }
-
+        
+        /// <summary>
+        /// get a maze
+        /// </summary>
+        /// <param name="name">the name of the maze</param>
+        /// <returns>the maze if exist</returns>
         public Maze GetMaze(string name)
         {
             if (mazes.ContainsKey(name))
@@ -69,9 +95,18 @@ namespace Command
             return null;
         }
 
-        public Maze StartGame(string name, int rows,int cols, TcpClient client)
+        /// <summary>
+        /// start a game
+        /// </summary>
+        /// <param name="name">of the maze </param>
+        /// <param name="rows">of the maze </param>
+        /// <param name="cols">of the maze</param>
+        /// <param name="client">that start this game</param>
+        /// <returns>the maze</returns>
+        public Maze StartGame(string name, int rows, int cols, TcpClient client)
         {
             Maze maze;
+            // לבדוק אם (מי) בכלל צריך את זה
             if (mazes.ContainsKey(name))
             {
                 maze = mazes[name];
@@ -81,7 +116,9 @@ namespace Command
                 maze = GenerateMaze(name, rows, cols);
             }
             waitingList.Add(name, maze);
-            playersToMaze.Add(new Player(client), maze);
+            Player p = new Player(client);
+            playersToMaze.Add(p, maze);
+            p.WaitForPlayer();
             return maze;
         }
 
@@ -91,26 +128,28 @@ namespace Command
             if (waitingList.ContainsKey(name))
             {
                 maze = waitingList[name];
+                Player p = playersToMaze.Where(elem => 
+                    { return elem.Value.Equals(maze); }).First().Key;
                 activeGames.Add(name, maze);
                 waitingList.Remove(name);
                 playersToMaze.Add(new Player(client), maze);
+                p.StopWaiting();
                 return maze;
             }
             return null;
         }
 
-        public Maze PlayGame(string move, TcpClient client)
+        public Maze PlayGame(Direction move, TcpClient client)
         {
             if (clientToPlayer.ContainsKey(client))
             {
-                clientToPlayer[client].Way.Add(Enum.Parse(Direction, move));
+                Player player = clientToPlayer[client];
                 Maze maze = playersToMaze[player];
-            }
-            if (activeGames.ContainsKey(name))
-            {
-                activeGames.Add(name, waitingList[name]);
-                waitingList.Remove(name);
-                return mazes[name];
+                if (activeGames.ContainsKey(maze.Name))
+                {
+                    player.Way.Add(move);
+                    return maze;
+                }
             }
             return null;
         }
@@ -133,7 +172,12 @@ namespace Command
                     activeGames.Remove(name);
                 }
             }
+            
         }
 
+        public string[] GetAllNames()
+        {
+            return waitingList.Keys.ToArray();
+        }
     }
 }

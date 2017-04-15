@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVC;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -46,6 +47,7 @@ namespace Server
                 Console.WriteLine("Server stopped");
             });
             task.Start();
+            task.Wait();
         }
 
         public void Stop()

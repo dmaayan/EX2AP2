@@ -56,7 +56,7 @@ namespace SearchAlgorithmsLib
                 solution.Add(state);
                 state = state.CameFrom;
             } 
-            return new Solution<T>(solution);
+            return new Solution<T>(solution, getNumberOfNodesEvaluated());
         }
 
 

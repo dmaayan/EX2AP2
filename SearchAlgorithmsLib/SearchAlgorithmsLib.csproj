@@ -36,6 +36,9 @@
     <Reference Include="MazeLib">
       <HintPath>D:\Maayan\Documents\studies\שנה ב\תכנות מתקדם 2\MazeLib.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Priority Queue, Version=4.0.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\OptimizedPriorityQueue.4.0.4\lib\net45\Priority Queue.dll</HintPath>
     </Reference>
@@ -50,7 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BFS.cs" />
-    <Compile Include="DFSAlgo.cs" />
+    <Compile Include="DFS.cs" />
     <Compile Include="ISearchable.cs" />
     <Compile Include="ISearcher.cs" />
     <Compile Include="NonPrioritySearcher.cs" />
@@ -61,6 +64,7 @@
     <Compile Include="State.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

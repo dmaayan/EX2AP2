@@ -24,7 +24,7 @@ namespace Ex1
             Console.WriteLine(maze.ToString());
             MazeAdapter mazeAdapter = new MazeAdapter(maze);
             BFS<Position> bfs = new BFS<Position>();
-            DFSAlgo<Position> dfs = new DFSAlgo<Position>();
+            DFS<Position> dfs = new DFS<Position>();
             bfs.search(mazeAdapter);
             dfs.search(mazeAdapter);
             Console.WriteLine("BFS evaluated nodes: " + bfs.getNumberOfNodesEvaluated());

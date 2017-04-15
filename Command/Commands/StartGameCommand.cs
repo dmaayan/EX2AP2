@@ -2,22 +2,20 @@
 using System;
 using System.Net.Sockets;
 
-namespace Command
+namespace MVC
 {
-    internal class StartMazeGameCommand : Command
+    public class StartGameCommand : Command
     {
-        public StartMazeGameCommand(IModel model) : base(model)
-        {
-        }
+        public StartGameCommand(IModel model) : base(model) { }
 
         public override string Execute(string[] args, TcpClient client)
         {
-            string name = args[0];
             try
             {
+                string name = args[0];
                 int rows = int.Parse(args[1]);
                 int cols = int.Parse(args[2]);
-                Maze maze = Model.GenerateMaze(name, rows, cols);
+                Maze maze = Model.StartGame(name, rows, cols, client);
                 return maze.ToJSON();
             }
             catch (Exception e)

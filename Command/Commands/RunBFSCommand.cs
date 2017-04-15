@@ -3,14 +3,12 @@ using System.Net.Sockets;
 using SearchAlgorithmsLib;
 using Ex1;
 
-namespace Command
+namespace MVC
 {
-    internal class RunBFSCommand : Command
+    public class RunBFSCommand : Command
     {
 
-        public RunBFSCommand(IModel model) : base(model)
-        {
-        }
+        public RunBFSCommand(IModel model) : base(model) { }
 
         public override string Execute(string[] args, TcpClient client)
         {

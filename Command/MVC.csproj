@@ -36,6 +36,9 @@
     <Reference Include="MazeLib">
       <HintPath>..\SearchAlgorithmsLib\MazeLib.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,14 +49,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClientHandler.cs" />
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="Commands\CloseGameCommand.cs" />
     <Compile Include="Commands\GenerateMazeCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="IClientHandler.cs" />
     <Compile Include="IController.cs" />
     <Compile Include="IModel.cs" />
-    <Compile Include="IView.cs" />
     <Compile Include="Commands\JoinGameCommand.cs" />
     <Compile Include="Commands\ListGameNamesCommand.cs" />
     <Compile Include="Model.cs" />
@@ -62,7 +66,7 @@
     <Compile Include="Commands\RunBFSCommand.cs" />
     <Compile Include="Commands\RunDFSCommand.cs" />
     <Compile Include="Commands\SolveMazeCommand.cs" />
-    <Compile Include="Commands\StartMazeGameCommand.cs" />
+    <Compile Include="Commands\StartGameCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Client\Client.csproj">
@@ -77,6 +81,10 @@
       <Project>{dd7b007a-d5dd-4144-a43e-8af6678c2076}</Project>
       <Name>SearchAlgorithmsLib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

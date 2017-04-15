@@ -1,6 +1,6 @@
 ﻿using System.Net.Sockets;
 
-namespace Command
+namespace MVC
 {
     public interface IController
     {
@@ -10,7 +10,7 @@ namespace Command
             set;
         }
 
-        IView View
+        IClientHandler View
         {
             set;
         }
