@@ -5,7 +5,6 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace Command
 {
     public class Controller
@@ -16,7 +15,7 @@ namespace Command
         {
             model = new Model();
             commands = new Dictionary<string, ICommand>();
-            commands.Add("generate", new GenerateMazeCommand(model));
+            //commands.Add("generate", new GenerateMazeCommand(model));
             // more commands...
         }
         public string ExecuteCommand(string commandLine, TcpClient client)

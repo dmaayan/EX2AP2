@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MazeLib;
+using System.Net.Sockets;
 
 namespace Command
 {
     public class GenerateMazeCommand : ICommand
     {
-        private IModel model;
+        /*private IModel model;
         public GenerateMazeCommand(IModel model)
         {
             this.model = model;
@@ -21,6 +22,11 @@ namespace Command
             int cols = int.Parse(args[2]);
             Maze maze = model.GenerateMaze(name, rows, cols);
             return maze.ToJSON();
+        }*/
+        public string Execute(string[] args, TcpClient client = null)
+        {
+            return "";
         }
+
     }
 }
