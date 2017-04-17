@@ -10,6 +10,10 @@ namespace MVC
 
         public override string Execute(string[] args, TcpClient client)
         {
+            if (args.Length != 1)
+            {
+                return "Parameter does not match";
+            }
             Maze maze = Model.JoinGame(args[0], client);
             if (maze == null)
             {

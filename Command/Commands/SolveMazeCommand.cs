@@ -17,6 +17,10 @@ namespace MVC
 
         public override string Execute(string[] args, TcpClient client)
         {
+            if (args.Length != 2)
+            {
+                return "Parameter does not match";
+            }
             string[] newArgs = args.Take(1).ToArray();
             if (commands.ContainsKey(args[1]))
             {

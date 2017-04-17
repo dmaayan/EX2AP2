@@ -1,5 +1,4 @@
-﻿using Client;
-using MazeLib;
+﻿using MazeLib;
 using SearchAlgorithmsLib;
 using System;
 using System.Collections.Generic;

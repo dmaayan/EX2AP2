@@ -6,7 +6,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Client
+namespace MVC
 {
     public class Player
     {
@@ -46,10 +46,10 @@ namespace Client
         }
 
 
-        // לבדוק אם צריך את זה
-        public override bool Equals(object obj)
-        {
-            return client.Equals(obj);
-        }
+        //לבדוק אם צריך את זה
+        //public override bool Equals(object obj)
+        //{
+        //    return client.Equals(obj);
+        //}
     }
 }

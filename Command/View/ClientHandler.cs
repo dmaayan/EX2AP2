@@ -33,8 +33,16 @@ namespace MVC
                         try
                         {
                             commandLine = reader.ReadString();
+                            if (commandLine.Equals("Received move"))
+                            {
+                                continue;
+                            }
                             Console.WriteLine("Got command: {0}", commandLine);
                             string result = controller.ExecuteCommand(commandLine, client);
+                            if (result.Equals("Sent Massage to other player"))
+                            {
+                                continue;
+                            }
                             writer.Write(result);
                         }
                         //**לשנות את האקספשין 
@@ -52,18 +60,16 @@ namespace MVC
 
         public void SendToClient(string s, TcpClient client)
         {
-            using (NetworkStream stream = client.GetStream())
-            using (BinaryReader reader = new BinaryReader(stream))
-            using (BinaryWriter writer = new BinaryWriter(stream))
-            {
-                writer.Write(s);
-                Console.WriteLine("answer sent");
-                string result = reader.ReadString();
-                if (result.Equals("Received move"))
-                {
+            NetworkStream stream = client.GetStream();
+            BinaryReader reader = new BinaryReader(stream);
+            BinaryWriter writer = new BinaryWriter(stream);
 
-                }
-            }
+            writer.Write(s);
+            Console.WriteLine("answer sent");
+            //****לבדוק אם צריך 
+            //string result = reader.ReadString();
+
+
         }
     }
 }

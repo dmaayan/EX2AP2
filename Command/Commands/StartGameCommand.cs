@@ -12,6 +12,10 @@ namespace MVC
         {
             try
             {
+                if (args.Length != 3)
+                {
+                    return "Parameter does not match";
+                }
                 string name = args[0];
                 int rows = int.Parse(args[1]);
                 int cols = int.Parse(args[2]);

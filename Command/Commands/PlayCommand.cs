@@ -1,5 +1,4 @@
-﻿using Client;
-using MazeLib;
+﻿using MazeLib;
 using System;
 using System.Net.Sockets;
 using System.Text;
@@ -17,6 +16,10 @@ namespace MVC
 
         public override string Execute(string[] args, TcpClient client)
         {
+            if (args.Length != 1)
+            {
+                return "Parameter does not match";
+            }
             String move = args[0].ToLower();
             move = char.ToUpper(move[0]) + move.Substring(1);
             Direction direction = (Direction) Enum.Parse(typeof(Direction), move);

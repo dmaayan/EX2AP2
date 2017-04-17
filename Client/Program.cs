@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -17,12 +18,13 @@ namespace Client
         private static BinaryReader reader;
         private static BinaryWriter writer;
         private static CancellationTokenSource ts;
-
+        private static TcpClient client;
+        private static IPEndPoint ep;
 
         static void Main(string[] args)
         {
-            IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8080);
-            TcpClient client = new TcpClient();
+            ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8080);
+            client = new TcpClient();
             client.Connect(ep);
             Console.WriteLine("You are connected!");
             using (stream = client.GetStream())
@@ -32,18 +34,26 @@ namespace Client
                 string command = "";
                 while (!command.Contains("close"))
                 {
-                    // Send data to server
-                    Console.Write("Please enter a command: \n");
-                    command = Console.ReadLine();
-                    writer.Write(command);
-                    // Get result from server
-                    string result = reader.ReadString();
-                    if ((command.Contains("start") || command.Contains("join"))
-                         && !result.Contains("Error"))
+                    try
                     {
-                        StartMultiplay();
+                        // Send data to server
+                        Console.Write("Please enter a command: \n");
+                        command = Console.ReadLine();
+                        writer.Write(command);
+                        mr.open();
+                        // Get result from server
+                        string result = mr.GetMassage();
+                        if ((command.Contains("start") || command.Contains("join"))
+                             && !result.Contains("Error"))
+                        {
+                            StartMultiplay();
+                        }
+                        Console.WriteLine("{0}", result);
+                    } catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        break;
                     }
-                    Console.WriteLine("{0}", result);
                 }
             }
             StopMultiplay();
@@ -60,13 +70,21 @@ namespace Client
                 bool active = true;
                 while (active)
                 {
-                    string otherPlayerMove = reader.ReadString();
-                    if (otherPlayerMove.Contains("close"))
+                    try
                     {
-                        active = false;
+                        string otherPlayerMove = reader.ReadString();
+                        if (otherPlayerMove.Contains("close"))
+                        {
+                            active = false;
+                        }
+                        writer.Write("Received move");
+                        Console.WriteLine(otherPlayerMove);
                     }
-                    writer.Write("Received move");
-                    Console.WriteLine(otherPlayerMove);
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        break;
+                    }
                 }
             }, ct);
         }
@@ -74,6 +92,66 @@ namespace Client
         private static void StopMultiplay()
         {
             ts.Cancel();
+        }
+
+        public class MassageReceiver {
+            private string massageReceived;
+            private Task receiver;
+            private bool isOpen;
+
+            public MassageReceiver()
+            {
+                massageReceived = null;
+                isOpen = false;
+            }
+
+            public void open()
+            {
+                client.Connect(ep);
+                isOpen = true;
+                receiver = new Task(() => {
+                    using (stream = client.GetStream())
+                    using (reader = new BinaryReader(stream))
+                    {
+                        while (isOpen)
+                        {
+                            if (massageReceived == null)
+                            {
+                                string current = reader.ReadString();
+                                if (current.Contains("\"Direction\": "))
+                                {
+                                    Console.WriteLine(current);
+                                    continue;
+                                }
+                                massageReceived = current;
+                            }
+                            else
+                            {
+                                Thread.Sleep(1);
+                            }
+                        }
+                    }
+                });
+                receiver.Start();
+            }
+
+            public string GetMassage()
+            {
+                while (massageReceived == null)
+                {
+                    Thread.Sleep(1);
+                }
+                string current = massageReceived;
+                massageReceived = null;
+                return current;
+            }
+
+            public void close()
+            {
+                isOpen = false;
+                receiver.Wait();
+                client.Close();
+            }
         }
     }
 }

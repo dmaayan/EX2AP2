@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using MazeGeneratorLib;
 using SearchAlgorithmsLib;
 using System.Net.Sockets;
-using Client;
 
 namespace MVC
 {

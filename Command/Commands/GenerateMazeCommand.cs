@@ -10,14 +10,16 @@ namespace MVC
 {
     public class GenerateMazeCommand : Command
     {
-        public GenerateMazeCommand(IModel model) : base(model)
-        {
-        }
+        public GenerateMazeCommand(IModel model) : base(model) { }
 
         public override string Execute(string[] args, TcpClient client)
         {
             try
             {
+                if (args.Length != 3)
+                {
+                    return "Parameter does not match";
+                }
                 string name = args[0];
                 int rows = int.Parse(args[1]);
                 int cols = int.Parse(args[2]);
