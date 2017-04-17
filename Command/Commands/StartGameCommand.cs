@@ -16,6 +16,10 @@ namespace MVC
                 int rows = int.Parse(args[1]);
                 int cols = int.Parse(args[2]);
                 Maze maze = Model.StartGame(name, rows, cols, client);
+                if (maze == null)
+                {
+                    return "Error: Name Already taken";
+                }
                 return maze.ToJSON();
             }
             catch (Exception e)

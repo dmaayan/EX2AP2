@@ -10,7 +10,12 @@ namespace MVC
 
         public override string Execute(string[] args, TcpClient client)
         {
-            return Model.JoinGame(args[0], client).ToJSON();
+            Maze maze = Model.JoinGame(args[0], client);
+            if (maze == null)
+            {
+                return "Error: Can't find game named: " + args[0];
+            }
+            return maze.ToJSON();
         }
     }
 }

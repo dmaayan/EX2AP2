@@ -12,7 +12,12 @@ namespace MVC
 
         public override string Execute(string[] args, TcpClient client)
         {
-            return Model.SolveMaze(args[0], new BFS<Position>().search).ToString();
+            MazeSolution ms = Model.SolveMaze(args[0], new BFS<Position>().search);
+            if (ms == null)
+            {
+                return "No solution possible";
+            }
+            return ms.ToJson();
         }
     }
 }

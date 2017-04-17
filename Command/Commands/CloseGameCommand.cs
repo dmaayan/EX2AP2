@@ -15,7 +15,7 @@ namespace MVC
         {
             string name = args[0];
             Model.CloseGame(name);
-            return "Closed game";
+            return "Game closed";
         }
     }
 }

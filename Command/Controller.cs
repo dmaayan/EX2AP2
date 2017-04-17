@@ -17,23 +17,28 @@ namespace MVC
         public Controller()
         {
             commands = new Dictionary<string, ICommand>();
-            commands.Add("generate", new GenerateMazeCommand(model));
-            commands.Add("solve", new SolveMazeCommand(model));
-            commands.Add("start", new StartGameCommand(model));
-            commands.Add("list", new ListGameNamesCommand(model));
-            commands.Add("join", new JoinGameCommand(model));
-            commands.Add("play", new PlayCommand(model));
-            commands.Add("close", new CloseGameCommand(model));
         }
 
-        public IModel Model
+        public void SetModel(IModel model)
         {
-            set { model = value; }
+            this.model = model;
+            AddAllCommands();
         }
 
         public IClientHandler View
         {
             set { view = value; }
+        }
+
+        private void AddAllCommands()
+        {
+            commands.Add("generate", new GenerateMazeCommand(model));
+            commands.Add("solve", new SolveMazeCommand(model));
+            commands.Add("start", new StartGameCommand(model));
+            commands.Add("list", new ListGameNamesCommand(model));
+            commands.Add("join", new JoinGameCommand(model));
+            commands.Add("play", new PlayCommand(model, view));
+            commands.Add("close", new CloseGameCommand(model));
         }
         
         public string ExecuteCommand(string commandLine, TcpClient client)

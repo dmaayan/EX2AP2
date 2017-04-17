@@ -10,5 +10,7 @@ namespace MVC
     public interface IClientHandler
     {
         void HandleClient(TcpClient client);
+
+        void SendToClient(string s, TcpClient client);
     }
 }

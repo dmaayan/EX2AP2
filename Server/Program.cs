@@ -14,34 +14,14 @@ namespace Server
     {
         static void Main(string[] args)
         {
-            Controller c = new Controller();
+            IController c = new Controller();
             IModel model = new Model();
             IClientHandler ic = new ClientHandler(c);
-            c.Model = model;
             c.View = ic;
+            c.SetModel(model);
             Server server = new Server(int.Parse(args[0]), ic);
             server.Start();
             server.Stop();
-            //IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8000);
-            //TcpListener listener = new TcpListener(ep);
-            //listener.Start();
-            //Console.WriteLine("Waiting for client connections...");
-            //TcpClient client = listener.AcceptTcpClient();
-            //Console.WriteLine("Client connected");
-            //using (NetworkStream stream = client.GetStream())
-            //using (BinaryReader reader = new BinaryReader(stream))
-            //using (BinaryWriter writer = new BinaryWriter(stream))
-            //{
-            //    Console.WriteLine("Waiting for a number");
-            //    int num = reader.ReadInt32();
-            //    Console.WriteLine("Number accepted");
-            //    num *= 2;
-            //    writer.Write(num);
-            //}
-            //Console.WriteLine();
-            //client.Close();
-            //listener.Stop();
-
         }
     }
 }

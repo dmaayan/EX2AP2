@@ -17,7 +17,7 @@ namespace MVC
 
         public override string Execute(string[] args, TcpClient client)
         {
-            string[] newArgs = args.Take(1).Skip(1).ToArray();
+            string[] newArgs = args.Take(1).ToArray();
             if (commands.ContainsKey(args[1]))
             {
                 ICommand command = commands[args[1]];

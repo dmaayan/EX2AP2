@@ -55,6 +55,7 @@
     <Compile Include="Commands\CloseGameCommand.cs" />
     <Compile Include="Commands\GenerateMazeCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Game.cs" />
     <Compile Include="IClientHandler.cs" />
     <Compile Include="IController.cs" />
     <Compile Include="IModel.cs" />

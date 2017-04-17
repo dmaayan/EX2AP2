@@ -4,11 +4,7 @@ namespace MVC
 {
     public interface IController
     {
-
-        IModel Model
-        {
-            set;
-        }
+        void SetModel(IModel model);
 
         IClientHandler View
         {

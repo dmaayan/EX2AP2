@@ -21,6 +21,11 @@ namespace Client
             way = new List<Direction>();
         }
 
+        public TcpClient Client
+        {
+            get { return client; }
+        }
+
         public List<Direction> Way
         {
             get { return way; }

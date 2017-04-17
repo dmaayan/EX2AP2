@@ -21,7 +21,7 @@ namespace MVC
                 string name = args[0];
                 int rows = int.Parse(args[1]);
                 int cols = int.Parse(args[2]);
-                Maze maze = Model.GenerateMaze(name, rows, cols);
+                Maze maze = Model.SingleGameGenerateMaze(name, rows, cols);
                 return maze.ToJSON();
             }
             catch (Exception e)

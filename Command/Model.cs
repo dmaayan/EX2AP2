@@ -16,22 +16,24 @@ namespace MVC
     {
         private Dictionary<string, Maze> waitingList;
         private Dictionary<string, Maze> activeGames;
-        private Dictionary<string, Maze> mazes;
-        private Dictionary<string, Solution<Position>> solved;
-        private Dictionary<Player, Maze> playersToMaze;
-        private Dictionary<TcpClient, Player> clientToPlayer;
+        private Dictionary<string, Maze> singlePlayerMazes;
+        private Dictionary<string, Maze> multiPlayerMazes;
+        private Dictionary<string, MazeSolution> singlePlayerSolved;
+        private Dictionary<string, Game> mazeNameToGame;
+        private Dictionary<TcpClient, string> clientToMazeName;
 
         /// <summary>
         /// constructor
         /// </summary>
         public Model()
         {
-            mazes = new Dictionary<string, Maze>();
+            singlePlayerMazes = new Dictionary<string, Maze>();
+            multiPlayerMazes = new Dictionary<string, Maze>();
             activeGames = new Dictionary<string, Maze>();
             waitingList = new Dictionary<string, Maze>();
-            solved = new Dictionary<string, Solution<Position>>();
-            playersToMaze = new Dictionary<Player, Maze>();
-            clientToPlayer = new Dictionary<TcpClient, Player>();
+            singlePlayerSolved = new Dictionary<string, MazeSolution>();
+            mazeNameToGame = new Dictionary<string, Game>();
+            clientToMazeName = new Dictionary<TcpClient, string>();
         }
 
         /// <summary>
@@ -41,59 +43,82 @@ namespace MVC
         /// <param name="rows">the rows of the maze </param>
         /// <param name="cols">the cols of the maze </param>
         /// <returns>the new maze</returns>
-        public Maze GenerateMaze(string name, int rows, int cols)
+        public Maze SingleGameGenerateMaze(string name, int rows, int cols)
         {
             DFSMazeGenerator mazeGenerator = new DFSMazeGenerator();
             Maze maze = mazeGenerator.Generate(rows, cols);
             maze.Name = name;
             // if the maze exist close it
-            if (mazes.ContainsKey(name))
+            if (singlePlayerMazes.ContainsKey(name))
             {
                 CloseGame(name);
             }
             // create new maze
-            mazes.Add(name, maze);
+            singlePlayerMazes.Add(name, maze);
             return maze;
         }
+
+        /// <summary>
+        /// Generate a Maze, if the maze exist close it and create new maze
+        /// </summary>
+        /// <param name="name">the name of the maze </param>
+        /// <param name="rows">the rows of the maze </param>
+        /// <param name="cols">the cols of the maze </param>
+        /// <returns>the new maze</returns>
+        private Maze MultiGameGenerateMaze(string name, int rows, int cols)
+        {
+            DFSMazeGenerator mazeGenerator = new DFSMazeGenerator();
+            Maze maze = mazeGenerator.Generate(rows, cols);
+            maze.Name = name;
+            // if the maze exist close it
+            if (multiPlayerMazes.ContainsKey(name))
+            {
+                return null;
+            }
+            // create new maze
+            multiPlayerMazes.Add(name, maze);
+            return maze;
+        }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="name">the name of the maze</param>
         /// <param name="searcher">the algorithem to solve with</param>
         /// <returns>the solution to the maze</returns>
-        public Solution<Position> SolveMaze(string name, searchAlgo searcher)
+        public MazeSolution SolveMaze(string name, searchAlgo searcher)
         {
             // checks if the maze exist
-            if (!mazes.ContainsKey(name))
+            if (!singlePlayerMazes.ContainsKey(name))
             {
                 return null;
             }
             // checks if the solution exist
-            if (solved.ContainsKey(name))
+            if (singlePlayerSolved.ContainsKey(name))
             {
-                return solved[name];
+                return singlePlayerSolved[name];
             }
             // solve the maze and return the solution
-            Maze maze = mazes[name];
+            Maze maze = singlePlayerMazes[name];
             MazeAdapter mazeAdapter = new MazeAdapter(maze);
-            Solution<Position> solution = searcher(mazeAdapter);
-            solved.Add(name, solution);
-            return solution;
+            MazeSolution ms = new MazeSolution(searcher(mazeAdapter), maze.Name);
+            singlePlayerSolved.Add(name, ms);
+            return ms;
         }
         
-        /// <summary>
-        /// get a maze
-        /// </summary>
-        /// <param name="name">the name of the maze</param>
-        /// <returns>the maze if exist</returns>
-        public Maze GetMaze(string name)
-        {
-            if (mazes.ContainsKey(name))
-            {
-                return mazes[name];
-            }
-            return null;
-        }
+        ///// <summary>
+        ///// get a maze
+        ///// </summary>
+        ///// <param name="name">the name of the maze</param>
+        ///// <returns>the maze if exist</returns>
+        //public Maze GetMaze(string name)
+        //{
+        //    if (singlePlayerMazes.ContainsKey(name))
+        //    {
+        //        return singlePlayerMazes[name];
+        //    }
+        //    return null;
+        //}
 
         /// <summary>
         /// start a game
@@ -105,20 +130,17 @@ namespace MVC
         /// <returns>the maze</returns>
         public Maze StartGame(string name, int rows, int cols, TcpClient client)
         {
-            Maze maze;
-            // לבדוק אם (מי) בכלל צריך את זה
-            if (mazes.ContainsKey(name))
+            Maze maze = MultiGameGenerateMaze(name, rows, cols);
+            if (maze == null)
             {
-                maze = mazes[name];
+                return null;
             }
-            else
-            {
-                maze = GenerateMaze(name, rows, cols);
-            }
+            string mazeName = maze.Name;
             waitingList.Add(name, maze);
             Player p = new Player(client);
-            playersToMaze.Add(p, maze);
-            p.WaitForPlayer();
+            mazeNameToGame.Add(mazeName, new Game(p));
+            mazeNameToGame[mazeName].waitForOtherPlayer();
+            clientToMazeName.Add(client, mazeName);
             return maze;
         }
 
@@ -128,12 +150,12 @@ namespace MVC
             if (waitingList.ContainsKey(name))
             {
                 maze = waitingList[name];
-                Player p = playersToMaze.Where(elem => 
-                    { return elem.Value.Equals(maze); }).First().Key;
+                string mazeName = maze.Name;
                 activeGames.Add(name, maze);
                 waitingList.Remove(name);
-                playersToMaze.Add(new Player(client), maze);
-                p.StopWaiting();
+                Player player = new Player(client);
+                mazeNameToGame[mazeName].AddPlayer(player);
+                clientToMazeName.Add(client, mazeName);
                 return maze;
             }
             return null;
@@ -141,13 +163,14 @@ namespace MVC
 
         public Maze PlayGame(Direction move, TcpClient client)
         {
-            if (clientToPlayer.ContainsKey(client))
+            if (clientToMazeName.ContainsKey(client))
             {
-                Player player = clientToPlayer[client];
-                Maze maze = playersToMaze[player];
+                string mazeName = clientToMazeName[client];
+                Game game = mazeNameToGame[mazeName];
+                Maze maze = multiPlayerMazes[mazeName];
                 if (activeGames.ContainsKey(maze.Name))
                 {
-                    player.Way.Add(move);
+                    //player.Way.Add(move);
                     return maze;
                 }
             }
@@ -156,12 +179,12 @@ namespace MVC
 
         public void CloseGame(string name)
         {
-            if (mazes.ContainsKey(name))
+            if (singlePlayerMazes.ContainsKey(name))
             {
-                mazes.Remove(name);
-                if (solved.ContainsKey(name))
+                singlePlayerMazes.Remove(name);
+                if (singlePlayerSolved.ContainsKey(name))
                 {
-                    solved.Remove(name);
+                    singlePlayerSolved.Remove(name);
                 }
                 if (waitingList.ContainsKey(name))
                 {
@@ -178,6 +201,12 @@ namespace MVC
         public string[] GetAllNames()
         {
             return waitingList.Keys.ToArray();
+        }
+
+        public Player GetPlayerToSendMove(TcpClient tcc)
+        {
+            Game game = mazeNameToGame[clientToMazeName[tcc]];
+            return game.GetOtherPlayer(tcc);
         }
     }
 }

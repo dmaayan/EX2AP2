@@ -56,6 +56,7 @@
     <Compile Include="DFS.cs" />
     <Compile Include="ISearchable.cs" />
     <Compile Include="ISearcher.cs" />
+    <Compile Include="MazeSolution.cs" />
     <Compile Include="NonPrioritySearcher.cs" />
     <Compile Include="PrioritySearcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

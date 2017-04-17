@@ -1,4 +1,5 @@
-﻿using MazeLib;
+﻿using Client;
+using MazeLib;
 using SearchAlgorithmsLib;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,9 @@ namespace MVC
 
     public interface IModel
     {
-        Maze GenerateMaze(string name, int rows, int cols);
+        Maze SingleGameGenerateMaze(string name, int rows, int cols);
 
-        Maze GetMaze(string name);
+        //Maze GetMaze(string name);
 
         Maze StartGame(string name, int rows, int cols, TcpClient client);
 
@@ -26,9 +27,11 @@ namespace MVC
 
         void CloseGame(string name);
 
-        Solution<Position> SolveMaze(string name, searchAlgo search);
+        MazeSolution SolveMaze(string name, searchAlgo search);
 
         string[] GetAllNames();
+
+        Player GetPlayerToSendMove(TcpClient tcc);
 
     }
 }

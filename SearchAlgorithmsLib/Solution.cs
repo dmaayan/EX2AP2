@@ -18,6 +18,16 @@ namespace SearchAlgorithmsLib
             nodesEvaluated = amountOfNodes;
         }
 
+        public List<State<T>> getSolution
+        {
+            get { return this.solution; }
+        }
+
+        public int NodesEvaluated
+        {
+            get { return nodesEvaluated; }
+        }
+
         public string ToJson()
         {
             return null;

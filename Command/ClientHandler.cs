@@ -11,9 +11,9 @@ namespace MVC
 {
     public class ClientHandler : IClientHandler
     {
-        Controller controller;
+        IController controller;
 
-        public ClientHandler(Controller c)
+        public ClientHandler(IController c)
         {
             controller = c;
         }
@@ -23,8 +23,8 @@ namespace MVC
             new Task(() =>
             {
                 using (NetworkStream stream = client.GetStream())
-                using (StreamReader reader = new StreamReader(stream))
-                using (StreamWriter writer = new StreamWriter(stream))
+                using (BinaryReader reader = new BinaryReader(stream))
+                using (BinaryWriter writer = new BinaryWriter(stream))
                 {
                     string commandLine = "";
                     //** לשנות את התנאי
@@ -32,10 +32,10 @@ namespace MVC
                     {
                         try
                         {
-                            commandLine = reader.ReadLine();
+                            commandLine = reader.ReadString();
                             Console.WriteLine("Got command: {0}", commandLine);
                             string result = controller.ExecuteCommand(commandLine, client);
-                            writer.WriteLine(result);
+                            writer.Write(result);
                         }
                         //**לשנות את האקספשין 
                         catch (IOException e)
@@ -44,9 +44,26 @@ namespace MVC
                             break;
                         }
                     }
+
                 }
                 client.Close();
             }).Start();
+        }
+
+        public void SendToClient(string s, TcpClient client)
+        {
+            using (NetworkStream stream = client.GetStream())
+            using (BinaryReader reader = new BinaryReader(stream))
+            using (BinaryWriter writer = new BinaryWriter(stream))
+            {
+                writer.Write(s);
+                Console.WriteLine("answer sent");
+                string result = reader.ReadString();
+                if (result.Equals("Received move"))
+                {
+
+                }
+            }
         }
     }
 }
