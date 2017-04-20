@@ -5,12 +5,18 @@ namespace MVC
 {
     public class ListGameNamesCommand : Command
     {
+        private IClientHandler ic;
 
-        public ListGameNamesCommand(IModel model) : base(model) { }
-
-        public override string Execute(string[] args, TcpClient client)
+        public ListGameNamesCommand(IModel model, IClientHandler clientHandle) : base(model)
         {
-            return JsonConvert.SerializeObject(Model.GetAllNames());
+            ic = clientHandle;
+        }
+
+        public override Status Execute(string[] args, TcpClient client)
+        {
+            Stat.SetStatues(Status.Disconnect, JsonConvert.SerializeObject(Model.GetAllNames()));
+            ic.SendToClient(Stat.ToJson(), client);
+            return Status.Disconnect;
         }
     }
 }

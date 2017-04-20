@@ -54,8 +54,8 @@ namespace SearchAlgorithmsLib
             if (current.Cost < costOfState)
             {
                 updatedStates[state] = new KeyValuePair<State<T>, double>
-                                       (updatedStates[current].Key, updatedStates[current].Value);
-                openList.UpdatePriority(state, (float)updatedStates[current].Value);
+                                       (current.CameFrom, current.Cost);
+                openList.UpdatePriority(state, (float)current.Cost);
             }
 
         }

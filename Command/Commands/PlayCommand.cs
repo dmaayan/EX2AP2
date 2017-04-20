@@ -14,24 +14,47 @@ namespace MVC
             ic = clientHandler;
         }
 
-        public override string Execute(string[] args, TcpClient client)
+        public override Status Execute(string[] args, TcpClient client)
         {
+            Stat.SetStatues(Status.KeepConnection, "Parameter does not match");
             if (args.Length != 1)
             {
-                return "Parameter does not match";
+                ic.SendToClient(Stat.ToJson(), client);
+                return Status.KeepConnection;
             }
-            String move = args[0].ToLower();
-            move = char.ToUpper(move[0]) + move.Substring(1);
+
+            String move = char.ToUpper(args[0].ToLower()[0]) + args[0].ToLower().Substring(1);
+            if (!Enum.IsDefined(typeof(Direction), move))
+            {
+                ic.SendToClient(Stat.ToJson(), client);
+                return Status.KeepConnection;
+            }
+
             Direction direction = (Direction) Enum.Parse(typeof(Direction), move);
             Maze maze = Model.PlayGame(direction, client);
-            Player otherPlayer = Model.GetPlayerToSendMove(client);
+            if (maze == null)
+            {
+                Stat.SetStatues(Status.Close, "Game is not on");
+                ic.SendToClient(Stat.ToJson(), client);
+                return Status.Close;
+            }
+            Player otherPlayer = Model.GetOtherPlayer(client);
+            if (otherPlayer == null)
+            {
+                Stat.SetStatues(Status.Close, "No other player to send move to");
+                ic.SendToClient(Stat.ToJson(), client);
+                return Status.Close;
+            }
+
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("{");
             sb.AppendLine("  \"Name\": \"" + maze.Name + "\"");
             sb.AppendLine("  \"Direction\": \"" + move + "\"");
             sb.AppendLine("}");
-            ic.SendToClient(sb.ToString(), otherPlayer.Client);
-            return "Sent Massage to other player";
+
+            Stat.SetStatues(Status.PrintAndContinue, sb.ToString());
+            ic.SendToClient(Stat.ToJson(), otherPlayer.Client);
+            return Status.KeepConnection;
         }
     }
 }

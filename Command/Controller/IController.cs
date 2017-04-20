@@ -2,8 +2,10 @@
 
 namespace MVC
 {
+
     public interface IController
     {
+
         void SetModel(IModel model);
 
         IClientHandler View
@@ -11,7 +13,7 @@ namespace MVC
             set;
         }
 
-        string ExecuteCommand(string commandLine, TcpClient client);
+        Status ExecuteCommand(string commandLine, TcpClient client);
 
     }
 }

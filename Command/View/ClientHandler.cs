@@ -26,33 +26,20 @@ namespace MVC
                 using (BinaryReader reader = new BinaryReader(stream))
                 using (BinaryWriter writer = new BinaryWriter(stream))
                 {
-                    string commandLine = "";
-                    //** לשנות את התנאי
-                    while (!commandLine.Contains("close"))
+                    Status result = Status.KeepConnection;
+                    do
                     {
                         try
                         {
-                            commandLine = reader.ReadString();
-                            if (commandLine.Equals("Received move"))
-                            {
-                                continue;
-                            }
+                            string commandLine = reader.ReadString();
                             Console.WriteLine("Got command: {0}", commandLine);
-                            string result = controller.ExecuteCommand(commandLine, client);
-                            if (result.Equals("Sent Massage to other player"))
-                            {
-                                continue;
-                            }
-                            writer.Write(result);
+                            result = controller.ExecuteCommand(commandLine, client);
                         }
-                        //**לשנות את האקספשין 
-                        catch (IOException e)
+                        catch (Exception e)
                         {
-                            Console.WriteLine(e);
                             break;
                         }
-                    }
-
+                    } while (result == Status.KeepConnection);
                 }
                 client.Close();
             }).Start();
@@ -61,15 +48,8 @@ namespace MVC
         public void SendToClient(string s, TcpClient client)
         {
             NetworkStream stream = client.GetStream();
-            BinaryReader reader = new BinaryReader(stream);
             BinaryWriter writer = new BinaryWriter(stream);
-
             writer.Write(s);
-            Console.WriteLine("answer sent");
-            //****לבדוק אם צריך 
-            //string result = reader.ReadString();
-
-
         }
     }
 }

@@ -6,15 +6,22 @@ namespace MVC
 {
     public class StartGameCommand : Command
     {
-        public StartGameCommand(IModel model) : base(model) { }
+        private IClientHandler ic;
 
-        public override string Execute(string[] args, TcpClient client)
+        public StartGameCommand(IModel model, IClientHandler clientHandle) : base(model)
+        {
+            ic = clientHandle;
+        }
+
+        public override Status Execute(string[] args, TcpClient client)
         {
             try
             {
                 if (args.Length != 3)
                 {
-                    return "Parameter does not match";
+                    Stat.SetStatues(Status.Disconnect, "Parameter does not match");
+                    ic.SendToClient(Stat.ToJson(), client);
+                    return Status.Disconnect;
                 }
                 string name = args[0];
                 int rows = int.Parse(args[1]);
@@ -22,15 +29,19 @@ namespace MVC
                 Maze maze = Model.StartGame(name, rows, cols, client);
                 if (maze == null)
                 {
-                    return "Error: Name Already taken";
+                    Stat.SetStatues(Status.Disconnect, "Error: Name Already taken");
+                    ic.SendToClient(Stat.ToJson(), client);
+                    return Status.Disconnect;
                 }
-                return maze.ToJSON();
+                Stat.SetStatues(Status.KeepConnection, maze.ToJSON());
+                ic.SendToClient(Stat.ToJson(), client);
+                return Status.KeepConnection;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
-            return null;
+            return Status.Disconnect;
         }
     }
 }

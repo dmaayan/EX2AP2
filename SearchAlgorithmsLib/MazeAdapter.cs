@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MazeLib;
-using SearchAlgorithmsLib;
 
-namespace Ex1
+namespace SearchAlgorithmsLib
 {
     public class MazeAdapter : ISearchable<Position>
     {
@@ -21,6 +20,7 @@ namespace Ex1
         {
             State<Position> state = State<Position>.StatePool.getState(maze.InitialPos);
             state.Cost = 0;
+            state.CameFrom = null;
             return state;
         }
 

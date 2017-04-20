@@ -10,10 +10,12 @@ namespace MVC
     public abstract class Command : ICommand
     {
         private IModel model;
+        private Statues statues;
 
         protected Command(IModel m)
         {
             model = m;
+            statues = new Statues();
         }
 
         protected IModel Model
@@ -21,6 +23,12 @@ namespace MVC
             get { return model; }
         }
 
-        public abstract string Execute(string[] args, TcpClient client = null);
+        protected Statues Stat
+        {
+            get { return statues; }
+            set { statues = value; }
+        }
+
+        public abstract Status Execute(string[] args, TcpClient client = null);
     }
 }

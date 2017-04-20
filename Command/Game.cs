@@ -20,6 +20,16 @@ namespace MVC
             //PlayGame(creator);
         }
 
+        public Player FirstPlayer
+        {
+            get { return player; }
+        }
+
+        public Player SecondPlayer
+        {
+            get { return otherPlayer; }
+        }
+
         public void AddPlayer(Player secondPlayer)
         {
             otherPlayer = secondPlayer;

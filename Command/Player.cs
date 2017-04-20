@@ -44,12 +44,5 @@ namespace MVC
         {
             wait = false;
         }
-
-
-        //לבדוק אם צריך את זה
-        //public override bool Equals(object obj)
-        //{
-        //    return client.Equals(obj);
-        //}
     }
 }

@@ -9,6 +9,6 @@ namespace MVC
 {
     public interface ICommand
     {
-        string Execute(string[] args, TcpClient client = null);
+        Status Execute(string[] args, TcpClient client = null);
     }
 }

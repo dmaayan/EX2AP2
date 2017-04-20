@@ -24,13 +24,15 @@ namespace MVC
 
         Maze PlayGame(Direction move, TcpClient client);
 
-        void CloseGame(string name);
+        Game CloseGame(string name);
 
         MazeSolution SolveMaze(string name, searchAlgo search);
 
         string[] GetAllNames();
 
-        Player GetPlayerToSendMove(TcpClient tcc);
+        Player GetOtherPlayer(TcpClient tcc);
+
+        Game GetGameOfPlayer(TcpClient client);
 
     }
 }

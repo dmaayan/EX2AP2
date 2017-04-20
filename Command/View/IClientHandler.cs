@@ -12,5 +12,7 @@ namespace MVC
         void HandleClient(TcpClient client);
 
         void SendToClient(string s, TcpClient client);
+
+        //void SendToClient(string s);
     }
 }

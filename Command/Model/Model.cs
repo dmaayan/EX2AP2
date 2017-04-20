@@ -50,7 +50,7 @@ namespace MVC
             // if the maze exist close it
             if (singlePlayerMazes.ContainsKey(name))
             {
-                CloseGame(name);
+                CloseSingleGame(name);
             }
             // create new maze
             singlePlayerMazes.Add(name, maze);
@@ -176,7 +176,7 @@ namespace MVC
             return null;
         }
 
-        public void CloseGame(string name)
+        private void CloseSingleGame(string name)
         {
             if (singlePlayerMazes.ContainsKey(name))
             {
@@ -185,16 +185,24 @@ namespace MVC
                 {
                     singlePlayerSolved.Remove(name);
                 }
-                if (waitingList.ContainsKey(name))
-                {
-                    waitingList.Remove(name);
-                }
-                if (activeGames.ContainsKey(name))
-                {
-                    activeGames.Remove(name);
-                }
             }
             
+        }
+
+        public Game CloseGame(string name)
+        {
+            if (activeGames.ContainsKey(name))
+            {
+                activeGames.Remove(name);
+                multiPlayerMazes.Remove(name);
+
+                Game game = mazeNameToGame[name];
+                mazeNameToGame.Remove(name);
+                clientToMazeName.Remove(game.FirstPlayer.Client);
+                clientToMazeName.Remove(game.SecondPlayer.Client);
+                return game;
+            }
+            return null;
         }
 
         public string[] GetAllNames()
@@ -202,10 +210,23 @@ namespace MVC
             return waitingList.Keys.ToArray();
         }
 
-        public Player GetPlayerToSendMove(TcpClient tcc)
+        public Player GetOtherPlayer(TcpClient client)
         {
-            Game game = mazeNameToGame[clientToMazeName[tcc]];
-            return game.GetOtherPlayer(tcc);
+            if (!clientToMazeName.ContainsKey(client))
+            {
+                return null;
+            }
+            Game game = mazeNameToGame[clientToMazeName[client]];
+            return game.GetOtherPlayer(client);
+        }
+
+        public Game GetGameOfPlayer(TcpClient client)
+        {
+            if (!clientToMazeName.ContainsKey(client))
+            {
+                return null;
+            }
+            return mazeNameToGame[clientToMazeName[client]];
         }
     }
 }

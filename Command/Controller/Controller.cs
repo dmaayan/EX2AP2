@@ -10,6 +10,7 @@ namespace MVC
 {
     public class Controller : IController
     {
+
         private Dictionary<string, ICommand> commands;
         private IModel model;
         private IClientHandler view;
@@ -32,31 +33,30 @@ namespace MVC
 
         private void AddAllCommands()
         {
-            commands.Add("generate", new GenerateMazeCommand(model));
-            commands.Add("solve", new SolveMazeCommand(model));
-            commands.Add("start", new StartGameCommand(model));
-            commands.Add("list", new ListGameNamesCommand(model));
-            commands.Add("join", new JoinGameCommand(model));
+            commands.Add("generate", new GenerateMazeCommand(model, view));
+            commands.Add("solve", new SolveMazeCommand(model, view));
+            commands.Add("start", new StartGameCommand(model, view));
+            commands.Add("list", new ListGameNamesCommand(model, view));
+            commands.Add("join", new JoinGameCommand(model, view));
             commands.Add("play", new PlayCommand(model, view));
-            commands.Add("close", new CloseGameCommand(model));
+            commands.Add("close", new CloseGameCommand(model, view));
+            commands.Add("exit", new ExitClientCommand(model, view));
         }
         
-        public string ExecuteCommand(string commandLine, TcpClient client)
+        public Status ExecuteCommand(string commandLine, TcpClient client)
         {
             string[] arr = commandLine.Split(' ');
             string commandKey = arr[0];
             if (!commands.ContainsKey(commandKey))
             {
-                return "Command not found";
+                Statues stat = new Statues();
+                stat.SetStatues(Status.Disconnect, "Command not found");
+                view.SendToClient(stat.ToJson(), client);
+                return Status.Disconnect;
             }
             string[] args = arr.Skip(1).ToArray();
             ICommand command = commands[commandKey];
-            string result = command.Execute(args, client);
-            if (result == null)
-            {
-                return "Incorrect Command";
-            }
-            return result;
+            return command.Execute(args, client);
         }
     }
 }

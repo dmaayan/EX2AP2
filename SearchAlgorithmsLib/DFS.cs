@@ -12,6 +12,7 @@ namespace SearchAlgorithmsLib
 
         public override Solution<T> search(ISearchable<T> searchable)
         {
+            clear();
             visited = new HashSet<State<T>>();
             State<T> state = searchable.getInitialState();
             State<T> goal = searchable.getGoalState();
@@ -54,6 +55,11 @@ namespace SearchAlgorithmsLib
                 state = Parents[state];
             }
             return new Solution<T>(solution, getNumberOfNodesEvaluated());
+        }
+
+        private void clear()
+        {
+            Parents.Clear();
         }
     }
 }
