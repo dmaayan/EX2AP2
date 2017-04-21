@@ -11,6 +11,7 @@ namespace SearchAlgorithmsLib
     public class BFS<T> : PrioritySearcher<T>
     {
         private Object locker = new Object();                       // locker for threads
+        private Object locker2 = new Object();
 
         /// <summary>
         /// Searcher's abstract method overriding 
@@ -19,7 +20,7 @@ namespace SearchAlgorithmsLib
         /// <returns>the solution that BFS found</returns>
         public override Solution<T> Search(ISearchable<T> searchable)
         {
-            lock (new Object())
+            lock (locker2)
             {
                 addToOpenList(searchable.GetInitialState());
             }

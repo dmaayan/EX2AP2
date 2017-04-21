@@ -19,36 +19,43 @@ namespace SearchAlgorithmsLib
         /// <returns>the solution that DFS found </returns>
         public override Solution<T> Search(ISearchable<T> searchable)
         {
-
             visited = new HashSet<State<T>>();
+            // get initial and goal states
             State<T> state = searchable.GetInitialState();
             State<T> goal = searchable.GetGoalState();
             Stack<State<T>> stack = new Stack<State<T>>();
-
+            // add initial to the stack and update the parents
             stack.Push(state);
             state.CameFrom = null;
             Parents.Add(state, null);
 
+            // while we have items and havn't reached the goal
             while (stack.Count > 0)
             {
-                increaseEvaluatedNodes();
+                IncreaseEvaluatedNodes();
                 state = stack.Pop();
+                // check if reached the goal
                 if (goal.Equals(state))
                 {
                     return Backtrace(goal);
                 }
+                // checks if already seen this state
                 if (!visited.Contains(state))
                 {
+                    // add the state to the visited hashset
                     visited.Add(state);
+                    // for all neighbours of the state which havn't een visited yet
                     foreach (State<T> neighbour in searchable.GetAllPossibleStates(state).Where
                                                    (elem => !visited.Contains(elem)))
                     {
+                        //add to the stack, update comefrom and add to parents
                         stack.Push(neighbour);
                         neighbour.CameFrom = state;
                         Parents.Add(neighbour, state);
                     }
                 }
             }
+            // didn't reach goal state
             return null;
         }
 
@@ -61,7 +68,7 @@ namespace SearchAlgorithmsLib
         {
             List<State<T>> solution = new List<State<T>>();
             State<T> state = goal;
-            // for each state, add the state that he came from, until the surce
+            // for each state, add the state that he came from, until the initial
             while (state != null)
             {
                 solution.Add(state);

@@ -31,7 +31,7 @@ namespace SearchAlgorithmsLib
 
         protected State<T> popOpenList()
         {
-            increaseEvaluatedNodes();
+            IncreaseEvaluatedNodes();
             return openList.Dequeue();
         }
         // a property of openList 

@@ -14,7 +14,7 @@ namespace SearchAlgorithmsLib
             evaluatedNodes = 0;
         }
 
-        protected void increaseEvaluatedNodes()
+        protected void IncreaseEvaluatedNodes()
         {
             evaluatedNodes++;
         }
