@@ -25,10 +25,10 @@ namespace Ex1
             MazeAdapter mazeAdapter = new MazeAdapter(maze);
             BFS<Position> bfs = new BFS<Position>();
             DFS<Position> dfs = new DFS<Position>();
-            bfs.search(mazeAdapter);
-            dfs.search(mazeAdapter);
-            Console.WriteLine("BFS evaluated nodes: " + bfs.getNumberOfNodesEvaluated());
-            Console.WriteLine("DFS evaluated nodes: " + dfs.getNumberOfNodesEvaluated());
+            bfs.Search(mazeAdapter);
+            dfs.Search(mazeAdapter);
+            Console.WriteLine("BFS evaluated nodes: " + bfs.GetNumberOfNodesEvaluated());
+            Console.WriteLine("DFS evaluated nodes: " + dfs.GetNumberOfNodesEvaluated());
 
         }
     }
