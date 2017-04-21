@@ -1,24 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SearchAlgorithmsLib
 {
+    /// <summary>
+    /// BFS, Best First search, is a generic algoritem for Search problems.
+    /// inherit from PrioritySearcher, had a locker.
+    /// </summary>
+    /// <typeparam name="T">the type of object to search</typeparam>
     public class BFS<T> : PrioritySearcher<T>
     {
-        private Object locker = new Object();
-        // Searcher's abstract method overriding 
-        public override Solution<T> search(ISearchable<T> searchable)
+        private Object locker = new Object();                       // locker for threads
+
+        /// <summary>
+        /// Searcher's abstract method overriding 
+        /// </summary>
+        /// <param name="searchable"> to search on </param>
+        /// <returns>the solution that BFS found</returns>
+        public override Solution<T> Search(ISearchable<T> searchable)
         {
             lock (new Object())
             {
-                addToOpenList(searchable.getInitialState());
+                addToOpenList(searchable.GetInitialState());
             }
             HashSet<State<T>> closed = new HashSet<State<T>>();
-
-            State<T> goal = searchable.getGoalState();
+            State<T> goal = searchable.GetGoalState();
 
             while (OpenListSize > 0)
             {
@@ -27,12 +33,13 @@ namespace SearchAlgorithmsLib
 
                 if (state.Equals(goal))
                 {
-                    return backTrace(goal);            // back traces through the parents
+                    return BackTrace(goal);             // back traces through the parents
                 }
-                // calling the delegated method, returns a list of states with state as a parent
+                
                 lock (locker)
                 {
-                    List<State<T>> succerssors = searchable.getAllPossibleStates(state);
+                    // returns a list of states with state as a parent
+                    List<State<T>> succerssors = searchable.GetAllPossibleStates(state);
                     foreach (State<T> s in succerssors)
                     {
                         if (!closed.Contains(s) && !OpenList.Contains(s))
@@ -51,21 +58,24 @@ namespace SearchAlgorithmsLib
             }
             return null;
         }
-        //** לבדוק סינטקס של פונקציות
-        private Solution<T> backTrace(State<T> goal)
+
+        /// <summary>
+        /// BackTrace is a privat method that calc the Solution of the problem.
+        /// </summary>
+        /// <param name="goal">from where to go back </param>
+        /// <returns>the path - the solution </returns>
+        private Solution<T> BackTrace(State<T> goal)
         {
-            // ** לבדוק עניין של זכרון
             List<State<T>> solution = new List<State<T>>();
-            State<T> state = goal;
+            State<T> state = UpdatedStates[goal].Key;
+            // for each state, add the state that he came from, until the surce
             while (state != null)
             {
                 solution.Add(state);
-                state = state.CameFrom;
+                state = UpdatedStates[state].Key;
             } 
-            return new Solution<T>(solution, getNumberOfNodesEvaluated());
+            return new Solution<T>(solution, GetNumberOfNodesEvaluated());
         }
-
-
     }
 }
 

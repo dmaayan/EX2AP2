@@ -60,6 +60,6 @@ namespace SearchAlgorithmsLib
 
         }
 
-        public override abstract Solution<T> search(ISearchable<T> searchable);
+        public override abstract Solution<T> Search(ISearchable<T> searchable);
     }
 }

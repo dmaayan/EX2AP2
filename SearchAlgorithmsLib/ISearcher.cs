@@ -1,18 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace SearchAlgorithmsLib
 {
+    /// <summary>
+    /// ISearchable is an interface for search problems solvers
+    /// has two methods.
+    /// </summary>
+    /// <typeparam name="T">is the object to search</typeparam>
     public interface ISearcher<T>
     {
-        // the search method
-        Solution<T> search (ISearchable<T> searchable);
+        /// <summary>
+        /// the Search method
+        /// </summary>
+        /// <param name="searchable">to search on</param>
+        /// <returns>the solution</returns>
+        Solution<T> Search (ISearchable<T> searchable);
         // get how many nodes were evaluated by the algorithm 
-        int getNumberOfNodesEvaluated();
+
+        /// <summary>
+        /// get how many nodes were evaluated by the algorithm
+        /// </summary>
+        /// <returns> the number of the nodes</returns>
+        int GetNumberOfNodesEvaluated();
     }
-
-
 }

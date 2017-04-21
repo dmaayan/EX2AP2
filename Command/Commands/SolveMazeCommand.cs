@@ -28,11 +28,11 @@ namespace MVC
             MazeSolution ms;
             if (args[1].Equals(options[0]))
             {
-                ms = Model.SolveMaze(args[0], new BFS<Position>().search);
+                ms = Model.SolveMaze(args[0], new BFS<Position>().Search);
             }
             else
             {
-                ms = Model.SolveMaze(args[0], new DFS<Position>().search);
+                ms = Model.SolveMaze(args[0], new DFS<Position>().Search);
             }
             if (ms == null)
             {

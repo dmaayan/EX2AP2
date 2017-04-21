@@ -20,11 +20,11 @@ namespace SearchAlgorithmsLib
         }
 
         // ISearcher’s methods:
-        public int getNumberOfNodesEvaluated()
+        public int GetNumberOfNodesEvaluated()
         {
             return evaluatedNodes;
         }
 
-        public abstract Solution<T> search(ISearchable<T> searchable);
+        public abstract Solution<T> Search(ISearchable<T> searchable);
     }
 }
