@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26228.12
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex1", "Ex1\Ex1.csproj", "{82414EB6-207B-4A85-8E4F-57CFEA38C5DE}"
 EndProject
@@ -12,6 +12,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{B48B28B0-BB60-455B-ABD4-1561F8A95470}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC", "Command\MVC.csproj", "{AB440259-FC08-4F8D-B8BD-F96F70EF7E66}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "etc", "etc", "{6837601F-1F35-4A67-8503-4C511EF85AE4}"
+	ProjectSection(SolutionItems) = preProject
+		info.txt = info.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

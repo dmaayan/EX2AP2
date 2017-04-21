@@ -4,22 +4,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MVC;
-using static Client.Program;
 using System.Net.Sockets;
 using Client.Commands;
 
 namespace Client
 {
+    /// <summary>
+    /// use commands design to use the user commands
+    /// </summary>
     public class ClientController
     {
         private Dictionary<string, ICommand> commands;
         private MessageTransmiter mr;
 
-
+        /// <summary>
+        /// constructor
+        /// </summary>
+        /// <param name="messageReceiver">responsible for message transferring to the server</param>
         public ClientController(MessageTransmiter messageReceiver)
         {
             mr = messageReceiver;
             SinglePlayCommand singlePC = new SinglePlayCommand(mr);
+            // set the commands dictionary
             commands = new Dictionary<string, ICommand>();
             commands.Add("generate", singlePC);
             commands.Add("solve", singlePC);
@@ -31,15 +37,22 @@ namespace Client
             commands.Add("exit", new ExitCommand(mr));
         }
 
+        /// <summary>
+        /// execute commands 
+        /// </summary>
+        /// <param name="commandLine">command received from the user</param>
+        /// <returns>the status returned from the command executed</returns>
         public Status ExecuteCommand(string commandLine)
         {
+            // split the commandline
             string[] args = commandLine.Split();
+            // check for valid command
             if (args.Length == 0 || !commands.ContainsKey(args[0]))
             {
                 Console.WriteLine("Command not found");
                 return Status.Error;
             }
-
+            // execute command
             ICommand command = commands[args[0]];
             Status status = command.Execute(args);
             return status;

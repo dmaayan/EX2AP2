@@ -10,13 +10,12 @@ using System.Threading.Tasks;
 
 namespace MVC
 {
-    public delegate Solution<Position> searchAlgo(ISearchable<Position> searchable);
+    // delegate for search algorithms
+    public delegate Solution<Position> SearchAlgo(ISearchable<Position> searchable);
 
     public interface IModel
     {
         Maze SingleGameGenerateMaze(string name, int rows, int cols);
-
-        //Maze GetMaze(string name);
 
         Maze StartGame(string name, int rows, int cols, TcpClient client);
 
@@ -26,11 +25,11 @@ namespace MVC
 
         Game CloseGame(string name);
 
-        MazeSolution SolveMaze(string name, searchAlgo search);
+        MazeSolution SolveMaze(string name, SearchAlgo search);
 
         string[] GetAllNames();
 
-        Player GetOtherPlayer(TcpClient tcc);
+        Player GetOtherPlayer(TcpClient client);
 
         Game GetGameOfPlayer(TcpClient client);
 

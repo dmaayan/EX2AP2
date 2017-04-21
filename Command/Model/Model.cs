@@ -74,18 +74,18 @@ namespace MVC
             {
                 return null;
             }
-            // create new maze
+            // add the new maze
             multiPlayerMazes.Add(name, maze);
             return maze;
         }
 
         /// <summary>
-        /// 
+        /// solve a maze
         /// </summary>
         /// <param name="name">the name of the maze</param>
         /// <param name="searcher">the algorithem to solve with</param>
         /// <returns>the solution to the maze</returns>
-        public MazeSolution SolveMaze(string name, searchAlgo searcher)
+        public MazeSolution SolveMaze(string name, SearchAlgo searcher)
         {
             // checks if the maze exist
             if (!singlePlayerMazes.ContainsKey(name))
@@ -101,23 +101,10 @@ namespace MVC
             Maze maze = singlePlayerMazes[name];
             MazeAdapter mazeAdapter = new MazeAdapter(maze);
             MazeSolution ms = new MazeSolution(searcher(mazeAdapter), maze.Name);
+            // save the current solution
             singlePlayerSolved.Add(name, ms);
             return ms;
         }
-        
-        ///// <summary>
-        ///// get a maze
-        ///// </summary>
-        ///// <param name="name">the name of the maze</param>
-        ///// <returns>the maze if exist</returns>
-        //public Maze GetMaze(string name)
-        //{
-        //    if (singlePlayerMazes.ContainsKey(name))
-        //    {
-        //        return singlePlayerMazes[name];
-        //    }
-        //    return null;
-        //}
 
         /// <summary>
         /// start a game
@@ -129,29 +116,46 @@ namespace MVC
         /// <returns>the maze</returns>
         public Maze StartGame(string name, int rows, int cols, TcpClient client)
         {
+            // create a multiplay game
             Maze maze = MultiGameGenerateMaze(name, rows, cols);
+            // checks that the maze is ok
             if (maze == null)
             {
                 return null;
             }
+            // add the maze to the waiting list
             string mazeName = maze.Name;
             waitingList.Add(name, maze);
+
+            // create the game with the player
             Player p = new Player(client);
             mazeNameToGame.Add(mazeName, new Game(p));
+
+            // wait for a player to join the game
             mazeNameToGame[mazeName].waitForOtherPlayer();
             clientToMazeName.Add(client, mazeName);
             return maze;
         }
 
+        /// <summary>
+        /// join a game
+        /// </summary>
+        /// <param name="name"> of the game to join </param>
+        /// <param name="client"> that requested to join</param>
+        /// <returns>the maze of the game</returns>
         public Maze JoinGame(string name, TcpClient client)
         {
-            Maze maze;
+            // check for available maze with that name
             if (waitingList.ContainsKey(name))
             {
-                maze = waitingList[name];
+                Maze maze = waitingList[name];
                 string mazeName = maze.Name;
+
+                // put the game in the active games list and remove from waiting
                 activeGames.Add(name, maze);
                 waitingList.Remove(name);
+
+                // add the player to the game
                 Player player = new Player(client);
                 mazeNameToGame[mazeName].AddPlayer(player);
                 clientToMazeName.Add(client, mazeName);
@@ -160,13 +164,23 @@ namespace MVC
             return null;
         }
 
+        /// <summary>
+        /// play a move in the game
+        /// </summary>
+        /// <param name="move"> Direction to play</param>
+        /// <param name="client">that moved</param>
+        /// <returns></returns>
         public Maze PlayGame(Direction move, TcpClient client)
         {
+            // checks for the maze
             if (clientToMazeName.ContainsKey(client))
             {
+                //get the maze info
                 string mazeName = clientToMazeName[client];
                 Game game = mazeNameToGame[mazeName];
                 Maze maze = multiPlayerMazes[mazeName];
+
+                // checks that the game is active
                 if (activeGames.ContainsKey(maze.Name))
                 {
                     //player.Way.Add(move);
@@ -176,8 +190,13 @@ namespace MVC
             return null;
         }
 
+        /// <summary>
+        /// close a single game
+        /// </summary>
+        /// <param name="name">of the maze to close</param>
         private void CloseSingleGame(string name)
         {
+            // remove the maze if found
             if (singlePlayerMazes.ContainsKey(name))
             {
                 singlePlayerMazes.Remove(name);
@@ -189,13 +208,21 @@ namespace MVC
             
         }
 
+        /// <summary>
+        /// close a multiplayer game
+        /// </summary>
+        /// <param name="name">of the maze  to close</param>
+        /// <returns></returns>
         public Game CloseGame(string name)
         {
+            //if the game is on
             if (activeGames.ContainsKey(name))
             {
+                //remove from active list and multiplayer mazes list
                 activeGames.Remove(name);
                 multiPlayerMazes.Remove(name);
 
+                // remove the players and clients
                 Game game = mazeNameToGame[name];
                 mazeNameToGame.Remove(name);
                 clientToMazeName.Remove(game.FirstPlayer.Client);
@@ -205,13 +232,23 @@ namespace MVC
             return null;
         }
 
+        /// <summary>
+        /// list all waiting games names
+        /// </summary>
+        /// <returns>array of waiting games names</returns>
         public string[] GetAllNames()
         {
             return waitingList.Keys.ToArray();
         }
-
+        
+        /// <summary>
+        /// get the player that plays against the client
+        /// </summary>
+        /// <param name="client">to get the other player</param>
+        /// <returns>the other player</returns>
         public Player GetOtherPlayer(TcpClient client)
         {
+            // checks for avtive game
             if (!clientToMazeName.ContainsKey(client))
             {
                 return null;
@@ -220,8 +257,14 @@ namespace MVC
             return game.GetOtherPlayer(client);
         }
 
+        /// <summary>
+        /// get the game of a player
+        /// </summary>
+        /// <param name="client">to request its game</param>
+        /// <returns>the game of the player</returns>
         public Game GetGameOfPlayer(TcpClient client)
         {
+            // checks for active game with this client
             if (!clientToMazeName.ContainsKey(client))
             {
                 return null;
