@@ -5,17 +5,24 @@ namespace MVC
 {
     public class ListGameNamesCommand : Command
     {
-        private IClientHandler ic;
+        /// <summary>
+        /// constructor
+        /// </summary>
+        /// <param name="m">model</param>
+        /// <param name="ic">view</param>
+        public ListGameNamesCommand(IModel model, IClientHandler clientHandle) : base(model, clientHandle) { }
 
-        public ListGameNamesCommand(IModel model, IClientHandler clientHandle) : base(model)
-        {
-            ic = clientHandle;
-        }
-
+        /// <summary>
+        /// executes the command given
+        /// </summary>
+        /// <param name="args">command received from the client</param>
+        /// <param name="client">the client to give the command</param>
+        /// <returns>the status of the command</returns>
         public override Status Execute(string[] args, TcpClient client)
         {
+            // set the statues with the list of names, send to client and return
             Stat.SetStatues(Status.Disconnect, JsonConvert.SerializeObject(Model.GetAllNames()));
-            ic.SendToClient(Stat.ToJson(), client);
+            Handler.SendToClient(Stat.ToJson(), client);
             return Status.Disconnect;
         }
     }

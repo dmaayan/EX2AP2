@@ -8,29 +8,47 @@ using System.Threading.Tasks;
 
 namespace MVC
 {
+    /// <summary>
+    /// controller for the server's MVC
+    /// </summary>
     public class Controller : IController
     {
-
+        /// <summary>
+        /// commnds to execute
+        /// </summary>
         private Dictionary<string, ICommand> commands;
+        /// <summary>
+        /// model
+        /// </summary>
         private IModel model;
+        /// <summary>
+        /// view
+        /// </summary>
         private IClientHandler view;
 
+        /// <summary>
+        /// constructor
+        /// </summary>
         public Controller()
         {
             commands = new Dictionary<string, ICommand>();
         }
 
-        public void SetModel(IModel model)
+        /// <summary>
+        /// sets the model of the controller
+        /// </summary>
+        /// <param name="model">to set</param>
+        /// <param name="clientHandler">view to set</param>
+        public void SetModelndView(IModel model, IClientHandler clientHandler)
         {
             this.model = model;
+            view = clientHandler;
             AddAllCommands();
         }
 
-        public IClientHandler View
-        {
-            set { view = value; }
-        }
-
+        /// <summary>
+        /// add all the commands
+        /// </summary>
         private void AddAllCommands()
         {
             commands.Add("generate", new GenerateMazeCommand(model, view));

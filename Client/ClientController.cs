@@ -14,7 +14,13 @@ namespace Client
     /// </summary>
     public class ClientController
     {
+        /// <summary>
+        /// stores commands
+        /// </summary>
         private Dictionary<string, ICommand> commands;
+        /// <summary>
+        /// send and receive messages
+        /// </summary>
         private MessageTransmiter mr;
 
         /// <summary>

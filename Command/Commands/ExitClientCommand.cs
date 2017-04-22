@@ -10,28 +10,38 @@ namespace MVC
 {
     public class ExitClientCommand : Command
     {
-        private IClientHandler ic;
+        /// <summary>
+        /// constructor
+        /// </summary>
+        /// <param name="m">model</param>
+        /// <param name="ic">view</param>
+        public ExitClientCommand(IModel model, IClientHandler clientHandle) : base(model, clientHandle) { }
 
-        public ExitClientCommand(IModel model, IClientHandler clientHandle) : base(model)
-        {
-            ic = clientHandle;
-        }
-
+        /// <summary>
+        /// executes the command given
+        /// </summary>
+        /// <param name="args">command received from the client</param>
+        /// <param name="client">the client to give the command</param>
+        /// <returns>the status of the command</returns>
         public override Status Execute(string[] args, TcpClient client)
         {
+            // get the game played by this client if exist
             Game game = Model.GetGameOfPlayer(client);
             if (game == null)
             {
+                // set the statues, send to client and return
                 Stat.SetStatues(Status.Exit, "No active game to close");
-                ic.SendToClient(Stat.ToJson(), client);
+                Handler.SendToClient(Stat.ToJson(), client);
                 return Status.Disconnect;
             }
+            // set the statues, send to client and return
             Stat.SetStatues(Status.Exit, "Game is closing");
-            ic.SendToClient(Stat.ToJson(), client);
+            Handler.SendToClient(Stat.ToJson(), client);
 
+            // inform the other plaayer that its game have been closed
             Player otherPlayer = game.GetOtherPlayer(client);
             Stat.SetStatues(Status.Close, "Closed game");
-            ic.SendToClient(Stat.ToJson(), otherPlayer.Client);
+            Handler.SendToClient(Stat.ToJson(), otherPlayer.Client);
             return Status.Disconnect;
         }
     }

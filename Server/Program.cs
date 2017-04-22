@@ -22,8 +22,7 @@ namespace Server
             IController c = new Controller();
             IModel model = new Model();
             IClientHandler ic = new ClientHandler(c);
-            c.View = ic;
-            c.SetModel(model);
+            c.SetModelndView(model, ic);
 
             // get connection info from app.config file
             int port = int.Parse(ConfigurationManager.AppSettings["port"].ToString());

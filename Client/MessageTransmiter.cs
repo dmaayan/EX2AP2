@@ -16,14 +16,41 @@ namespace Client
     /// </summary>
     public class MessageTransmiter
     {
+        /// <summary>
+        /// client currently active
+        /// </summary>
         private TcpClient client;
+        /// <summary>
+        /// the end point to the connection
+        /// </summary>
         private IPEndPoint ep;
+        /// <summary>
+        /// the network stream
+        /// </summary>
         private NetworkStream stream;
+        /// <summary>
+        /// read messages from the server
+        /// </summary>
         private BinaryReader reader;
+        /// <summary>
+        /// write messages to the server
+        /// </summary>
         private BinaryWriter writer;
+        /// <summary>
+        /// message received from the server
+        /// </summary>
         private string messageReceived;
+        /// <summary>
+        /// wait for messages from the server in multiplayer connection
+        /// </summary>
         private Task receiver;
+        /// <summary>
+        /// true if there is a connection open
+        /// </summary>
         private bool isOpen;
+        /// <summary>
+        /// true if there is a game
+        /// </summary>
         private bool isMultiActive;
 
         /// <summary>

@@ -15,8 +15,17 @@ namespace Server
     /// </summary>
     public class Server
     {
+        /// <summary>
+        /// listener for accepting new clients
+        /// </summary>
         private TcpListener listener;
+        /// <summary>
+        /// client handler to handle new clients
+        /// </summary>
         private IClientHandler ch;
+        /// <summary>
+        /// connection end point
+        /// </summary>
         private IPEndPoint ep;
 
         /// <summary>

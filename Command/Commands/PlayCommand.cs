@@ -7,53 +7,66 @@ namespace MVC
 {
     public class PlayCommand : Command
     {
-        private IClientHandler ic;
+        /// <summary>
+        /// constructor
+        /// </summary>
+        /// <param name="m">model</param>
+        /// <param name="ic">view</param>
+        public PlayCommand(IModel model, IClientHandler clientHandle) : base(model, clientHandle) { }
 
-        public PlayCommand(IModel model, IClientHandler clientHandler) : base(model)
-        {
-            ic = clientHandler;
-        }
-
+        /// <summary>
+        /// executes the command given
+        /// </summary>
+        /// <param name="args">command received from the client</param>
+        /// <param name="client">the client to give the command</param>
+        /// <returns>the status of the command</returns>
         public override Status Execute(string[] args, TcpClient client)
         {
             Stat.SetStatues(Status.KeepConnection, "Parameter does not match");
+            // checks that the argument length is valid
             if (args.Length != 1)
             {
-                ic.SendToClient(Stat.ToJson(), client);
+                // send statues to client
+                Handler.SendToClient(Stat.ToJson(), client);
                 return Status.KeepConnection;
             }
-
+            // change input to match enum Direction
             String move = char.ToUpper(args[0].ToLower()[0]) + args[0].ToLower().Substring(1);
             if (!Enum.IsDefined(typeof(Direction), move))
             {
-                ic.SendToClient(Stat.ToJson(), client);
+                // send statues to client
+                Handler.SendToClient(Stat.ToJson(), client);
                 return Status.KeepConnection;
             }
-
+            // get the direction from the command
             Direction direction = (Direction) Enum.Parse(typeof(Direction), move);
+            // get the maze played by this player
             Maze maze = Model.PlayGame(direction, client);
             if (maze == null)
             {
+                // set the statues with the message, send to client and return
                 Stat.SetStatues(Status.Close, "Game is not on");
-                ic.SendToClient(Stat.ToJson(), client);
+                Handler.SendToClient(Stat.ToJson(), client);
                 return Status.Close;
             }
+            // get other player and check that is not null
             Player otherPlayer = Model.GetOtherPlayer(client);
             if (otherPlayer == null)
             {
                 Stat.SetStatues(Status.Close, "No other player to send move to");
-                ic.SendToClient(Stat.ToJson(), client);
+                Handler.SendToClient(Stat.ToJson(), client);
                 return Status.Close;
             }
-
+            // build the JSon string of the message to send to the other client
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("{");
             sb.AppendLine("  \"Name\": \"" + maze.Name + "\"");
             sb.AppendLine("  \"Direction\": \"" + move + "\"");
             sb.AppendLine("}");
 
+            // set the statues with the message, send to client and return
             Stat.SetStatues(Status.PrintAndContinue, sb.ToString());
-            ic.SendToClient(Stat.ToJson(), otherPlayer.Client);
+            Handler.SendToClient(Stat.ToJson(), otherPlayer.Client);
             return Status.KeepConnection;
         }
     }

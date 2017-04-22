@@ -13,12 +13,33 @@ namespace MVC
 {
     public class Model : IModel
     {
+        /// <summary>
+        /// all the games waiting for a second player
+        /// </summary>
         private Dictionary<string, Maze> waitingList;
+        /// <summary>
+        /// all games currently active
+        /// </summary>
         private Dictionary<string, Maze> activeGames;
+        /// <summary>
+        /// all the single game mazes
+        /// </summary>
         private Dictionary<string, Maze> singlePlayerMazes;
+        /// <summary>
+        /// all the multiplayer games
+        /// </summary>
         private Dictionary<string, Maze> multiPlayerMazes;
+        /// <summary>
+        /// all the solutions to the single game mazes
+        /// </summary>
         private Dictionary<string, MazeSolution> singlePlayerSolved;
+        /// <summary>
+        /// maze name to game dictionary
+        /// </summary>
         private Dictionary<string, Game> mazeNameToGame;
+        /// <summary>
+        /// client to maze dictionary
+        /// </summary>
         private Dictionary<TcpClient, string> clientToMazeName;
 
         /// <summary>
@@ -169,7 +190,7 @@ namespace MVC
         /// </summary>
         /// <param name="move"> Direction to play</param>
         /// <param name="client">that moved</param>
-        /// <returns></returns>
+        /// <returns>the maze played by this client</returns>
         public Maze PlayGame(Direction move, TcpClient client)
         {
             // checks for the maze
@@ -212,11 +233,12 @@ namespace MVC
         /// close a multiplayer game
         /// </summary>
         /// <param name="name">of the maze  to close</param>
-        /// <returns></returns>
-        public Game CloseGame(string name)
+        /// <param name="client">that requested to close the game</param>
+        /// <returns>the closed game</returns>
+        public Game CloseGame(string name, TcpClient client)
         {
             //if the game is on
-            if (activeGames.ContainsKey(name))
+            if (activeGames.ContainsKey(name) && IsLegalToClose(name, client))
             {
                 //remove from active list and multiplayer mazes list
                 activeGames.Remove(name);
@@ -230,6 +252,25 @@ namespace MVC
                 return game;
             }
             return null;
+        }
+
+        /// <summary>
+        /// checks if the client had permision to close the game
+        /// </summary>
+        /// <param name="name">of the maze  to close</param>
+        /// <param name="client">that requested to close the game</param>
+        /// <returns></returns>
+        private bool IsLegalToClose(string name, TcpClient client)
+        {
+            if (mazeNameToGame.ContainsKey(name))
+            {
+                // get the game and other player
+                Game game = mazeNameToGame[name];
+                Player otherPlayer = game.GetOtherPlayer(client);
+                // player is null if the client is not a part of this game
+                return otherPlayer != null;
+            }
+            return false;
         }
 
         /// <summary>
