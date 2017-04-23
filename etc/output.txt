@@ -1,0 +1,239 @@
+commit f85fa6f71d7529b38d665494459863d85e288009
+Author: Maayan <damaayan@gmail.com>
+Date:   Sun Apr 23 21:19:18 2017 +0300
+
+    finished comments
+
+commit aefde3094a5313dcd6df4c48d596823fbc93b3df
+Merge: 49d173f 3a9f51a
+Author: Maayan <damaayan@gmail.com>
+Date:   Sun Apr 23 19:54:18 2017 +0300
+
+    need schanges
+
+commit 3a9f51ab440cf4743cd18170b1f22f8ab16aa15e
+Author: Maayan <damaayan@gmail.com>
+Date:   Sun Apr 23 19:48:56 2017 +0300
+
+    SearchAlgorithmsLib comments
+
+commit 49d173fb18bfebbfa19404db94fc027a06816bb7
+Author: nweichse <nevo12345@gmail.com>
+Date:   Sun Apr 23 02:57:24 2017 +0300
+
+    comments over commands and half MVC
+
+commit 9f91e944dd3eac033f6c5936abf74b0dbe85654a
+Author: nweichse <nevo12345@gmail.com>
+Date:   Fri Apr 21 13:39:31 2017 +0300
+
+    ex1 after comments
+
+commit cc1898e20e5647e18d71acc8b7b7b7675abd1f66
+Merge: eec2fa9 00a713e
+Author: Maayan <damaayan@gmail.com>
+Date:   Fri Apr 21 13:19:44 2017 +0300
+
+    Merge branch 'maayan'
+
+commit 00a713ea56f250cd5189d2d202c26b6c871de2ad
+Author: Maayan <damaayan@gmail.com>
+Date:   Fri Apr 21 13:18:03 2017 +0300
+
+    comments finish:
+    BFS
+    ISearchable
+    ISearcher
+
+commit eec2fa9715680f6c2299ce0530d02a7094fe8612
+Author: nweichse <nevo12345@gmail.com>
+Date:   Fri Apr 21 13:12:48 2017 +0300
+
+    comments over client-server-model.
+    app.config settings  and information text
+
+commit 83308d201dd4eb974fe9f4dada030ce71d82586b
+Author: nweichse <nevo12345@gmail.com>
+Date:   Thu Apr 20 19:55:40 2017 +0300
+
+    working after client controller added.
+
+commit 55a79b0ae8e76c963e284df0e5440b2fde9241db
+Author: Maayan <damaayan@gmail.com>
+Date:   Mon Apr 17 16:47:08 2017 +0300
+
+    SinglePlayCommand, MultiPlayCommand
+
+commit 53f1d4be60f79042982521e647ed28d34a6b72f7
+Author: nweichse <nevo12345@gmail.com>
+Date:   Mon Apr 17 09:23:14 2017 +0300
+
+    command server and client working
+
+commit a8b955b281da2be24f6a1f8e5a040297ad6d6afb
+Author: Maayan <damaayan@gmail.com>
+Date:   Sat Apr 15 23:52:02 2017 +0300
+
+    server and client check
+
+commit c51da31e560d667ac6085be9dfd0ebcf078d9e40
+Merge: ac06a8e fdf2b71
+Author: Maayan <damaayan@gmail.com>
+Date:   Sat Apr 15 20:55:51 2017 +0300
+
+    after comit
+
+commit fdf2b7174cfd789a96cb95a64578cf0ffc322ffe
+Author: nweichse <nevo12345@gmail.com>
+Date:   Sat Apr 15 20:53:28 2017 +0300
+
+    controller
+
+commit ac06a8ef9b463ce23701acc6d741ca92185d115e
+Author: Maayan <damaayan@gmail.com>
+Date:   Sat Apr 15 20:52:08 2017 +0300
+
+    client handler
+
+commit be0b1dbe55da63ed2c41cc712a90d784f22522b4
+Author: Maayan <damaayan@gmail.com>
+Date:   Sat Apr 8 19:01:03 2017 +0300
+
+    part 2
+
+commit 088869da06bd8ec000c6652391ae666762ac4f1d
+Author: nweichse <nevo12345@gmail.com>
+Date:   Sat Apr 8 16:04:17 2017 +0300
+
+    middle change
+
+commit ac499e5ef0a9b94a089bb888a759137fc96eeae0
+Author: Maayan <damaayan@gmail.com>
+Date:   Sat Apr 8 00:55:47 2017 +0300
+
+    checking
+
+commit 988329910a760ab6a97beb084fe6e2a0b393bfce
+Merge: ae90e12 e6d5421
+Author: Maayan <damaayan@gmail.com>
+Date:   Fri Apr 7 23:55:18 2017 +0300
+
+    maze adapter
+
+commit ae90e12267accd60c0535c5bbbf4ad855ef72af7
+Author: Maayan <damaayan@gmail.com>
+Date:   Fri Apr 7 23:52:50 2017 +0300
+
+    maze adapter
+
+commit e6d542193e19adb31c3047227ed27130f7eb8c57
+Author: nweichse <nevo12345@gmail.com>
+Date:   Fri Apr 7 20:24:20 2017 +0300
+
+    dll added and program
+
+commit dd950ba0a691c57506dac8fbb0ecd38c0e0faa1b
+Author: Maayan <damaayan@gmail.com>
+Date:   Wed Apr 5 22:37:41 2017 +0300
+
+    BFS, abstract classes, interfaces are  ready
+
+commit 7402ed0bc9d0deb3fd9146740d10d11c7a5fd860
+Merge: a8fd65f 0ade51e
+Author: Maayan <damaayan@gmail.com>
+Date:   Tue Apr 4 22:21:59 2017 +0300
+
+    searcher
+
+commit a8fd65fe5a3260c4fe22bef577379ca97b56c06c
+Author: Maayan <damaayan@gmail.com>
+Date:   Tue Apr 4 22:18:41 2017 +0300
+
+    isearcher
+
+commit 0ade51e6533dad4362a9edf1f7e12b47b68ea380
+Author: nweichse <nevo12345@gmail.com>
+Date:   Tue Apr 4 22:13:38 2017 +0300
+
+    solution and DFS
+
+commit 9a5ebb38a1cf695e09533f9c72f661efc541efb8
+Merge: 7fdeb64 ae187d8
+Author: nweichse <nevo12345@gmail.com>
+Date:   Tue Apr 4 20:23:39 2017 +0300
+
+    Merge branch 'master' of https://github.com/nevow/ex1ap2.git
+
+commit 7fdeb645c4eccaaaf7ab2c68d39ac9ccf266e510
+Author: nweichse <nevo12345@gmail.com>
+Date:   Tue Apr 4 20:23:18 2017 +0300
+
+    classes files
+
+commit ae187d88cbf122eb7c5c13e70c7ca340634f73e6
+Merge: d5982d8 149cb1b
+Author: Maayan <damaayan@gmail.com>
+Date:   Sat Apr 1 20:57:21 2017 +0300
+
+    with search
+
+commit d5982d8a558ef9466ae5a995ec62bc4b8e1bbe6d
+Author: Maayan <damaayan@gmail.com>
+Date:   Sat Apr 1 20:51:13 2017 +0300
+
+    try to cummit 4
+
+commit 149cb1bc4f78fbb5522ca829ed4f0b9aba823617
+Author: nweichse <nevo12345@gmail.com>
+Date:   Sat Apr 1 20:40:57 2017 +0300
+
+    abstract ISearchable
+
+commit 16d1271cf90fd89a0ffcbf07593a03469c8d779f
+Merge: badda2b 78f7cd5
+Author: nweichse <nevo12345@gmail.com>
+Date:   Sat Apr 1 19:26:20 2017 +0300
+
+    Merge remote-tracking branch 'refs/remotes/origin/nevo'
+
+commit 78f7cd553bf079355213ecb2b4376e945ae8ef7b
+Author: nweichse <nevo12345@gmail.com>
+Date:   Sat Apr 1 19:24:19 2017 +0300
+
+    commit to branch nevo
+
+commit badda2b51a437aa3d1ecc459ecec02b2cfbe13b2
+Author: Maayan <damaayan@gmail.com>
+Date:   Sat Apr 1 19:14:47 2017 +0300
+
+    try commit 2
+
+commit 01d48908beca8fb158782ffa76084afec9f866e0
+Author: Maayan <damaayan@gmail.com>
+Date:   Sat Apr 1 19:10:31 2017 +0300
+
+    try to branch
+
+commit 676c0f7e75a75bd3de89b91922f21c5fc3f0dc48
+Author: Maayan <damaayan@gmail.com>
+Date:   Sat Apr 1 19:03:37 2017 +0300
+
+    try to commit
+
+commit 334f77b23460d8a3ee8016311a4bad3345983877
+Author: nweichse <nevo12345@gmail.com>
+Date:   Sat Apr 1 18:49:09 2017 +0300
+
+    hello world
+
+commit 3e3d483610edeb01e270b8d79309a8b8dc6aa60c
+Author: nweichse <nweichse@NWEICHSE-MOBL>
+Date:   Sat Apr 1 18:35:32 2017 +0300
+
+    Add project files.
+
+commit 5959ad65d859c092d5e7ed05b880680e9d57953d
+Author: nweichse <nweichse@NWEICHSE-MOBL>
+Date:   Sat Apr 1 18:35:31 2017 +0300
+
+    Add .gitignore and .gitattributes.
