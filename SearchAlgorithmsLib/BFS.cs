@@ -22,14 +22,14 @@ namespace SearchAlgorithmsLib
         {
             lock (locker2)
             {
-                addToOpenList(searchable.GetInitialState());
+                AddToOpenList(searchable.GetInitialState());
             }
             HashSet<State<T>> closed = new HashSet<State<T>>();
             State<T> goal = searchable.GetGoalState();
 
             while (OpenListSize > 0)
             {
-                State<T> state = popOpenList();         // removes the best state
+                State<T> state = PopOpenList();         // removes the best state
                 closed.Add(state);                      // add it to the closed hash
 
                 if (state.Equals(goal))
@@ -46,13 +46,13 @@ namespace SearchAlgorithmsLib
                         if (!closed.Contains(s) && !OpenList.Contains(s))
                         {
                             s.CameFrom = state;
-                            addToOpenList(s);
+                            AddToOpenList(s);
                         }
                         // the cost of the new way is better
                         else if (OpenList.Contains(s))
                         {
                             s.CameFrom = state;
-                            updateStateIfPathBetter(s);
+                            UpdateStateIfPathBetter(s);
                         }
                     }
                 }
