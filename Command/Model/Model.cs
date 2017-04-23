@@ -1,16 +1,15 @@
-﻿using Ex1;
-using MazeLib;
-using System;
+﻿using MazeLib;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MazeGeneratorLib;
 using SearchAlgorithmsLib;
 using System.Net.Sockets;
 
 namespace MVC
 {
+    /// <summary>
+    /// the maze model
+    /// </summary>
     public class Model : IModel
     {
         /// <summary>
@@ -41,6 +40,7 @@ namespace MVC
         /// client to maze dictionary
         /// </summary>
         private Dictionary<TcpClient, string> clientToMazeName;
+
 
         /// <summary>
         /// constructor
@@ -259,7 +259,7 @@ namespace MVC
         /// </summary>
         /// <param name="name">of the maze  to close</param>
         /// <param name="client">that requested to close the game</param>
-        /// <returns></returns>
+        /// <returns>true if legal else false</returns>
         private bool IsLegalToClose(string name, TcpClient client)
         {
             if (mazeNameToGame.ContainsKey(name))

@@ -10,6 +10,9 @@ namespace SearchAlgorithmsLib
     /// <typeparam name="T">the type of object to search</typeparam>
     public abstract class NonPrioritySearcher<T> : Searcher<T>
     {
+        /// <summary>
+        /// the updated parents of each state
+        /// </summary>
         private Dictionary<State<T>, State<T>> parents;
 
         /// <summary>

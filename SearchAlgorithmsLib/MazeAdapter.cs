@@ -8,6 +8,9 @@ namespace SearchAlgorithmsLib
     /// </summary>
     public class MazeAdapter : ISearchable<Position>
     {
+        /// <summary>
+        /// the maze
+        /// </summary>
         private Maze maze;
 
         /// <summary>

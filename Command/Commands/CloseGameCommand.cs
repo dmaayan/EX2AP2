@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using System.Net.Sockets;
 
 namespace MVC
 {
     /// <summary>
-    /// command for close game
+    /// close game command
     /// </summary>
     public class CloseGameCommand : Command
     {
@@ -17,7 +13,8 @@ namespace MVC
         /// </summary>
         /// <param name="m">model</param>
         /// <param name="ic">view</param>
-        public CloseGameCommand(IModel model, IClientHandler clientHandle) : base(model, clientHandle) { }
+        public CloseGameCommand(IModel model, IClientHandler clientHandle) :
+            base(model, clientHandle) { }
 
         /// <summary>
         /// executes the command given

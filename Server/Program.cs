@@ -12,10 +12,14 @@ using System.Threading.Tasks;
 namespace Server
 {
     /// <summary>
-    /// server
+    /// server main
     /// </summary>
     class Program
     {
+        /// <summary>
+        /// main
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             // start and set the MVC items

@@ -8,42 +8,71 @@ using System.Threading.Tasks;
 
 namespace MVC
 {
+    /// <summary>
+    /// game between two players
+    /// </summary>
     public class Game
     {
+        /// <summary>
+        /// player to create the game
+        /// </summary>
         Player player;
+        /// <summary>
+        /// the other player that joined the game
+        /// </summary>
         Player otherPlayer;
-        //bool active = false;
 
+        /// <summary>
+        /// constructor
+        /// </summary>
+        /// <param name="creator">player that created the game</param>
         public Game(Player creator)
         {
             player = creator;
-            //PlayGame(creator);
         }
 
+        /// <summary>
+        /// property of player
+        /// </summary>
         public Player FirstPlayer
         {
             get { return player; }
         }
 
+        /// <summary>
+        /// property of otherPlayer
+        /// </summary>
         public Player SecondPlayer
         {
             get { return otherPlayer; }
         }
 
+        /// <summary>
+        /// add a player to the game
+        /// </summary>
+        /// <param name="secondPlayer">to join the game</param>
         public void AddPlayer(Player secondPlayer)
         {
             otherPlayer = secondPlayer;
             player.StopWaiting();
-            //PlayGame(secondPlayer);
         }
 
+        /// <summary>
+        /// creator of the game waits for a palyer to join
+        /// </summary>
         public void waitForOtherPlayer()
         {
             player.WaitForPlayer();
         }
 
+        /// <summary>
+        /// get the other player
+        /// </summary>
+        /// <param name="tcc">client to get the other client</param>
+        /// <returns>the other client</returns>
         public Player GetOtherPlayer(TcpClient tcc)
         {
+            // compares this client with the plaer to get the other palyer
             if (player.Client == tcc)
             {
                 return otherPlayer;
@@ -52,48 +81,8 @@ namespace MVC
             {
                 return player;
             }
+            // the client is not one of the players
             return null;
         }
-
-        //private void PlayGame(Player p)
-        //{
-        //    active = true;
-        //    using (NetworkStream stream = p.Client.GetStream())
-        //    using (BinaryReader reader = new BinaryReader(stream))
-        //    using (BinaryWriter writer = new BinaryWriter(stream))
-        //    {
-        //        Task task = new Task(() =>
-        //        {
-        //            while (active)
-        //            {
-        //                try
-        //                {
-        //                    Console.WriteLine(reader.ReadString());
-        //                }
-        //                catch (IOException e)
-        //                {
-        //                    Console.WriteLine(e);
-        //                    active = false;
-        //                    return;
-        //                }
-        //            }
-        //        });
-        //        string command = "";
-        //        task.Start();
-        //        while (!command.Contains("exit"))
-        //        {
-        //            // Send data to server
-        //            Console.Write("Starting multiplayer Game.\n");
-        //            Console.Write("Please enter a move: \n");
-        //            command = Console.ReadLine();
-        //            writer.Write(command);
-        //            // Get result from server
-        //            string result = reader.ReadString();
-        //            Console.WriteLine("{0}", result);
-        //        }
-        //        active = false;
-        //        task.Wait();
-        //    }
-        //}
     }
 }

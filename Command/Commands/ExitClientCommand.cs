@@ -1,13 +1,10 @@
-﻿using MVC;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace MVC
 {
+    /// <summary>
+    /// Exit Client Command
+    /// </summary>
     public class ExitClientCommand : Command
     {
         /// <summary>
@@ -15,7 +12,8 @@ namespace MVC
         /// </summary>
         /// <param name="m">model</param>
         /// <param name="ic">view</param>
-        public ExitClientCommand(IModel model, IClientHandler clientHandle) : base(model, clientHandle) { }
+        public ExitClientCommand(IModel model, IClientHandler clientHandle) :
+            base(model, clientHandle) { }
 
         /// <summary>
         /// executes the command given

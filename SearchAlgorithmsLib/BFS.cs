@@ -10,7 +10,13 @@ namespace SearchAlgorithmsLib
     /// <typeparam name="T">the type of object to search</typeparam>
     public class BFS<T> : PrioritySearcher<T>
     {
-        private Object locker = new Object();                       // locker for threads
+        /// <summary>
+        /// locker for threads
+        /// </summary>
+        private Object locker = new Object();
+        /// <summary>
+        /// locker for threads
+        /// </summary>
         private Object locker2 = new Object();
 
         /// <summary>

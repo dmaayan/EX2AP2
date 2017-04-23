@@ -1,11 +1,8 @@
 ﻿using MVC;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -45,7 +42,7 @@ namespace Client
         /// </summary>
         private Task receiver;
         /// <summary>
-        /// true if there is a connection open
+        /// true if there is a connection Open
         /// </summary>
         private bool isOpen;
         /// <summary>
@@ -66,7 +63,7 @@ namespace Client
         }
 
         /// <summary>
-        /// property
+        /// property isMultiActive
         /// </summary>
         public bool IsMultiActive
         {
@@ -77,14 +74,14 @@ namespace Client
         /// <summary>
         /// opens a new multiplayer connection to the client
         /// </summary>
-        public void open()
+        public void Open()
         {
             // sets bools to true and message to null
             messageReceived = null;
             isMultiActive = true;
             isOpen = true;
 
-            // create a client and open the streams
+            // create a client and Open the streams
             client = new TcpClient();
             client.Connect(ep);
             stream = client.GetStream();
@@ -111,7 +108,7 @@ namespace Client
                         {
                             // an error in the connection
                             statues = new Statues();
-                            statues.SetStatues(Status.Close, "Error");
+                            statues.SetStatues(Status.Close, "Error" + e.ToString());
                             result = "Error";
                             break;
                         }
@@ -168,7 +165,7 @@ namespace Client
         }
 
         /// <summary>
-        /// gets a message from the server using the open connection
+        /// gets a message from the server using the Open connection
         /// </summary>
         /// <returns>the message received from the server</returns>
         public string GetMassage()
@@ -185,7 +182,7 @@ namespace Client
         }
 
         /// <summary>
-        /// close an open connection to the server
+        /// close an Open connection to the server
         /// </summary>
         public void Close()
         {
@@ -224,14 +221,14 @@ namespace Client
         /// multiplayer message transferring
         /// </summary
         /// <param name="message">if there is a connection, sends message.
-        /// open a connection if not opened</param>
+        /// Open a connection if not opened</param>
         public void SendMessage(string message)
         {
-            // checks for open connection
+            // checks for Open connection
             if (!isOpen)
             {
-                // open new connection
-                open();
+                // Open new connection
+                Open();
             }
             // send message
             writer.Write(message);

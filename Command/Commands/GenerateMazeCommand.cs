@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MazeLib;
 using System.Net.Sockets;
-using Newtonsoft.Json;
 
 namespace MVC
 {
+    /// <summary>
+    /// Generate Maze Command
+    /// </summary>
     public class GenerateMazeCommand : Command
     {
         /// <summary>
@@ -16,7 +14,8 @@ namespace MVC
         /// </summary>
         /// <param name="m">model</param>
         /// <param name="ic">view</param>
-        public GenerateMazeCommand(IModel model, IClientHandler clientHandle) : base(model, clientHandle) { }
+        public GenerateMazeCommand(IModel model, IClientHandler clientHandle) :
+            base(model, clientHandle) { }
 
         /// <summary>
         /// executes the command given

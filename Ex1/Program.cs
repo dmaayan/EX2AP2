@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MazeGeneratorLib;
 using MazeLib;
 using SearchAlgorithmsLib;
@@ -22,7 +18,7 @@ namespace Ex1
         }
 
         /// <summary>
-        /// compare between BFS and DFS
+        /// CompareSolvers is a static function that compare between BFS and DFS
         /// </summary>
         public static void CompareSolvers()
         {

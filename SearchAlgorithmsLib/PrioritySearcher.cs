@@ -11,7 +11,13 @@ namespace SearchAlgorithmsLib
     /// <typeparam name="T">the type of object to search</typeparam>
     public abstract class PrioritySearcher<T> : Searcher<T>
     {
+        /// <summary>
+        /// the open list that states have not been closed yet
+        /// </summary>
         private SimplePriorityQueue<State<T>> openList;
+        /// <summary>
+        /// updated came from and cost for each state
+        /// </summary>
         private Dictionary<State<T>, KeyValuePair<State<T>, double>> updatedStates;
 
         /// <summary>

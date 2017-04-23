@@ -9,9 +9,18 @@ namespace SearchAlgorithmsLib
     /// <typeparam name="T">is the type of the state </typeparam>
     public class State<T>
     {
+        /// <summary>
+        /// the state
+        /// </summary>
         private T state;            
-        private double cost;        // cost to reach this state
-        private State<T> cameFrom;  // the state we came from to this state
+        /// <summary>
+        /// cost to get to this state
+        /// </summary>
+        private double cost;
+        /// <summary>
+        /// the state we came from to this state
+        /// </summary>
+        private State<T> cameFrom;
 
         /// <summary>
         /// constuctor
@@ -73,6 +82,9 @@ namespace SearchAlgorithmsLib
         /// </summary>
         public static class StatePool
         {
+            /// <summary>
+            /// the pool of states
+            /// </summary>
             private static Dictionary<T, State<T>> pool = new Dictionary<T, State<T>>();
 
             /// <summary>

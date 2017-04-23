@@ -10,6 +10,9 @@ namespace SearchAlgorithmsLib
     /// <typeparam name="T">the type of object to search</typeparam>
     public class DFS<T> : NonPrioritySearcher<T>
     {
+        /// <summary>
+        /// the visited list
+        /// </summary>
         private HashSet<State<T>> visited;
 
         /// <summary>

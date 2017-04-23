@@ -11,8 +11,17 @@ namespace SearchAlgorithmsLib
     /// </summary>
     public class MazeSolution
     {
+        /// <summary>
+        /// a list of directions
+        /// </summary>
         private List<Direction> directions;
+        /// <summary>
+        /// nodes Evaluated
+        /// </summary>
         private int nodesEvaluated;
+        /// <summary>
+        /// maze Name
+        /// </summary>
         private string mazeName;
 
         /// <summary>

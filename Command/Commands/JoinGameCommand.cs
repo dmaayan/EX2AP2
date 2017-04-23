@@ -3,6 +3,9 @@ using System.Net.Sockets;
 
 namespace MVC
 {
+    /// <summary>
+    /// Join Game Command 
+    /// </summary>
     public class JoinGameCommand : Command
     {
         /// <summary>
@@ -10,7 +13,8 @@ namespace MVC
         /// </summary>
         /// <param name="m">model</param>
         /// <param name="ic">view</param>
-        public JoinGameCommand(IModel model, IClientHandler clientHandle) : base(model, clientHandle) { }
+        public JoinGameCommand(IModel model, IClientHandler clientHandle) :
+            base(model, clientHandle) { }
 
         /// <summary>
         /// executes the command given

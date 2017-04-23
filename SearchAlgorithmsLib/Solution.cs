@@ -8,7 +8,13 @@ namespace SearchAlgorithmsLib
     /// <typeparam name="T">is the type of the Solution</typeparam>
     public class Solution<T>
     {
+        /// <summary>
+        /// list of the states to get to the goal
+        /// </summary>
         private List<State<T>> solution;
+        /// <summary>
+        /// the number of nodes evaluated to get this solution
+        /// </summary>
         private int nodesEvaluated;
 
         /// <summary>
@@ -34,15 +40,6 @@ namespace SearchAlgorithmsLib
         public int NodesEvaluated
         {
             get { return nodesEvaluated; }
-        }
-
-        /// <summary>
-        /// ToJson 
-        /// </summary>
-        /// <returns> </returns>
-        public string ToJson()
-        {
-            return null;
         }
     }
 }

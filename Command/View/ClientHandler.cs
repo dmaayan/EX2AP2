@@ -9,6 +9,9 @@ using MVC;
 
 namespace MVC
 {
+    /// <summary>
+    /// the view
+    /// </summary>
     public class ClientHandler : IClientHandler
     {
         /// <summary>
@@ -53,6 +56,7 @@ namespace MVC
                         }
                         catch (Exception e)
                         {
+                            Console.WriteLine(e.ToString());
                             break;
                         }
                     } while (result == Status.KeepConnection);

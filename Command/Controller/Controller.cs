@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
-
 
 namespace MVC
 {
@@ -60,11 +56,19 @@ namespace MVC
             commands.Add("close", new CloseGameCommand(model, view));
             commands.Add("exit", new ExitClientCommand(model, view));
         }
-        
+
+        /// <summary>
+        /// execute commands 
+        /// </summary>
+        /// <param name="commandLine">command received from the user</param>
+        /// <param name="client">that requested the command</param>
+        /// <returns>the status returned from the command executed</returns>
         public Status ExecuteCommand(string commandLine, TcpClient client)
         {
+            // split command
             string[] arr = commandLine.Split(' ');
             string commandKey = arr[0];
+            // check that the command is valid
             if (!commands.ContainsKey(commandKey))
             {
                 Statues stat = new Statues();
@@ -72,6 +76,7 @@ namespace MVC
                 view.SendToClient(stat.ToJson(), client);
                 return Status.Disconnect;
             }
+            // get command and execute it
             string[] args = arr.Skip(1).ToArray();
             ICommand command = commands[commandKey];
             return command.Execute(args, client);

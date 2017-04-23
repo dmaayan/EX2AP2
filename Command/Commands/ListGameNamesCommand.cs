@@ -3,6 +3,9 @@ using Newtonsoft.Json;
 
 namespace MVC
 {
+    /// <summary>
+    /// List Game Names Command
+    /// </summary>
     public class ListGameNamesCommand : Command
     {
         /// <summary>
@@ -10,7 +13,8 @@ namespace MVC
         /// </summary>
         /// <param name="m">model</param>
         /// <param name="ic">view</param>
-        public ListGameNamesCommand(IModel model, IClientHandler clientHandle) : base(model, clientHandle) { }
+        public ListGameNamesCommand(IModel model, IClientHandler clientHandle) : 
+            base(model, clientHandle) { }
 
         /// <summary>
         /// executes the command given

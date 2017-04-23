@@ -14,7 +14,7 @@ namespace MVC
         /// <param name="clientHandler">view to set</param>
         void SetModelndView(IModel model, IClientHandler clientHandler);
 
-        /// /// <summary>
+        /// <summary>
         /// execute commands 
         /// </summary>
         /// <param name="commandLine">command received from the user</param>

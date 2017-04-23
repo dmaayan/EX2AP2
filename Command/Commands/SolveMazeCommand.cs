@@ -1,20 +1,27 @@
-﻿using System.Collections.Generic;
-using System.Net.Sockets;
+﻿using System.Net.Sockets;
 using System.Linq;
 using SearchAlgorithmsLib;
 using MazeLib;
 
 namespace MVC
 {
+    /// <summary>
+    /// Solve Maze Command
+    /// </summary>
     public class SolveMazeCommand : Command
     {
+        /// <summary>
+        /// the options for searcher algorithm
+        /// </summary>
         private string[] options = {"0", "1"};
+
         /// <summary>
         /// constructor
         /// </summary>
         /// <param name="m">model</param>
         /// <param name="ic">view</param>
-        public SolveMazeCommand(IModel model, IClientHandler clientHandle) : base(model, clientHandle) { }
+        public SolveMazeCommand(IModel model, IClientHandler clientHandle) :
+            base(model, clientHandle) { }
 
         /// <summary>
         /// executes the command given

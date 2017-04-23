@@ -1,10 +1,6 @@
 ﻿using MVC;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Client.Commands
 {
@@ -13,6 +9,7 @@ namespace Client.Commands
     /// </summary>
     public class StartMultiPlayCommand : ICommand
     {
+
         /// <summary>
         /// send and receive messages
         /// </summary>
@@ -32,7 +29,7 @@ namespace Client.Commands
         /// </summary>
         /// <param name="args">arguments of the command</param>
         /// <param name="client">to give the command</param>
-        /// <returns></returns>
+        /// <returns> the Status</returns>
         public Status Execute(string[] args, TcpClient client)
         {
             string message = String.Join(" ", args);

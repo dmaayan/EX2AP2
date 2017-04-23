@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net.Sockets;
 
 namespace MVC
 {
+    /// <summary>
+    /// abstract class command extend ICommand
+    /// </summary>
     public abstract class Command : ICommand
     {
         /// <summary>

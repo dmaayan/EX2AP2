@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MVC;
-using static Client.Program;
 using System.Net.Sockets;
 
 namespace Client
@@ -33,7 +28,7 @@ namespace Client
         /// </summary>
         /// <param name="args">arguments of the command</param>
         /// <param name="client">to give the command</param>
-        /// <returns></returns>
+        /// <returns>the Status</returns>
         public Status Execute(string[] args, TcpClient client)
         {
             // checks if there is a connection with the server

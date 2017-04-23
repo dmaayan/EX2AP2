@@ -8,6 +8,9 @@ namespace SearchAlgorithmsLib
     /// <typeparam name="T">is the object to search</typeparam>
     public abstract class Searcher<T> : ISearcher<T>
     {
+        /// <summary>
+        /// number of nodes evaluated
+        /// </summary>
         private int evaluatedNodes;
 
         /// <summary>
