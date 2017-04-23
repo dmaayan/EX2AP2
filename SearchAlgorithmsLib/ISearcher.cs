@@ -2,7 +2,7 @@
 namespace SearchAlgorithmsLib
 {
     /// <summary>
-    /// ISearchable is an interface for search problems solvers
+    /// ISearcher is an interface for search problems solvers
     /// has two methods.
     /// </summary>
     /// <typeparam name="T">is the object to search</typeparam>
@@ -14,7 +14,6 @@ namespace SearchAlgorithmsLib
         /// <param name="searchable">to search on</param>
         /// <returns>the solution</returns>
         Solution<T> Search (ISearchable<T> searchable);
-        // get how many nodes were evaluated by the algorithm 
 
         /// <summary>
         /// get how many nodes were evaluated by the algorithm

@@ -31,7 +31,7 @@ namespace SearchAlgorithmsLib
 
             while (stack.Count > 0)
             {
-                increaseEvaluatedNodes();
+                IncreaseEvaluatedNodes();
                 state = stack.Pop();
                 if (goal.Equals(state))
                 {
