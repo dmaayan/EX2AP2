@@ -43,5 +43,7 @@ namespace MazeGUI
             MainWindow win = (MainWindow)Application.Current.MainWindow;
             win.Show();
         }
+
+        
     }
 }

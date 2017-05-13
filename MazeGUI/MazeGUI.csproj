@@ -64,7 +64,11 @@
     <Compile Include="SinglePlayerMazeWindow.xaml.cs">
       <DependentUpon>SinglePlayerMazeWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SinglePlayerSettingsWindow.xaml.cs">
+    <Compile Include="singlePlayerSettings\model\ISingleSettingsMoudel.cs" />
+    <Compile Include="singlePlayerSettings\model\SingleSettingsModel.cs" />
+    <Compile Include="singlePlayerSettings\viewModel\ISingleSettingViewModel.cs" />
+    <Compile Include="singlePlayerSettings\viewModel\SingleSettingsViewModel.cs" />
+    <Compile Include="singlePlayerSettings\view\SinglePlayerSettingsWindow.xaml.cs">
       <DependentUpon>SinglePlayerSettingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="userControls\MazeControl.xaml.cs">
@@ -90,7 +94,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SinglePlayerSettingsWindow.xaml">
+    <Page Include="singlePlayerSettings\view\SinglePlayerSettingsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
