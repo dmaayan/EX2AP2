@@ -5,13 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MazeGUI.singlePlayerSettings.viewModel
+namespace MazeGUI.singlePlayerSettings
 {
-    public interface ISingleSettingViewModel
+    public interface ISingleSettingsModel
     {
         int Cols { get; set; }
+
         int Rows { get; set; }
-        int Name { get; set; }
+
+        string Name { get; set; }
+
         Maze Connect();
     }
 }

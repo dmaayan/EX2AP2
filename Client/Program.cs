@@ -26,23 +26,23 @@ namespace Client
             ClientController clientController = new ClientController(mr);
             Status status;
             // repeat until status from the command is exit
-            do
-            {
+            //do
+            //{
                 try
                 {
                     // get command from user
                     Console.Write("Please enter a command: \n");
                     string command = Console.ReadLine();
                     // apply command with the controller
-                    status = clientController.ExecuteCommand(command);
+                    //status = clientController.ExecuteCommand(command);
                 }
                 catch (Exception e)
                 {
                     // connection error
                     Console.WriteLine(e);
-                    break;
+                    //break;
                 }
-            } while (status != Status.Exit);
+            //} while (status != Status.Exit);
         }
     }
 }

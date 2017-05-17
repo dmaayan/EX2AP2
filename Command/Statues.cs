@@ -55,7 +55,7 @@ namespace MVC
         /// <returns>as string </returns>
         public string ToJson()
         {
-            return "\"status\":" + status.ToString() + "|" + "\"message\":" + message;
+            return "\"status\"~" + status.ToString() + "|" + "\"message\"~" + message;
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace MVC
         public static Statues FromJson(string s)
         {
             // split the string
-            char[] spliters = { '|', ':' };
+            char[] spliters = { '|', '~' };
             string[] members = s.Split(spliters);
             Statues statues = new Statues();
             // parse the status back
@@ -75,7 +75,7 @@ namespace MVC
             // build the string
             for (int i = 3; i < members.Length; i++)
             {
-                message += members[i];
+                message += members[i];  
             }
             statues.SetStatues(status, message);
             return statues;

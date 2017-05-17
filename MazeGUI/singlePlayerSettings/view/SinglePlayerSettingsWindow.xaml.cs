@@ -1,4 +1,7 @@
-﻿using System;
+﻿using MazeGUI.singlePlayerSettings.model;
+using MazeGUI.singlePlayerSettings.viewModel;
+using MazeLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,14 +23,20 @@ namespace MazeGUI
     /// </summary>
     public partial class SinglePlayerSettingsWindow : Window
     {
+        SingleSettingsViewModel model;
+
         public SinglePlayerSettingsWindow()
         {
+            model = new SingleSettingsViewModel(new SingleSettingsModel());
+            DataContext = model;
             InitializeComponent();
+            
         }
 
         private void OKButton_Click(object sender, RoutedEventArgs e)
         {
-            new SinglePlayerMazeWindow().Show();
+            Maze m = model.Connect();
+            new SinglePlayerMazeWindow(m).Show();
             Close();
         }
 
@@ -37,13 +46,22 @@ namespace MazeGUI
             win.Show();
             Close();
         }
-
-        private void SinglePlayerWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        
+        public int Cols
         {
-            MainWindow win = (MainWindow)Application.Current.MainWindow;
-            win.Show();
+            get { return model.Cols; }
+            set { model.Cols = value; }
+        }
+        public int Rows
+        {
+            get { return model.Rows; }
+            set { model.Rows = value; }
         }
 
-        
+        public string Name
+        {
+            get { return model.Name; }
+            set { model.Name = value; }
+        }
     }
 }
