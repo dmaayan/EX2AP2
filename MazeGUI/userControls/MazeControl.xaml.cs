@@ -24,7 +24,7 @@ namespace MazeGUI.userControls
     {
         private static int rectSizePX = 10;
         private List<Rectangle> rects;
-
+        private Position player;
         public MazeControl()
         {
             InitializeComponent();
@@ -36,12 +36,6 @@ namespace MazeGUI.userControls
             mazeCanvas.Width = rectSizePX * Rows;
             mazeCanvas.Height = rectSizePX * Cols;
             initializeMazeLabels();
-        }
-
-        public void PositionPlayer(Position mazeStartPoint, Position lastPosition)
-        {
-            rects[lastPosition.Row * Cols + lastPosition.Col].Fill = Brushes.White;
-            rects[mazeStartPoint.Row * Cols + mazeStartPoint.Col].Fill = Brushes.Aquamarine;
         }
 
         private void initializeMazeLabels()
@@ -70,8 +64,19 @@ namespace MazeGUI.userControls
                 }
                 distanceFromTop = (distanceFromTop + rectHeight);
             }
-
+            //player = new Position(MazeStartPoint.Row, MazeStartPoint.Col);
         }
+
+        public void PositionPlayer(Position mazeStartPoint, Position lastPosition)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                rects[lastPosition.Row * Cols + lastPosition.Col].Fill =
+                    ColorFactory.GetColor(MazeString[lastPosition.Row * Cols + lastPosition.Col]);
+                rects[mazeStartPoint.Row * Cols + mazeStartPoint.Col].Fill = Brushes.Aquamarine;
+            });
+        }
+
 
         //Using a DependencyProperty as the backing store for Maze.This enables animation, styling, binding, etc...
         public static readonly DependencyProperty RowsProperty =
@@ -122,7 +127,5 @@ namespace MazeGUI.userControls
             get { return (Position)GetValue(MazeEndPointProperty); }
             set { SetValue(MazeEndPointProperty, value); }
         }
-
-
     }
 }

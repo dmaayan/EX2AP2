@@ -4,11 +4,13 @@ using MazeGUI.singlePlayerMaze.viewModel;
 using MazeGUI.singlePlayerSettings.model;
 using MazeGUI.singlePlayerSettings.viewModel;
 using MazeLib;
+using SearchAlgorithmsLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -116,6 +118,79 @@ namespace MazeGUI
         private void FinishGame()
         {
             MessageBox.Show("You escaped!");
+        }
+
+        private void RestartButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure tou want to restart?", "Delete Confirmation", MessageBoxButton.YesNo);
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                Position lastLocation = mazePlayer.MazePoint;
+                mazePlayer.MazePoint = MazeStartPoint;
+                mazeControl.PositionPlayer(mazePlayer.MazePoint, lastLocation);
+            }
+        }
+
+        private void MainMenuButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow win = (MainWindow)Application.Current.MainWindow;
+            win.Show();
+            Close();
+        }
+
+        private void SolveMazeButton_Click(object sender, RoutedEventArgs e)
+        {
+            string solution = model.SolveMaze();
+            AnimateFromAnotherThread(solution);
+        }
+
+        public void AnimateFromAnotherThread(string solution)
+        {
+            Position startPoint = MazeStartPoint;
+            Task animation = new Task(() =>
+            {
+                Position startPos = mazePlayer.MazePoint;
+                mazeControl.PositionPlayer(startPoint, mazePlayer.MazePoint);
+                mazePlayer.MazePoint = startPoint;
+                Position lastLocation;
+                int i = 0;
+                int value;
+                while (i < solution.Length)
+                {
+                    value = (int)Char.GetNumericValue(solution[i]);
+                    if (value == (int)Direction.Down)
+                    {
+                        lastLocation = mazePlayer.MazePoint;
+                        mazePlayer.MazePoint = new Position(lastLocation.Row + 1,
+                                                            lastLocation.Col);
+                        mazeControl.PositionPlayer(mazePlayer.MazePoint, lastLocation);
+                    }
+                    else if (value == (int)Direction.Up)
+                    {
+                        lastLocation = mazePlayer.MazePoint;
+                        mazePlayer.MazePoint = new Position(lastLocation.Row - 1,
+                                                            lastLocation.Col);
+                        mazeControl.PositionPlayer(mazePlayer.MazePoint, lastLocation);
+                    }
+                    else if (value == (int)Direction.Left)
+                    {
+                        lastLocation = mazePlayer.MazePoint;
+                        mazePlayer.MazePoint = new Position(lastLocation.Row,
+                                                            lastLocation.Col + 1);
+                        mazeControl.PositionPlayer(mazePlayer.MazePoint, lastLocation);
+                    }
+                    else if (value == (int)Direction.Right)
+                    {
+                        lastLocation = mazePlayer.MazePoint;
+                        mazePlayer.MazePoint = new Position(lastLocation.Row,
+                                                            lastLocation.Col - 1);
+                        mazeControl.PositionPlayer(mazePlayer.MazePoint, lastLocation);
+                    }
+                    i++;
+                    System.Threading.Thread.Sleep(1000);
+                }
+            });
+            animation.Start();
         }
     }
 }

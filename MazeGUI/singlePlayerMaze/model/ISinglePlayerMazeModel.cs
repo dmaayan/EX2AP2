@@ -1,4 +1,5 @@
 ﻿using MazeLib;
+using SearchAlgorithmsLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,5 +23,7 @@ namespace MazeGUI.singlePlayerMaze.model
         Position MazeEndPoint { get; }
 
         bool IsMoveOk(Position mazeStartPoint, Direction direct);
+
+        string SolveMaze();
     }
 }

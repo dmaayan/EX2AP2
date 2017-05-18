@@ -74,13 +74,13 @@ namespace SearchAlgorithmsLib
         private Solution<T> BackTrace(State<T> goal)
         {
             List<State<T>> solution = new List<State<T>>();
-            State<T> state = UpdatedStates[goal].Key;
+            State<T> state = goal;
             // for each state, add the state that he came from, until the surce
             while (state != null)
             {
                 solution.Add(state);
                 state = UpdatedStates[state].Key;
-            } 
+            }
             return new Solution<T>(solution, GetNumberOfNodesEvaluated());
         }
     }
