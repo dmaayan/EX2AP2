@@ -75,6 +75,7 @@
     <Compile Include="singlePlayerMaze\model\ISinglePlayerMazeModel.cs" />
     <Compile Include="singlePlayerMaze\model\SinglePlayerMazeModel.cs" />
     <Compile Include="singlePlayerMaze\viewModel\SinglePlayerMazeViewModel.cs" />
+    <Compile Include="MazePlayer.cs" />
     <Compile Include="singlePlayerMaze\view\SinglePlayerMazeWindow.xaml.cs">
       <DependentUpon>SinglePlayerMazeWindow.xaml</DependentUpon>
     </Compile>
@@ -85,6 +86,7 @@
     <Compile Include="singlePlayerSettings\view\SinglePlayerSettingsWindow.xaml.cs">
       <DependentUpon>SinglePlayerSettingsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ColorFactory.cs" />
     <Compile Include="userControls\MazeControl.xaml.cs">
       <DependentUpon>MazeControl.xaml</DependentUpon>
     </Compile>

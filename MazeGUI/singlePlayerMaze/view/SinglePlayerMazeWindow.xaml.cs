@@ -26,6 +26,7 @@ namespace MazeGUI
     public partial class SinglePlayerMazeWindow : Window
     {
         private SinglePlayerMazeViewModel model;
+        MazePlayer mazePlayer;
 
         public SinglePlayerMazeWindow(Maze m)
         {
@@ -33,11 +34,14 @@ namespace MazeGUI
             this.DataContext = model;
             InitializeComponent();
             mazeControl.start();
+            mazePlayer = new MazePlayer(MazeStartPoint);
+            mazeControl.PositionPlayer(mazePlayer.MazePoint, mazePlayer.MazePoint);
+            singlePlayerMazeWindow.KeyDown += singlePlayerMazeWindow_KeyDown;
         }
 
-        public string Name
+        public string MazeName
         {
-            get { return model.Name; }
+            get { return model.MazeName; }
         }
 
         public int Cols
@@ -50,5 +54,68 @@ namespace MazeGUI
             get { return model.Rows; }
         }
 
+        public string MazeString
+        {
+            get { return model.MazeString; }
+        }
+
+        public Position MazeStartPoint
+        {
+            get { return model.MazeStartPoint; }
+        }
+
+        public Position MazeEndPoint
+        {
+            get { return model.MazeEndPoint; }
+        }
+
+        private void singlePlayerMazeWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            int row = mazePlayer.MazePoint.Row;
+            int col = mazePlayer.MazePoint.Col;
+            Position lastPosition = mazePlayer.MazePoint;
+            if (e.Key == Key.Down)
+            {
+                if (model.IsMoveOk(mazePlayer.MazePoint, Direction.Down))
+                {
+                    mazePlayer.MazePoint = new Position(row + 1, col);
+                    mazeControl.PositionPlayer(mazePlayer.MazePoint, lastPosition);
+                }
+            }
+            else if (e.Key == Key.Up)
+            {
+                if (model.IsMoveOk(mazePlayer.MazePoint, Direction.Up))
+                {
+                    mazePlayer.MazePoint = new Position(row - 1, col);
+                    mazeControl.PositionPlayer(mazePlayer.MazePoint, lastPosition);
+                }
+            }
+            else if (e.Key == Key.Left)
+            {
+                if (model.IsMoveOk(mazePlayer.MazePoint, Direction.Left))
+                {
+                    mazePlayer.MazePoint = new Position(row, col - 1);
+                    mazeControl.PositionPlayer(mazePlayer.MazePoint, lastPosition);
+                }
+            }
+            else if (e.Key == Key.Right)
+            {
+                if (model.IsMoveOk(mazePlayer.MazePoint, Direction.Right))
+                {
+                    mazePlayer.MazePoint = new Position(row, col + 1);
+                    mazeControl.PositionPlayer(mazePlayer.MazePoint, lastPosition);
+                }
+            }
+            if ((mazePlayer.MazePoint.Col == MazeEndPoint.Col) 
+                && (mazePlayer.MazePoint.Row == MazeEndPoint.Row))
+            {
+                FinishGame();
+            }
+        }
+
+        private void FinishGame()
+        {
+            MessageBox.Show("You escaped!");
+        }
     }
 }

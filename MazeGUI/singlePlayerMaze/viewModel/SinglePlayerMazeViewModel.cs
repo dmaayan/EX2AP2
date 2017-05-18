@@ -1,4 +1,5 @@
 ﻿using MazeGUI.singlePlayerMaze.model;
+using MazeLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace MazeGUI.singlePlayerMaze.viewModel
             model = mod;
         }
 
-        public string Name
+        public string MazeName
         {
             get { return model.Name; }
         }
@@ -29,6 +30,26 @@ namespace MazeGUI.singlePlayerMaze.viewModel
         public int Rows
         {
             get { return model.Rows; }
+        }
+
+        public string MazeString
+        {
+            get { return model.MazeString; }
+        }
+
+        public Position MazeStartPoint
+        {
+            get { return model.MazeStartPoint; }
+        }
+
+        public Position MazeEndPoint
+        {
+            get { return model.MazeEndPoint; }
+        }
+
+        public bool IsMoveOk(Position mazeStartPoint, Direction direct)
+        {
+            return model.IsMoveOk(mazeStartPoint, direct);
         }
     }
 }

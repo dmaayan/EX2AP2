@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MazeLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,5 +14,13 @@ namespace MazeGUI.singlePlayerMaze.model
         int Cols { get; }
 
         int Rows { get; }
+
+        string MazeString { get; }
+
+        Position MazeStartPoint { get; }
+
+        Position MazeEndPoint { get; }
+
+        bool IsMoveOk(Position mazeStartPoint, Direction direct);
     }
 }

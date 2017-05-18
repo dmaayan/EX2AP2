@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MazeGUI"
         xmlns:controls="clr-namespace:MazeGUI.userControls"
         mc:Ignorable="d"
-        Title="{Binding Name}" Height="300" Width="300">
+        Title="{Binding MazeName}" Height="300" Width="300">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -20,13 +20,15 @@
         <Button x:Name="RestartButton" Content="Restart Game" Grid.Column="0" VerticalAlignment="Center" Width="75" HorizontalContentAlignment="Center" HorizontalAlignment="Right" />
         <Button x:Name="SolveMazeButton" Content="Solve Maze" Grid.Column="1" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="75"/>
         <Button x:Name="MainMenuButton" Content="Main Menu" Grid.Column="2" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Center" Width="75"/>
-        <!--Maze="{Binding ModelMaze}"-->
         <controls:MazeControl x:Name="mazeControl" 
                               Grid.ColumnSpan="3" 
                               Grid.Row="1" 
                               HorizontalAlignment="Center" 
                               VerticalAlignment="Center" 
                               Cols="{Binding Cols}" 
-                              Rows="{Binding Rows}"></controls:MazeControl>
+                              Rows="{Binding Rows}"
+                              MazeString="{Binding MazeString}"
+                              MazeStartPoint="{Binding MazeStartPoint}"
+                              MazeEndPoint="{Binding MazeEndPoint}"></controls:MazeControl>
     </Grid>
 </Window>
