@@ -62,7 +62,7 @@ namespace MVC
         /// </summary>
         /// <param name="args">command received from the client</param>
         /// <param name="client">the client to give the command</param>
-        /// <returns>the status of the command</returns>
+        /// <returns>the Status of the command</returns>
         public abstract Status Execute(string[] args, TcpClient client = null);
     }
 }

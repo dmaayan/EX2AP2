@@ -34,9 +34,9 @@ namespace Client
         /// </summary>
         private BinaryWriter writer;
         /// <summary>
-        /// message received from the server
+        /// statues received from the server
         /// </summary>
-        private string messageReceived;
+        private Statues messageReceived;
         /// <summary>
         /// wait for messages from the server in multiplayer connection
         /// </summary>
@@ -49,6 +49,10 @@ namespace Client
         /// true if there is a game
         /// </summary>
         private bool isMultiActive;
+        /// <summary>
+        /// statues of the send returned from the server
+        /// </summary>
+        Statues statues;
 
         /// <summary>
         /// constructor
@@ -60,6 +64,7 @@ namespace Client
             messageReceived = null;
             isOpen = false;
             isMultiActive = false;
+            statues = null;
         }
 
         /// <summary>
@@ -104,7 +109,8 @@ namespace Client
                             // get a message from the server and parse it to Statues
                             result = reader.ReadString();
                             statues = Statues.FromJson(result);
-                        } catch (Exception e)
+                        }
+                        catch (Exception e)
                         {
                             // an error in the connection
                             statues = new Statues();
@@ -151,7 +157,7 @@ namespace Client
                                 }
                         }
                         // put the message from the server into the messageReceived var.
-                        messageReceived = result;
+                        messageReceived = statues;
                     }
                     // wait for some one to receive the message
                     else
@@ -168,7 +174,7 @@ namespace Client
         /// gets a message from the server using the Open connection
         /// </summary>
         /// <returns>the message received from the server</returns>
-        public string GetMassage()
+        public Statues GetMassage()
         {
             // wait for the receiver to get a message
             while (messageReceived == null)
@@ -176,7 +182,7 @@ namespace Client
                 Thread.Sleep(1);
             }
             // save the message at current and reset the messageReceiverd to null
-            string current = messageReceived;
+            Statues current = messageReceived;
             messageReceived = null;
             return current;
         }
@@ -251,12 +257,23 @@ namespace Client
                 // write and erad a message
                 newWriter.Write(message);
                 string result = newReader.ReadString();
-                Statues statues = Statues.FromJson(result);
-                Console.WriteLine(statues.Message);
+                statues = Statues.FromJson(result);
             }
             // close the client
             newClient.Close();
         }
-        
+
+        public Statues getStatues()
+        {
+            // wait for the receiver to get a message
+            while (statues == null)
+            {
+                Thread.Sleep(1);
+            }
+            // save the message at current and reset the messageReceiverd to null
+            Statues current = statues;
+            statues = null;
+            return current;
+        }
     }
 }

@@ -36,7 +36,7 @@ namespace Client
                 string message = String.Join(" ", args);
                 // send and receive a message
                 messageRec.SendMessage(message);
-                Statues stat = Statues.FromJson(messageRec.GetMassage());
+                Statues stat = messageRec.GetMassage();
                 Console.WriteLine(stat.Message);
                 return stat.Stat;
             }

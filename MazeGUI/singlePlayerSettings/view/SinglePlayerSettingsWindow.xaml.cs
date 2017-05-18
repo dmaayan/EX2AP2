@@ -1,4 +1,6 @@
-﻿using MazeGUI.singlePlayerSettings.viewModel;
+﻿using MazeGUI.singlePlayerSettings.model;
+using MazeGUI.singlePlayerSettings.viewModel;
+using MazeLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,27 +23,21 @@ namespace MazeGUI
     /// </summary>
     public partial class SinglePlayerSettingsWindow : Window
     {
-        private ISingleSettingsViewModel viewModel;
+        SingleSettingsViewModel model;
 
         public SinglePlayerSettingsWindow()
         {
-            viewModel = new SingleSettingsViewModel();
+            model = new SingleSettingsViewModel(new SingleSettingsModel());
+            DataContext = model;
             InitializeComponent();
-            settingsControl.okButton.Click += OKButton_Click;
-            settingsControl.cancelButton.Click += CancelButton_Click;
+            
         }
 
         private void OKButton_Click(object sender, RoutedEventArgs e)
         {
-            if (settingsControl.mazeNameTxtBox.Text == "")
-            {
-                MessageBox.Show("Enter Maze Name");
-            }
-            else
-            {
-                new SinglePlayerMazeWindow().Show();
-                Close();
-            }
+            Maze m = model.Connect();
+            new SinglePlayerMazeWindow(m).Show();
+            Close();
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -50,12 +46,22 @@ namespace MazeGUI
             win.Show();
             Close();
         }
-
-        private void SinglePlayerWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        
+        public int Cols
         {
-            MainWindow win = (MainWindow)Application.Current.MainWindow;
-            win.Show();
+            get { return model.Cols; }
+            set { model.Cols = value; }
+        }
+        public int Rows
+        {
+            get { return model.Rows; }
+            set { model.Rows = value; }
         }
 
+        public string Name
+        {
+            get { return model.Name; }
+            set { model.Name = value; }
+        }
     }
 }

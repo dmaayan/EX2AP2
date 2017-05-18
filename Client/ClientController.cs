@@ -44,20 +44,15 @@ namespace Client
         /// </summary>
         /// <param name="commandLine">command received from the user</param>
         /// <returns>the status returned from the command executed</returns>
-        public Status ExecuteCommand(string commandLine)
+        public Statues ExecuteCommand(string commandLine)
         {
             // split the commandline
             string[] args = commandLine.Split();
-            // check for valid command
-            if (args.Length == 0 || !commands.ContainsKey(args[0]))
-            {
-                Console.WriteLine("Command not found");
-                return Status.Error;
-            }
+
             // execute command
             ICommand command = commands[args[0]];
-            Status status = command.Execute(args);
-            return status;
+            command.Execute(args);
+            return mr.getStatues();
         }
     }
 }

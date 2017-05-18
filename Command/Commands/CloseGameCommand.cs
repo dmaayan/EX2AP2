@@ -24,14 +24,6 @@ namespace MVC
         /// <returns>the status of the command</returns>
         public override Status Execute(string[] args, TcpClient client)
         {
-            // checks that the argument length is valid
-            if (args.Length != 1)
-            {
-                // set the statues, send to client and return
-                Stat.SetStatues(Status.KeepConnection, "Parameter does not match");
-                Handler.SendToClient(Stat.ToJson(), client);
-                return Status.KeepConnection;
-            }
             // get the name of the maze to close
             string name = args[0];
             // get its game

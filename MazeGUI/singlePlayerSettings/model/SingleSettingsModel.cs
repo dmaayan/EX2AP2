@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MazeLib;
+using MVC;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,40 +8,37 @@ using System.Threading.Tasks;
 
 namespace MazeGUI.singlePlayerSettings.model
 {
-    class SingleSettingsModel
+    public class SingleSettingsModel : ISingleSettingsModel
     {
-        string mazeName = null;
-        int mazeRows;
-        int mazeCols;
+        private int cols;
+        private int rows;
+        private string name;
 
-        public SingleSettingsModel ()
-        {
-            mazeRows = Properties.Settings.Default.MazeRows;
-            mazeCols = Properties.Settings.Default.MazeCols;
-        }
-
-        public string MazeName
-        {
-            get { return mazeName; }
-            set { mazeName = value; }
-        }
-
-        public int MazeRows
-        {
-            get { return mazeRows; }
-            set { mazeRows = value; }
-        }
-
-        public int MazeCols
-        {
-            get { return mazeCols; }
-            set { mazeCols = value; }
-        }
-
-        void SaveSettings()
+        public SingleSettingsModel()
         {
 
         }
 
+        public int Cols {
+            get { return cols; }
+            set { cols = value; }
+        }
+
+        public int Rows {
+            get { return rows; }
+            set { rows = value; }
+        }
+
+        public string Name {
+            get { return name; }
+            set { name = value; }
+        }
+
+        public Maze Connect()
+        {
+            Statues stat = ClientSingleton.Client.SendMesseage("generate " 
+                                                                + Name + " " + Rows + " " + Cols);
+            return Maze.FromJSON(stat.Message);
+        }
     }
 }

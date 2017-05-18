@@ -34,10 +34,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MazeGeneratorLib">
+      <HintPath>..\SearchAlgorithmsLib\MazeGeneratorLib.dll</HintPath>
+    </Reference>
+    <Reference Include="MazeLib">
+      <HintPath>..\SearchAlgorithmsLib\MazeLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -56,6 +64,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ClientSingleton.cs" />
     <Compile Include="settings\model\ApplicationSettingsModel.cs" />
     <Compile Include="settings\model\ISettingsModel.cs" />
     <Compile Include="settings\viewModel\SettingsViewModel.cs" />
@@ -63,18 +72,23 @@
     <Compile Include="settings\view\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SinglePlayerMazeWindow.xaml.cs">
+    <Compile Include="singlePlayerMaze\model\ISinglePlayerMazeModel.cs" />
+    <Compile Include="singlePlayerMaze\model\SinglePlayerMazeModel.cs" />
+    <Compile Include="singlePlayerMaze\viewModel\SinglePlayerMazeViewModel.cs" />
+    <Compile Include="MazePlayer.cs" />
+    <Compile Include="singlePlayerMaze\view\SinglePlayerMazeWindow.xaml.cs">
       <DependentUpon>SinglePlayerMazeWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="singlePlayerSettings\model\ISingleSettingsMoudel.cs" />
+    <Compile Include="singlePlayerSettings\model\ISingleSettingsModel.cs" />
     <Compile Include="singlePlayerSettings\model\SingleSettingsModel.cs" />
-    <Compile Include="singlePlayerSettings\viewModel\ISingleSettingsViewModel.cs" />
+    <Compile Include="singlePlayerSettings\viewModel\ISingleSettingViewModel.cs" />
     <Compile Include="singlePlayerSettings\viewModel\SingleSettingsViewModel.cs" />
-    <Compile Include="singlePlayerSettings\view\SettingsControl.xaml.cs">
-      <DependentUpon>SettingsControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="singlePlayerSettings\view\SinglePlayerSettingsWindow.xaml.cs">
       <DependentUpon>SinglePlayerSettingsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ColorFactory.cs" />
+    <Compile Include="userControls\MazeControl.xaml.cs">
+      <DependentUpon>MazeControl.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -92,17 +106,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="SinglePlayerMazeWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="singlePlayerSettings\view\SettingsControl.xaml">
+    <Page Include="singlePlayerMaze\view\SinglePlayerMazeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="singlePlayerSettings\view\SinglePlayerSettingsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="userControls\MazeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -123,6 +137,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -132,7 +147,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="multiPlayerSettings\" />
+    <ProjectReference Include="..\Client\Client.csproj">
+      <Project>{B48B28B0-BB60-455B-ABD4-1561F8A95470}</Project>
+      <Name>Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Command\MVC.csproj">
+      <Project>{AB440259-FC08-4F8D-B8BD-F96F70EF7E66}</Project>
+      <Name>MVC</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
