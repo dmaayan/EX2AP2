@@ -12,7 +12,7 @@ namespace MazeGUI.singlePlayerSettings.model
     {
         private int cols;
         private int rows;
-        private string name;
+        private string mazeName;
 
         public SingleSettingsModel()
         {
@@ -29,15 +29,15 @@ namespace MazeGUI.singlePlayerSettings.model
             set { rows = value; }
         }
 
-        public string Name {
-            get { return name; }
-            set { name = value; }
+        public string MazeName {
+            get { return mazeName; }
+            set { mazeName = value; }
         }
 
         public Maze Connect()
         {
             Statues stat = ClientSingleton.Client.SendMesseage("generate " 
-                                                                + Name + " " + Rows + " " + Cols);
+                                                                + mazeName + " " + Rows + " " + Cols);
             return Maze.FromJSON(stat.Message);
         }
     }

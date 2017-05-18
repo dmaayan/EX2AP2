@@ -10,23 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MazeGUI.singlePlayerSettings.view
+namespace MazeGUI.multiPlayerSettings.view
 {
     /// <summary>
-    /// Interaction logic for SettingsControl.xaml
+    /// Interaction logic for MultiSettingsWindow.xaml
     /// </summary>
-    public partial class SettingsControl : UserControl
+    public partial class MultiSettingsWindow : Window
     {
-        public SettingsControl()
+        public MultiSettingsWindow()
         {
             InitializeComponent();
-            txtRows.Text = Properties.Settings.Default.MazeRows.ToString();
-            txtCols.Text = Properties.Settings.Default.MazeCols.ToString();
-
         }
-
     }
 }

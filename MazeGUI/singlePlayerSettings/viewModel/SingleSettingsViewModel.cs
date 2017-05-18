@@ -12,11 +12,9 @@ namespace MazeGUI.singlePlayerSettings.viewModel
     {
         ISingleSettingsModel model;
 
-        public SingleSettingsViewModel(ISingleSettingsModel m)
+        public SingleSettingsViewModel(ISingleSettingsModel Imodel)
         {
-            model = m;
-            Cols = Properties.Settings.Default.MazeCols;
-            Rows = Properties.Settings.Default.MazeRows;
+            model = Imodel;
         }
 
         public int Cols
@@ -38,13 +36,13 @@ namespace MazeGUI.singlePlayerSettings.viewModel
             }
         }
 
-        public string Name
+        public string MazeName
         {
-            get { return model.Name; }
+            get { return model.MazeName; }
             set
             {
-                model.Name = value;
-                NotifyPropertyChanged("MazeNameTxtBox");
+                model.MazeName = value;
+                NotifyPropertyChanged("mazeNameTxtBox");
             }
         }
 

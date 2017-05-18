@@ -13,7 +13,7 @@
                     <ImageBrush/>
                 </Button.Background>
             </Button>
-            <Button x:Name="MultiPlayerButton" Content="Multi Player" HorizontalAlignment="Center" Margin="0,0,0,15" VerticalAlignment="Center" Width="75"/>
+            <Button x:Name="MultiPlayerButton" Content="Multi Player" HorizontalAlignment="Center" Margin="0,0,0,15" VerticalAlignment="Center" Width="75" Click="MultiPlayerButton_Click"/>
             <Button x:Name="settingsButton" Content="Settings" HorizontalAlignment="Center" Margin="0,0,0,15" VerticalAlignment="Center" Width="75" Click="SettingsButton_Click"/>
         </StackPanel>
 
