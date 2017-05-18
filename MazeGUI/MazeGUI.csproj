@@ -36,6 +36,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -66,8 +68,11 @@
     </Compile>
     <Compile Include="singlePlayerSettings\model\ISingleSettingsMoudel.cs" />
     <Compile Include="singlePlayerSettings\model\SingleSettingsModel.cs" />
-    <Compile Include="singlePlayerSettings\viewModel\ISingleSettingViewModel.cs" />
+    <Compile Include="singlePlayerSettings\viewModel\ISingleSettingsViewModel.cs" />
     <Compile Include="singlePlayerSettings\viewModel\SingleSettingsViewModel.cs" />
+    <Compile Include="singlePlayerSettings\view\SettingsControl.xaml.cs">
+      <DependentUpon>SettingsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="singlePlayerSettings\view\SinglePlayerSettingsWindow.xaml.cs">
       <DependentUpon>SinglePlayerSettingsWindow.xaml</DependentUpon>
     </Compile>
@@ -88,6 +93,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="SinglePlayerMazeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="singlePlayerSettings\view\SettingsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -121,6 +130,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="multiPlayerSettings\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

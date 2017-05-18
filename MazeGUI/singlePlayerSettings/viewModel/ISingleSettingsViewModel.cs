@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MazeGUI.singlePlayerSettings.viewModel
 {
-    interface ISingleSettingViewModel
+    public interface ISingleSettingsViewModel
     {
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MazeGUI.singlePlayerSettings.viewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,15 +21,27 @@ namespace MazeGUI
     /// </summary>
     public partial class SinglePlayerSettingsWindow : Window
     {
+        private ISingleSettingsViewModel viewModel;
+
         public SinglePlayerSettingsWindow()
         {
+            viewModel = new SingleSettingsViewModel();
             InitializeComponent();
+            settingsControl.okButton.Click += OKButton_Click;
+            settingsControl.cancelButton.Click += CancelButton_Click;
         }
 
         private void OKButton_Click(object sender, RoutedEventArgs e)
         {
-            new SinglePlayerMazeWindow().Show();
-            Close();
+            if (settingsControl.mazeNameTxtBox.Text == "")
+            {
+                MessageBox.Show("Enter Maze Name");
+            }
+            else
+            {
+                new SinglePlayerMazeWindow().Show();
+                Close();
+            }
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -44,6 +57,5 @@ namespace MazeGUI
             win.Show();
         }
 
-        
     }
 }
