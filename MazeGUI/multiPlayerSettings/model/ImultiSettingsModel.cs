@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace MazeGUI.multiPlayerSettings.model
 {
-    class IMultiSettingsModel
+    public interface IMultiSettingsModel
     {
+        int Cols { get; set; }
+
+        int Rows { get; set; }
+
+        string MazeName { get; set; }
+
+        void Start();
+
+        void JoinToGame();
     }
 }

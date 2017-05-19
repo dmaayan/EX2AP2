@@ -80,6 +80,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ClientSingleton.cs" />
+    <Compile Include="multiPlayerMaze\view\MultiMazesWindow.xaml.cs">
+      <DependentUpon>MultiMazesWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="multiPlayerSettings\model\IMultiSettingsModel.cs" />
     <Compile Include="multiPlayerSettings\model\MultiSettingsModel.cs" />
     <Compile Include="multiPlayerSettings\viewModel\MultiSettingsViewModel.cs" />
@@ -125,6 +128,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="multiPlayerMaze\view\MultiMazesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="multiPlayerSettings\view\MultiSettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -190,7 +197,6 @@
   <ItemGroup>
     <Folder Include="multiPlayerMaze\model\" />
     <Folder Include="multiPlayerMaze\viewModel\" />
-    <Folder Include="multiPlayerMaze\view\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">

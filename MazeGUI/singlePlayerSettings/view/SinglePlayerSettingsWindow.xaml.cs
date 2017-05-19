@@ -38,7 +38,7 @@ namespace MazeGUI
 
         private void OKButton_Click(object sender, RoutedEventArgs e)
         {
-            if (MazeName == "")
+            if (MazeName == null)
             {
                 MessageBox.Show("Enter Maze Name");
             }

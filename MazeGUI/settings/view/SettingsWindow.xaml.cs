@@ -19,20 +19,18 @@ namespace MazeGUI.settings.view
     /// </summary>
     public partial class SettingsWindow : Window
     {
-        private SettingsViewModel vm;
-        private ISettingsModel model;
+        private SettingsViewModel viewModel;
 
         public SettingsWindow()
         {
             InitializeComponent();
-            model = new ApplicationSettingsModel();
-            vm = new SettingsViewModel(model);
-            DataContext = vm;
+            viewModel = new SettingsViewModel(new ApplicationSettingsModel());
+            DataContext = viewModel;
         }
 
         private void BtnOK_Click(object sender, RoutedEventArgs e)
         {
-            vm.SaveSettings();
+            viewModel.SaveSettings();
             MainWindow win = (MainWindow)Application.Current.MainWindow;
             win.Show();
             Close();
@@ -40,7 +38,7 @@ namespace MazeGUI.settings.view
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {
-            vm.ReloadSettings();
+            viewModel.ReloadSettings();
             MainWindow win = (MainWindow)Application.Current.MainWindow;
             win.Show();
             Close();
@@ -48,7 +46,7 @@ namespace MazeGUI.settings.view
 
         private void SettingsWindow1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            vm.ReloadSettings();
+            viewModel.ReloadSettings();
             MainWindow win = (MainWindow)Application.Current.MainWindow;
             win.Show();
         }
