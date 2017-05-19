@@ -30,14 +30,24 @@ namespace MazeGUI
             model = new SingleSettingsViewModel(new SingleSettingsModel());
             DataContext = model;
             InitializeComponent();
-            
+            singelPlayerSettingsControl.okButton.Click += OKButton_Click;
+            singelPlayerSettingsControl.cancelButton.Click += CancelButton_Click;
+            Cols = Properties.Settings.Default.MazeCols;
+            Rows = Properties.Settings.Default.MazeRows;
         }
 
         private void OKButton_Click(object sender, RoutedEventArgs e)
         {
-            Maze m = model.Connect();
-            new SinglePlayerMazeWindow(m).Show();
-            Close();
+            if (MazeName == "")
+            {
+                MessageBox.Show("Enter Maze Name");
+            }
+            else
+            {
+                Maze maze = model.Connect();
+                new SinglePlayerMazeWindow(maze).Show();
+                Close();
+            }
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -58,10 +68,11 @@ namespace MazeGUI
             set { model.Rows = value; }
         }
 
-        public string Name
+        public string MazeName
         {
-            get { return model.Name; }
-            set { model.Name = value; }
+            get { return model.MazeName; }
+            set { model.MazeName = value; }
         }
+
     }
 }

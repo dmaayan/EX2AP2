@@ -1,4 +1,5 @@
-﻿using MazeGUI.settings.view;
+﻿using MazeGUI.multiPlayerSettings.view;
+using MazeGUI.settings.view;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,6 +49,12 @@ namespace MazeGUI
         private void SinglePlayerButton_Click(object sender, RoutedEventArgs e)
         {
             new SinglePlayerSettingsWindow().Show();
+            Hide();
+        }
+
+        private void MultiPlayerButton_Click(object sender, RoutedEventArgs e)
+        {
+            new MultiSettingsWindow().Show();
             Hide();
         }
     }

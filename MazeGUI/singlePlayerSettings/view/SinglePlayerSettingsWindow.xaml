@@ -3,30 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:MazeGUI.userControls"
         xmlns:local="clr-namespace:MazeGUI"
         mc:Ignorable="d"
         Title="singlePlayerWindow" Height="330" Width="330">
+    <Viewbox>
 
-    <Grid x:Name="SinglePlayerGrid" TextBlock.FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Width="210" Height="228" Margin="63,39,59,30" UseLayoutRounding="False">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="99*"/>
-            <ColumnDefinition Width="101*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <TextBlock  VerticalAlignment="Center" Margin="10,0,0,0">Maze name:</TextBlock>
-        <TextBox x:Name="MazeNameTxtBox" Text="{Binding Name}" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="90" Height="30" Margin="0,0,5,0" ></TextBox>
-        <TextBlock Grid.Row="1" VerticalAlignment="Center" Margin="10,0,0,0">Maze rows:</TextBlock>
-        <TextBox x:Name="txtRows" Text="{Binding Rows}" Grid.Row="1" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="90" Height="30" Margin="0,0,5,0" ></TextBox>
-        <TextBlock Grid.Row="2" VerticalAlignment="Center" Margin="10,0,0,0">Maze columns:</TextBlock>
-        <TextBox x:Name="txtCols" Text="{Binding Cols}" Grid.Row="2" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="90" Height="30" Margin="0,0,5,0"></TextBox>
-        <Button x:Name="OKButton" Content="ok" HorizontalAlignment="Left" Margin="10,30,0,0" Grid.Row="3" VerticalAlignment="Top" Width="75" FontWeight="Bold" Click="OKButton_Click" />
-        <Button x:Name="CancelButton" Content="Cancel" Grid.Column="1" HorizontalAlignment="Left" Margin="16,30,0,0" Grid.Row="3" VerticalAlignment="Top" Width="75" FontWeight="Bold" Click="CancelButton_Click" />
+        <controls:SettingsControl x:Name="singelPlayerSettingsControl" HorizontalAlignment="Left" Height="300" VerticalAlignment="Top" Width="330"/>
 
-
-    </Grid>
+    </Viewbox>
+    
 </Window>
