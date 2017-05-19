@@ -14,6 +14,7 @@ namespace MazeGUI.singlePlayerMaze.model
         private Maze maze;
         private string mazeString;
         private int searchAlgoritm;
+        private string mazeSolution;
 
         public SinglePlayerMazeModel(Maze m)
         {
@@ -84,9 +85,13 @@ namespace MazeGUI.singlePlayerMaze.model
 
         public string SolveMaze()
         {
-            Statues stat = ClientSingleton.Client.SendMesseage("solve " + maze.Name + " " + searchAlgoritm);
-
-            return MazeSolution.FromJson(stat.Message);
+            if (mazeSolution == null)
+            {
+                Statues stat = ClientSingleton.Client.SendMesseage("solve " + maze.Name + " " + searchAlgoritm);
+                mazeSolution = MazeSolution.FromJson(stat.Message);
+                
+            }
+            return mazeSolution;
         }
     }
 }
