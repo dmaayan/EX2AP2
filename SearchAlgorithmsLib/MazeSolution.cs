@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace SearchAlgorithmsLib
 {
@@ -56,22 +57,22 @@ namespace SearchAlgorithmsLib
                 // check right 
                 if (pos.Col > otherPos.Col)
                 {
-                    directions.Add(Direction.Left);
+                    directions.Add(Direction.Right);
                 }
                 // check left
                 else if (pos.Col < otherPos.Col)
                 {
-                    directions.Add(Direction.Right);
+                    directions.Add(Direction.Left);
                 }
                 // check down
-                else if (pos.Row > otherPos.Row)
-                {
-                    directions.Add(Direction.Down);
-                }
-                // check up
                 else if (pos.Row < otherPos.Row)
                 {
                     directions.Add(Direction.Up);
+                }
+                // check up
+                else if (pos.Row > otherPos.Row)
+                {
+                    directions.Add(Direction.Down);
                 }
                 // Unknown direction
                 else
@@ -80,6 +81,7 @@ namespace SearchAlgorithmsLib
                 }
                 pos = otherPos;
             }
+            directions.Reverse();
         }
 
         /// <summary>
@@ -103,6 +105,20 @@ namespace SearchAlgorithmsLib
             sb.AppendLine("  \"NodesEvaluated\" :" + nodesEvaluated);
             sb.AppendLine("}");
             return sb.ToString();
+        }
+
+        /// <summary>
+        /// transfer the maze solutions from json
+        /// </summary>
+        /// <returns> string in json </returns>
+        public static string FromJson(string solution)
+        {
+            Match match = Regex.Match(solution, "\"Solution\": \"(\\d*)", RegexOptions.Multiline);
+            if (match.Success)
+            {
+                return match.Groups[1].ToString();
+            }
+            return null;
         }
     }
 }

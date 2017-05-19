@@ -1,5 +1,6 @@
 ﻿using MazeGUI.singlePlayerMaze.model;
 using MazeLib;
+using SearchAlgorithmsLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,6 +51,11 @@ namespace MazeGUI.singlePlayerMaze.viewModel
         public bool IsMoveOk(Position mazeStartPoint, Direction direct)
         {
             return model.IsMoveOk(mazeStartPoint, direct);
+        }
+
+        public string SolveMaze()
+        {
+            return model.SolveMaze();
         }
     }
 }

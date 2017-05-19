@@ -8,8 +8,10 @@
              d:DesignHeight="300" 
              d:DesignWidth="300">
     <Viewbox >
-        <Border x:Name="CanvasBorder" BorderBrush="Black">
-            <Canvas x:Name="mazeCanvas" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Black"/>
+        <Border x:Name="canvasBorder" BorderBrush="Black">
+            <Canvas x:Name="mazeCanvas" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Black">
+                <Rectangle x:Name="player" Fill="Aquamarine" Panel.ZIndex="2"></Rectangle>
+            </Canvas>
         </Border>
     </Viewbox>
 </UserControl>

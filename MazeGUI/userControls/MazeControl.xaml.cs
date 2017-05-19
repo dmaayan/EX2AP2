@@ -24,7 +24,8 @@ namespace MazeGUI.userControls
     {
         private static int rectSizePX = 10;
         private List<Rectangle> rects;
-
+        private Position playerPos;
+        //private Position player;
         public MazeControl()
         {
             InitializeComponent();
@@ -33,22 +34,18 @@ namespace MazeGUI.userControls
 
         public void start()
         {
+            canvasBorder.BorderThickness = new Thickness(0.2);
             mazeCanvas.Width = rectSizePX * Rows;
             mazeCanvas.Height = rectSizePX * Cols;
             initializeMazeLabels();
         }
 
-        public void PositionPlayer(Position mazeStartPoint, Position lastPosition)
-        {
-            rects[lastPosition.Row * Cols + lastPosition.Col].Fill = Brushes.White;
-            rects[mazeStartPoint.Row * Cols + mazeStartPoint.Col].Fill = Brushes.Aquamarine;
-        }
-
         private void initializeMazeLabels()
         {
-            CanvasBorder.BorderThickness = new Thickness(0.2);
             double rectHeight = rectSizePX;
             double rectWidth = rectSizePX;
+            player.Width = rectWidth;
+            player.Height = rectHeight;
             double distanceFromLeft = 0;
             double distanceFromTop = 0;
 
@@ -70,8 +67,61 @@ namespace MazeGUI.userControls
                 }
                 distanceFromTop = (distanceFromTop + rectHeight);
             }
-
+            PositionPlayer(MazeStartPoint.Row, MazeStartPoint.Col);
         }
+
+        public void PositionPlayer(int row, int col)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                PlayerPos = new Position(row, col);
+                Canvas.SetLeft(player, col * rectSizePX);
+                Canvas.SetTop(player, row * rectSizePX);
+            });
+        }
+
+        public void PositionPlayer(Direction direct)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                switch (direct)
+                {
+                    case Direction.Down:
+                        {
+                            PositionPlayer(PlayerPos.Row + 1, PlayerPos.Col);
+                            break;
+                        }
+                    case Direction.Up:
+                        {
+                            PositionPlayer(PlayerPos.Row - 1, PlayerPos.Col);
+                            break;
+                        }
+                    case Direction.Left:
+                        {
+                            PositionPlayer(PlayerPos.Row, PlayerPos.Col - 1);
+                            break;
+                        }
+                    case Direction.Right:
+                        {
+                            PositionPlayer(PlayerPos.Row, PlayerPos.Col + 1);
+                            break;
+                        }
+                    default:
+                        {
+                            break;
+                        }
+                }
+            });
+        }
+
+        public void Restart()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                PositionPlayer(MazeStartPoint.Row, MazeStartPoint.Col);
+            });
+        }
+
 
         //Using a DependencyProperty as the backing store for Maze.This enables animation, styling, binding, etc...
         public static readonly DependencyProperty RowsProperty =
@@ -123,6 +173,10 @@ namespace MazeGUI.userControls
             set { SetValue(MazeEndPointProperty, value); }
         }
 
-
+        public Position PlayerPos
+        {
+            get { return playerPos; }
+            set { playerPos = value; }
+        }
     }
 }

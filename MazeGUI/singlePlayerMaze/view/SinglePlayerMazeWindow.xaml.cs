@@ -4,16 +4,20 @@ using MazeGUI.singlePlayerMaze.viewModel;
 using MazeGUI.singlePlayerSettings.model;
 using MazeGUI.singlePlayerSettings.viewModel;
 using MazeLib;
+using SearchAlgorithmsLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
@@ -25,8 +29,21 @@ namespace MazeGUI
     /// </summary>
     public partial class SinglePlayerMazeWindow : Window
     {
+        // cancel the control box of the window
+        private const int GWL_STYLE = -16;
+        private const int WS_SYSMENU = 0x80000;
+
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+
+        [DllImport("user32.dll")]
+        private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
+
+        //initializing members
         private SinglePlayerMazeViewModel model;
-        MazePlayer mazePlayer;
+        private bool isAnimating = false;
+        private Dictionary<Key, Direction> directions;
+        private Dictionary<char, Direction> charDirections;
 
         public SinglePlayerMazeWindow(Maze m)
         {
@@ -34,9 +51,19 @@ namespace MazeGUI
             this.DataContext = model;
             InitializeComponent();
             mazeControl.start();
-            mazePlayer = new MazePlayer(MazeStartPoint);
-            mazeControl.PositionPlayer(mazePlayer.MazePoint, mazePlayer.MazePoint);
             singlePlayerMazeWindow.KeyDown += singlePlayerMazeWindow_KeyDown;
+
+            directions = new Dictionary<Key, Direction>();
+            directions.Add(Key.Up, Direction.Up);
+            directions.Add(Key.Down, Direction.Down);
+            directions.Add(Key.Left, Direction.Left);
+            directions.Add(Key.Right, Direction.Right);
+
+            charDirections = new Dictionary<char, Direction>();
+            charDirections.Add('0', Direction.Left);
+            charDirections.Add('1', Direction.Right);
+            charDirections.Add('2', Direction.Up);
+            charDirections.Add('3', Direction.Down);
         }
 
         public string MazeName
@@ -71,43 +98,22 @@ namespace MazeGUI
 
         private void singlePlayerMazeWindow_KeyDown(object sender, KeyEventArgs e)
         {
-            int row = mazePlayer.MazePoint.Row;
-            int col = mazePlayer.MazePoint.Col;
-            Position lastPosition = mazePlayer.MazePoint;
-            if (e.Key == Key.Down)
+            if (isAnimating)
             {
-                if (model.IsMoveOk(mazePlayer.MazePoint, Direction.Down))
+                return;
+            }
+
+            if (directions.ContainsKey(e.Key))
+            {
+                Direction direction = directions[e.Key];
+                if (model.IsMoveOk(mazeControl.PlayerPos, direction))
                 {
-                    mazePlayer.MazePoint = new Position(row + 1, col);
-                    mazeControl.PositionPlayer(mazePlayer.MazePoint, lastPosition);
+                    mazeControl.PositionPlayer(direction);
                 }
             }
-            else if (e.Key == Key.Up)
-            {
-                if (model.IsMoveOk(mazePlayer.MazePoint, Direction.Up))
-                {
-                    mazePlayer.MazePoint = new Position(row - 1, col);
-                    mazeControl.PositionPlayer(mazePlayer.MazePoint, lastPosition);
-                }
-            }
-            else if (e.Key == Key.Left)
-            {
-                if (model.IsMoveOk(mazePlayer.MazePoint, Direction.Left))
-                {
-                    mazePlayer.MazePoint = new Position(row, col - 1);
-                    mazeControl.PositionPlayer(mazePlayer.MazePoint, lastPosition);
-                }
-            }
-            else if (e.Key == Key.Right)
-            {
-                if (model.IsMoveOk(mazePlayer.MazePoint, Direction.Right))
-                {
-                    mazePlayer.MazePoint = new Position(row, col + 1);
-                    mazeControl.PositionPlayer(mazePlayer.MazePoint, lastPosition);
-                }
-            }
-            if ((mazePlayer.MazePoint.Col == MazeEndPoint.Col) 
-                && (mazePlayer.MazePoint.Row == MazeEndPoint.Row))
+            
+            if ((mazeControl.PlayerPos.Col == MazeEndPoint.Col) 
+                && (mazeControl.PlayerPos.Row == MazeEndPoint.Row))
             {
                 FinishGame();
             }
@@ -116,6 +122,99 @@ namespace MazeGUI
         private void FinishGame()
         {
             MessageBox.Show("You escaped!");
+            if (!Restart())
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    Close();
+                    MainWindow win = (MainWindow)Application.Current.MainWindow;
+                    win.Show();
+                });
+            }
+        }
+
+        private void RestartButton_Click(object sender, RoutedEventArgs e)
+        {
+            Restart();
+        }
+
+        private bool Restart()
+        {
+            MessageBoxResult messageBoxResult = MessageBox.Show("Do you want to restart?",
+                                                                "Restart game",
+                                                                MessageBoxButton.YesNo);
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                isAnimating = false;
+                mazeControl.Restart();
+                return true;
+            }
+            return false;
+        }
+
+        private void MainMenuButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow win = (MainWindow)Application.Current.MainWindow;
+            win.Show();
+            Close();
+        }
+
+        private void SolveMazeButton_Click(object sender, RoutedEventArgs e)
+        {
+            string solution = model.SolveMaze();
+            AnimateFromAnotherThread(solution);
+        }
+
+        public void AnimateFromAnotherThread(string solution)
+        {
+            isAnimating = true;
+            Position startPoint = mazeControl.PlayerPos;
+            Task animation = new Task(() =>
+            {
+
+                mazeControl.Restart();
+                System.Threading.Thread.Sleep(300);
+                int i = 0;
+                while ((i < solution.Length) && (isAnimating == true))
+                {
+                    if (charDirections.ContainsKey(solution[i]))
+                    {
+                        mazeControl.PositionPlayer(charDirections[solution[i]]);
+                    }
+                    i++;
+                    System.Threading.Thread.Sleep(300);
+                }
+
+                if (isAnimating == false)
+                {
+                    return;
+                }
+                isAnimating = false;
+                MessageBoxResult messageBoxResult = MessageBox.Show("Continue playing?",
+                                                                "Continue playing",
+                                                                MessageBoxButton.YesNo);
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
+                    mazeControl.PositionPlayer(startPoint.Row, startPoint.Col);
+                }
+                else
+                {
+                    FinishGame();
+                }
+                
+            });
+            animation.Start();
+        }
+
+        private void singlePlayerMazeWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            isAnimating = false;
+        }
+
+        private void singlePlayerMazeWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            var hwnd = new WindowInteropHelper(this).Handle;
+            SetWindowLong(hwnd, GWL_STYLE, GetWindowLong(hwnd, GWL_STYLE) & ~WS_SYSMENU);
         }
     }
 }

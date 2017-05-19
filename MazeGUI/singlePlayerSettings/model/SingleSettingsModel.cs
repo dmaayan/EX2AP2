@@ -36,6 +36,7 @@ namespace MazeGUI.singlePlayerSettings.model
 
         public Maze Connect()
         {
+            // TODO sinchornize solves
             Statues stat = ClientSingleton.Client.SendMesseage("generate " 
                                                                 + mazeName + " " + Rows + " " + Cols);
             return Maze.FromJSON(stat.Message);

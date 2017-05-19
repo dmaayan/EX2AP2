@@ -1,4 +1,6 @@
 ﻿using MazeLib;
+using MVC;
+using SearchAlgorithmsLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +11,16 @@ namespace MazeGUI.singlePlayerMaze.model
 {
     class SinglePlayerMazeModel : ISinglePlayerMazeModel
     {
-        Maze maze;
-        string mazeString;
+        private Maze maze;
+        private string mazeString;
+        private int searchAlgoritm;
+        private string mazeSolution;
 
         public SinglePlayerMazeModel(Maze m)
         {
             maze = m;
             mazeString = String.Join("", maze.ToString().Split('\r', '\n'));
+            searchAlgoritm = Properties.Settings.Default.SearchAlgorithm;
         }
 
         public string Name {
@@ -76,6 +81,17 @@ namespace MazeGUI.singlePlayerMaze.model
                         return false;
                     }
             }
+        }
+
+        public string SolveMaze()
+        {
+            if (mazeSolution == null)
+            {
+                Statues stat = ClientSingleton.Client.SendMesseage("solve " + maze.Name + " " + searchAlgoritm);
+                mazeSolution = MazeSolution.FromJson(stat.Message);
+                
+            }
+            return mazeSolution;
         }
     }
 }

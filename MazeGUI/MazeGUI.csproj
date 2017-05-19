@@ -193,6 +193,10 @@
       <Project>{AB440259-FC08-4F8D-B8BD-F96F70EF7E66}</Project>
       <Name>MVC</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SearchAlgorithmsLib\SearchAlgorithmsLib.csproj">
+      <Project>{DD7B007A-D5DD-4144-A43E-8AF6678C2076}</Project>
+      <Name>SearchAlgorithmsLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="multiPlayerMaze\model\" />
