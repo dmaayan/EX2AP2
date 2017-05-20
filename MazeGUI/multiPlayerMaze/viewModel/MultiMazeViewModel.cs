@@ -1,21 +1,34 @@
-﻿using MazeGUI.singlePlayerMaze.model;
+﻿using Client;
+using MazeGUI.multiPlayerMaze.model;
 using MazeLib;
-using SearchAlgorithmsLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MazeGUI.singlePlayerMaze.viewModel
+namespace MazeGUI.multiPlayerMaze.viewModel
 {
-    class SinglePlayerMazeViewModel : ViewModel
+    public class MultiMazeViewModel : ViewModel
     {
-        private ISinglePlayerMazeModel model;
+        public event EventHandler<StatuesEventArgs> MoveOpponent;
 
-        public SinglePlayerMazeViewModel(ISinglePlayerMazeModel mod)
+        private IMultiMazeModel model;
+
+        public MultiMazeViewModel(IMultiMazeModel m)
         {
-            model = mod;
+            model = m;
+            model.MoveOpponent += OnOpponentMove;
+        }
+
+        public void Close()
+        {
+            model.Close();
+        }
+
+        public void OnOpponentMove(object o, StatuesEventArgs statues)
+        {
+            MoveOpponent(o, statues);
         }
 
         public string MazeName
@@ -48,14 +61,9 @@ namespace MazeGUI.singlePlayerMaze.viewModel
             get { return model.MazeEndPoint; }
         }
 
-        public bool IsMoveOk(Position mazeStartPoint, Direction direct)
+        public bool IsMoveOk(Position playerPos, Direction direction)
         {
-            return model.IsMoveOk(mazeStartPoint, direct);
-        }
-
-        public string SolveMaze()
-        {
-            return model.SolveMaze();
+            return model.IsMoveOk(playerPos, direction);
         }
     }
 }

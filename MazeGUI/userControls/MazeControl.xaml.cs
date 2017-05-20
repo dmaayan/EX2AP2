@@ -22,10 +22,18 @@ namespace MazeGUI.userControls
     /// </summary>
     public partial class MazeControl : UserControl
     {
+        private static Dictionary<char, Direction> charDirections =
+                                                   new Dictionary<char, Direction>
+                                                   {
+                                                       { '0', Direction.Left },
+                                                       { '1', Direction.Right },
+                                                       { '2', Direction.Up },
+                                                       { '3', Direction.Down },
+                                                   };
         private static int rectSizePX = 10;
         private List<Rectangle> rects;
         private Position playerPos;
-        //private Position player;
+
         public MazeControl()
         {
             InitializeComponent();
@@ -112,6 +120,14 @@ namespace MazeGUI.userControls
                         }
                 }
             });
+        }
+
+        public void PositionPlayer(char v)
+        {
+            if (charDirections.ContainsKey(v))
+            {
+                PositionPlayer(charDirections[v]);
+            }
         }
 
         public void Restart()

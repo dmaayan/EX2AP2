@@ -13,6 +13,9 @@ namespace Client
     /// </summary>
     public class MessageTransmiter
     {
+        public event EventHandler<StatuesEventArgs> NotifyAboutMessage;
+
+
         /// <summary>
         /// client currently active
         /// </summary>
@@ -109,6 +112,8 @@ namespace Client
                             // get a message from the server and parse it to Statues
                             result = reader.ReadString();
                             statues = Statues.FromJson(result);
+                            
+                            NotifyAboutMessage(this, new StatuesEventArgs(statues));
                         }
                         catch (Exception e)
                         {

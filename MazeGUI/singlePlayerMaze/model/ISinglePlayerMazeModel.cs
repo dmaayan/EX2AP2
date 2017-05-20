@@ -8,22 +8,8 @@ using System.Threading.Tasks;
 
 namespace MazeGUI.singlePlayerMaze.model
 {
-    public interface ISinglePlayerMazeModel
+    public interface ISinglePlayerMazeModel : IMazeModel
     {
-        string Name { get; }
-
-        int Cols { get; }
-
-        int Rows { get; }
-
-        string MazeString { get; }
-
-        Position MazeStartPoint { get; }
-
-        Position MazeEndPoint { get; }
-
-        bool IsMoveOk(Position mazeStartPoint, Direction direct);
-
         string SolveMaze();
     }
 }

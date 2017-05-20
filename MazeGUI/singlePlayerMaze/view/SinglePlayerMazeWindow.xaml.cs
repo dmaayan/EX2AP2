@@ -1,50 +1,22 @@
-﻿using MazeGeneratorLib;
-using MazeGUI.singlePlayerMaze.model;
+﻿using MazeGUI.singlePlayerMaze.model;
+using MazeGUI.etc;
 using MazeGUI.singlePlayerMaze.viewModel;
-using MazeGUI.singlePlayerSettings.model;
-using MazeGUI.singlePlayerSettings.viewModel;
 using MazeLib;
-using SearchAlgorithmsLib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading.Tasks;
-using System.Timers;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Interop;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace MazeGUI
 {
     /// <summary>
     /// Interaction logic for SinglePlayerMazeWindow.xaml
     /// </summary>
-    public partial class SinglePlayerMazeWindow : Window
+    public partial class SinglePlayerMazeWindow : NonClosableWindow
     {
-        // cancel the control box of the window
-        private const int GWL_STYLE = -16;
-        private const int WS_SYSMENU = 0x80000;
-
-        [DllImport("user32.dll", SetLastError = true)]
-        private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
-
-        [DllImport("user32.dll")]
-        private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
-
         //initializing members
         private SinglePlayerMazeViewModel model;
         private bool isAnimating = false;
-        private Dictionary<Key, Direction> directions;
-        private Dictionary<char, Direction> charDirections;
-
+        
         public SinglePlayerMazeWindow(Maze m)
         {
             model = new SinglePlayerMazeViewModel(new SinglePlayerMazeModel(m));
@@ -52,18 +24,6 @@ namespace MazeGUI
             InitializeComponent();
             mazeControl.start();
             singlePlayerMazeWindow.KeyDown += singlePlayerMazeWindow_KeyDown;
-
-            directions = new Dictionary<Key, Direction>();
-            directions.Add(Key.Up, Direction.Up);
-            directions.Add(Key.Down, Direction.Down);
-            directions.Add(Key.Left, Direction.Left);
-            directions.Add(Key.Right, Direction.Right);
-
-            charDirections = new Dictionary<char, Direction>();
-            charDirections.Add('0', Direction.Left);
-            charDirections.Add('1', Direction.Right);
-            charDirections.Add('2', Direction.Up);
-            charDirections.Add('3', Direction.Down);
         }
 
         public string MazeName
@@ -154,15 +114,22 @@ namespace MazeGUI
 
         private void MainMenuButton_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow win = (MainWindow)Application.Current.MainWindow;
-            win.Show();
-            Close();
+            // TODO force close when animating
+            if (isAnimating == false)
+            {
+                MainWindow win = (MainWindow)Application.Current.MainWindow;
+                win.Show();
+                Close();
+            }
         }
 
         private void SolveMazeButton_Click(object sender, RoutedEventArgs e)
         {
-            string solution = model.SolveMaze();
-            AnimateFromAnotherThread(solution);
+            if (isAnimating == false)
+            {
+                string solution = model.SolveMaze();
+                AnimateFromAnotherThread(solution);
+            }
         }
 
         public void AnimateFromAnotherThread(string solution)
@@ -174,14 +141,10 @@ namespace MazeGUI
 
                 mazeControl.Restart();
                 System.Threading.Thread.Sleep(300);
-                int i = 0;
-                while ((i < solution.Length) && (isAnimating == true))
+
+                for (int i = 0; (i < solution.Length) && (isAnimating == true); i++)
                 {
-                    if (charDirections.ContainsKey(solution[i]))
-                    {
-                        mazeControl.PositionPlayer(charDirections[solution[i]]);
-                    }
-                    i++;
+                    mazeControl.PositionPlayer(solution[i]);
                     System.Threading.Thread.Sleep(300);
                 }
 
@@ -189,10 +152,10 @@ namespace MazeGUI
                 {
                     return;
                 }
-                isAnimating = false;
+                
                 MessageBoxResult messageBoxResult = MessageBox.Show("Continue playing?",
-                                                                "Continue playing",
-                                                                MessageBoxButton.YesNo);
+                                                                    "Continue playing",
+                                                                    MessageBoxButton.YesNo);
                 if (messageBoxResult == MessageBoxResult.Yes)
                 {
                     mazeControl.PositionPlayer(startPoint.Row, startPoint.Col);
@@ -201,7 +164,8 @@ namespace MazeGUI
                 {
                     FinishGame();
                 }
-                
+                isAnimating = false;
+
             });
             animation.Start();
         }
@@ -211,10 +175,6 @@ namespace MazeGUI
             isAnimating = false;
         }
 
-        private void singlePlayerMazeWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            var hwnd = new WindowInteropHelper(this).Handle;
-            SetWindowLong(hwnd, GWL_STYLE, GetWindowLong(hwnd, GWL_STYLE) & ~WS_SYSMENU);
-        }
+       
     }
 }
