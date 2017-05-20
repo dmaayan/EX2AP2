@@ -35,8 +35,6 @@ namespace Client.Commands
             string message = String.Join(" ", args);
             // send and receive a message
             messageRec.SendMessage(message);
-            string result = messageRec.GetMassage().Message;
-            Console.WriteLine(result);
             return Status.KeepConnection;
         }
     }

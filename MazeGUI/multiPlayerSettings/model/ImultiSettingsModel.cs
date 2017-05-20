@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MazeLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,8 +15,10 @@ namespace MazeGUI.multiPlayerSettings.model
 
         string MazeName { get; set; }
 
-        void Start();
+        Maze StartGame();
 
-        void JoinToGame();
+        string[] GetListGames();
+
+        Maze JoinGame(string game);
     }
 }

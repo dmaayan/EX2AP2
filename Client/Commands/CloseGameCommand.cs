@@ -36,9 +36,7 @@ namespace Client
                 string message = String.Join(" ", args);
                 // send and receive a message
                 messageRec.SendMessage(message);
-                Statues stat = messageRec.GetMassage();
-                Console.WriteLine(stat.Message);
-                return stat.Stat;
+                return Status.Close;
             }
             Console.WriteLine("Can't close a game without playing");
             return Status.Disconnect;
