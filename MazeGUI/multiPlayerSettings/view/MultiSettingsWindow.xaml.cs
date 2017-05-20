@@ -96,7 +96,6 @@ namespace MazeGUI.multiPlayerSettings.view
 
                 Task t = new Task(() =>
                 {
-
                     if (model.StartGame())
                     {
                         Dispatcher.Invoke(() =>
