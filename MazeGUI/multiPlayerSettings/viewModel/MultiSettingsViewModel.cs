@@ -1,4 +1,6 @@
-﻿using MazeGUI.multiPlayerSettings.model;
+﻿using MazeGUI.multiPlayerMaze.view;
+using MazeGUI.multiPlayerSettings.model;
+using MazeLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,6 +45,33 @@ namespace MazeGUI.multiPlayerSettings.viewModel
                 model.MazeName = value;
                 NotifyPropertyChanged("mazeNameTxtBox");
             }
+        }
+
+        public string[] GetListGames()
+        {
+            return model.GetListGames();
+        }
+
+        public bool JoinGame(string game)
+        {
+            Maze maze = model.JoinGame(game);
+            if (maze != null)
+            {
+                new MultiMazesWindow(maze).Show();
+                return true;
+            }
+            else { return false; }
+        }
+       
+        public bool StartGame()
+        {
+            Maze maze = model.StartGame();
+            if (maze != null)
+            {
+                new MultiMazesWindow(maze).Show();
+                return true;
+            }
+            else { return false; }
         }
 
     }

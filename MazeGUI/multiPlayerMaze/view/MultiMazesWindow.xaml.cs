@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MazeLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,7 @@ namespace MazeGUI.multiPlayerMaze.view
     /// </summary>
     public partial class MultiMazesWindow : Window
     {
-        public MultiMazesWindow()
+        public MultiMazesWindow(Maze maze)
         {
             InitializeComponent();
         }

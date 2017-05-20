@@ -38,6 +38,10 @@ namespace Client
         /// </summary>
         private Statues messageReceived;
         /// <summary>
+        /// statues of the send returned from the server
+        /// </summary>
+        private Statues statues;
+        /// <summary>
         /// wait for messages from the server in multiplayer connection
         /// </summary>
         private Task receiver;
@@ -49,10 +53,7 @@ namespace Client
         /// true if there is a game
         /// </summary>
         private bool isMultiActive;
-        /// <summary>
-        /// statues of the send returned from the server
-        /// </summary>
-        Statues statues;
+
 
         /// <summary>
         /// constructor
@@ -103,7 +104,6 @@ namespace Client
                     if (messageReceived == null)
                     {
                         string result;
-                        Statues statues;
                         try
                         {
                             // get a message from the server and parse it to Statues
@@ -171,23 +171,6 @@ namespace Client
         }
 
         /// <summary>
-        /// gets a message from the server using the Open connection
-        /// </summary>
-        /// <returns>the message received from the server</returns>
-        public Statues GetMassage()
-        {
-            // wait for the receiver to get a message
-            while (messageReceived == null)
-            {
-                Thread.Sleep(1);
-            }
-            // save the message at current and reset the messageReceiverd to null
-            Statues current = messageReceived;
-            messageReceived = null;
-            return current;
-        }
-
-        /// <summary>
         /// close an Open connection to the server
         /// </summary>
         public void Close()
@@ -238,7 +221,6 @@ namespace Client
             }
             // send message
             writer.Write(message);
-            Console.WriteLine("message: " + message + " have been sent");
         }
 
         /// <summary>
@@ -261,6 +243,23 @@ namespace Client
             }
             // close the client
             newClient.Close();
+        }
+
+        /// <summary>
+        /// gets a message from the server using the Open connection
+        /// </summary>
+        /// <returns>the message received from the server</returns>
+        public Statues GetMassage()
+        {
+            // wait for the receiver to get a message
+            while (messageReceived == null)
+            {
+                Thread.Sleep(1);
+            }
+            // save the message at current and reset the messageReceiverd to null
+            Statues current = messageReceived;
+            messageReceived = null;
+            return current;
         }
 
         public Statues getStatues()

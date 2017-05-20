@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MazeGUI.multiPlayerMaze.view;
+using System.Collections.ObjectModel;
 
 namespace MazeGUI.multiPlayerSettings.view
 {
@@ -23,6 +24,7 @@ namespace MazeGUI.multiPlayerSettings.view
     public partial class MultiSettingsWindow : Window
     {
         private MultiSettingsViewModel model;
+        public ObservableCollection<string> gamesList = new ObservableCollection<string>();
 
         public MultiSettingsWindow()
         {
@@ -33,6 +35,9 @@ namespace MazeGUI.multiPlayerSettings.view
             multiSettingsContol.cancelButton.Click += CancelButton_Click;
             Cols = Properties.Settings.Default.MazeCols;
             Rows = Properties.Settings.Default.MazeRows;
+            //gamesList.Add("abc");
+            //gamesList.Add("fdc");
+            ListComboBox.ItemsSource = gamesList;
         }
         public int Cols
         {
@@ -51,40 +56,74 @@ namespace MazeGUI.multiPlayerSettings.view
             set { model.MazeName = value; }
         }
 
-    private void OKButton_Click(object sender, RoutedEventArgs e)
-    {
-        if (MazeName == null)
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Entr Maze Name");
+            MainWindow win = (MainWindow)Application.Current.MainWindow;
+            win.Show();
+            Close();
         }
-        else
+
+        private void ListComboBox_DropDownOpened(object sender, EventArgs e)
         {
+            string[] gamesArray = model.GetListGames();
+            if (gamesArray != null)
+            {
+                gamesList.Clear();
+                foreach (string game in gamesArray)
+                {
+                    gamesList.Add(game);
+                }
+            } else
+            {
+                MessageBox.Show("Problem occurred, please try again");
+            }
+            
+        }
+
+        private void OKButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (MazeName == null)
+            {
+                MessageBox.Show("Enter Maze Name");
+            }
+            else
+            {
                 ListGamesTextBlock.Visibility = Visibility.Hidden;
                 JoinButton.Visibility = Visibility.Hidden;
-                comboBox.Visibility = Visibility.Hidden;
+                ListComboBox.Visibility = Visibility.Hidden;
                 multiSettingsContol.Visibility = Visibility.Hidden;
                 waitLable.Visibility = Visibility.Visible;
-                //Maze maze = model.Connect();
-                //new MultiMazesWindow().Show();
-           
-        }
-    }
 
-    private void CancelButton_Click(object sender, RoutedEventArgs e)
-    {
-        MainWindow win = (MainWindow)Application.Current.MainWindow;
-        win.Show();
-        Close();
-    }
+                Task t = new Task(() =>
+                {
+
+                    if (model.StartGame())
+                    {
+                        Dispatcher.Invoke(() =>
+                        {
+                            Close();
+                        });
+                    }
+                    else
+                    {
+                        MessageBox.Show("Problem occurred, please try again");
+                    }
+                
+                });
+                t.Start();
+            }
+        }
 
         private void JoinButton_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void ListComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
+            if (model.JoinGame((string)ListComboBox.SelectedItem))
+            {
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("Game not evailable, choosh other game");
+            }
         }
     }
 }

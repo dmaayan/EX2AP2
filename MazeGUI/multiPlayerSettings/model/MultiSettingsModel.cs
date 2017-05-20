@@ -1,4 +1,6 @@
-﻿using MVC;
+﻿using MazeLib;
+using MVC;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,16 +38,42 @@ namespace MazeGUI.multiPlayerSettings.model
             set { mazeName = value; }
         }
 
-        public void Start()
+        public Maze StartGame()
         {
-
-            Statues stat = ClientSingleton.Client.SendMesseage("start " + mazeName + " " + Rows + " " + Cols);
+            try
+            {
+                Statues stat = ClientSingleton.Client.SendMesseage("start " + mazeName + " " + Rows + " " + Cols);
+                return Maze.FromJSON(stat.Message);
+            }catch (Exception)
+            {
+                return null;
+            }
         }
 
-        public void JoinToGame()
+        public string[] GetListGames()
         {
-//            Statues stat = ClientSingleton.Client.SendMesseage("start " + mazeName + " " + Rows + " " + Cols);
+            try
+            {
+                Statues stat = ClientSingleton.Client.SendMesseage("list");
+                return JsonConvert.DeserializeObject<string[]>(stat.Message);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
+        public Maze JoinGame(string game)
+        {
+            try
+            {
+                Statues stat = ClientSingleton.Client.SendMesseage("join " + game);
+                return Maze.FromJSON(stat.Message);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
     }
 }
