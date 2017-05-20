@@ -1,4 +1,5 @@
 ﻿using Client;
+using MazeGUI.etc;
 using MazeLib;
 using MVC;
 using System;

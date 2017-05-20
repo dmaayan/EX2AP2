@@ -7,7 +7,7 @@
         xmlns:src="clr-namespace:MazeGUI.etc"
         xmlns:controls="clr-namespace:MazeGUI.userControls"
         mc:Ignorable="d"
-        Title="MultiMazesWindow" Height="700" Width="700" KeyDown="NonClosableWindow_KeyDown">
+        Title="MultiMazesWindow" Height="500" Width="900" KeyDown="NonClosableWindow_KeyDown">
     <StackPanel>
         <Button x:Name="BackButton" Content="Back to main manu" Grid.Column="1" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="125" Click="BackButton_Click" />
 
@@ -28,7 +28,7 @@
                                   Rows="{Binding Rows}"
                                   MazeString="{Binding MazeString}"
                                   MazeStartPoint="{Binding MazeStartPoint}"
-                                  MazeEndPoint="{Binding MazeEndPoint}"></controls:MazeControl>
+                                  MazeEndPoint="{Binding MazeEndPoint}" Margin="10"></controls:MazeControl>
             <controls:MazeControl x:Name="OpponentMazeControl" 
                                   Grid.Column="1" 
                                   Grid.Row="1" 
@@ -38,7 +38,7 @@
                                   Rows="{Binding Rows}"
                                   MazeString="{Binding MazeString}"
                                   MazeStartPoint="{Binding MazeStartPoint}"
-                                  MazeEndPoint="{Binding MazeEndPoint}"></controls:MazeControl>
+                                  MazeEndPoint="{Binding MazeEndPoint}" Margin="10"></controls:MazeControl>
             <Label x:Name="userLabel" Content="My board" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center"/>
             <Label x:Name="opponentLabel" Content="Other player's board" HorizontalAlignment="Center" Margin="37.8,7,47.6,7" VerticalAlignment="Center" Grid.Column="1"/>
         </Grid>

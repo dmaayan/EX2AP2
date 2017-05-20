@@ -113,7 +113,7 @@ namespace Client
                             result = reader.ReadString();
                             statues = Statues.FromJson(result);
                             
-                            NotifyAboutMessage(this, new StatuesEventArgs(statues));
+                            NotifyAboutMessage?.Invoke(this, new StatuesEventArgs(statues));
                         }
                         catch (Exception e)
                         {

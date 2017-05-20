@@ -1,6 +1,6 @@
 ﻿using System.Windows.Media;
 
-namespace MazeGUI
+namespace MazeGUI.etc
 {
     public class ColorFactory
     {

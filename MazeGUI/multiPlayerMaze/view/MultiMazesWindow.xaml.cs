@@ -29,6 +29,7 @@ namespace MazeGUI.multiPlayerMaze.view
         public MultiMazesWindow(Maze maze)
         {
             model = new MultiMazeViewModel(new MultiMazeModel(maze));
+            this.DataContext = model;
             model.MoveOpponent += MoveOpponentPlayer;
             InitializeComponent();
         }

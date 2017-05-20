@@ -1,4 +1,5 @@
 ﻿using MazeGeneratorLib;
+using MazeGUI.etc;
 using MazeLib;
 using System;
 using System.Collections.Generic;
@@ -36,11 +37,11 @@ namespace MazeGUI.userControls
 
         public MazeControl()
         {
-            InitializeComponent();
             rects = new List<Rectangle>();
+            InitializeComponent();
         }
 
-        public void start()
+        private void start(object sender, RoutedEventArgs e)
         {
             canvasBorder.BorderThickness = new Thickness(0.2);
             mazeCanvas.Width = rectSizePX * Rows;

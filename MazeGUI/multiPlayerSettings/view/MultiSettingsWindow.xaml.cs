@@ -35,8 +35,6 @@ namespace MazeGUI.multiPlayerSettings.view
             multiSettingsContol.cancelButton.Click += CancelButton_Click;
             Cols = Properties.Settings.Default.MazeCols;
             Rows = Properties.Settings.Default.MazeRows;
-            //gamesList.Add("abc");
-            //gamesList.Add("fdc");
             ListComboBox.ItemsSource = gamesList;
         }
         public int Cols
@@ -96,19 +94,19 @@ namespace MazeGUI.multiPlayerSettings.view
 
                 Task t = new Task(() =>
                 {
+                    Dispatcher.Invoke(() =>
+                                            {
+                                                if (model.StartGame())
+                                                {
 
-                    if (model.StartGame())
-                    {
-                        Dispatcher.Invoke(() =>
-                        {
-                            Close();
-                        });
-                    }
-                    else
-                    {
-                        MessageBox.Show("Problem occurred, please try again");
-                    }
-                
+                                                    Close();
+
+                                                }
+                                                else
+                                                {
+                                                    MessageBox.Show("Problem occurred, please try again");
+                                                }
+                                            });
                 });
                 t.Start();
             }

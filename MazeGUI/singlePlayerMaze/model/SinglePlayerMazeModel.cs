@@ -1,4 +1,5 @@
-﻿using MazeLib;
+﻿using MazeGUI.etc;
+using MazeLib;
 using MVC;
 using SearchAlgorithmsLib;
 using System;

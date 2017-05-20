@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" 
              d:DesignWidth="300">
-    <Viewbox >
+    <Viewbox Loaded="start" >
         <Border x:Name="canvasBorder" BorderBrush="Black">
             <Canvas x:Name="mazeCanvas" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Black">
                 <Rectangle x:Name="player" Fill="Aquamarine" Panel.ZIndex="2"></Rectangle>

@@ -1,4 +1,5 @@
-﻿using MazeLib;
+﻿using MazeGUI.etc;
+using MazeLib;
 using SearchAlgorithmsLib;
 using System;
 using System.Collections.Generic;

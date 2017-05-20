@@ -79,9 +79,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AbstractMazeModel.cs" />
-    <Compile Include="IMazeModel.cs" />
-    <Compile Include="ClientSingleton.cs" />
+    <Compile Include="etc\AbstractMazeModel.cs" />
+    <Compile Include="etc\IMazeModel.cs" />
+    <Compile Include="etc\ClientSingleton.cs" />
     <Compile Include="etc\NonClosableWindow.cs" />
     <Compile Include="multiPlayerMaze\model\IMultiMazeModel.cs" />
     <Compile Include="multiPlayerMaze\model\MultiMazeModel.cs" />
@@ -118,7 +118,7 @@
     <Compile Include="singlePlayerSettings\view\SinglePlayerSettingsWindow.xaml.cs">
       <DependentUpon>SinglePlayerSettingsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ColorFactory.cs" />
+    <Compile Include="etc\ColorFactory.cs" />
     <Compile Include="userControls\MazeControl.xaml.cs">
       <DependentUpon>MazeControl.xaml</DependentUpon>
     </Compile>

@@ -22,7 +22,6 @@ namespace MazeGUI
             model = new SinglePlayerMazeViewModel(new SinglePlayerMazeModel(m));
             this.DataContext = model;
             InitializeComponent();
-            mazeControl.start();
             singlePlayerMazeWindow.KeyDown += singlePlayerMazeWindow_KeyDown;
         }
 

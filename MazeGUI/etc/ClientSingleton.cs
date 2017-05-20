@@ -7,7 +7,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MazeGUI
+namespace MazeGUI.etc
 {
     public class ClientSingleton
     {
