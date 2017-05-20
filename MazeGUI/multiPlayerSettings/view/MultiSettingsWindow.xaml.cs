@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MazeGUI.multiPlayerMaze.view;
 using System.Collections.ObjectModel;
+using MazeLib;
 
 namespace MazeGUI.multiPlayerSettings.view
 {
@@ -35,8 +36,6 @@ namespace MazeGUI.multiPlayerSettings.view
             multiSettingsContol.cancelButton.Click += CancelButton_Click;
             Cols = Properties.Settings.Default.MazeCols;
             Rows = Properties.Settings.Default.MazeRows;
-            //gamesList.Add("abc");
-            //gamesList.Add("fdc");
             ListComboBox.ItemsSource = gamesList;
         }
         public int Cols
@@ -96,10 +95,12 @@ namespace MazeGUI.multiPlayerSettings.view
 
                 Task t = new Task(() =>
                 {
-                    if (model.StartGame())
+                    Maze maze = model.StartGame();
+                    if (maze != null)
                     {
                         Dispatcher.Invoke(() =>
                         {
+                            new MultiMazesWindow(maze).Show();
                             Close();
                         });
                     }
@@ -107,7 +108,7 @@ namespace MazeGUI.multiPlayerSettings.view
                     {
                         MessageBox.Show("Problem occurred, please try again");
                     }
-                
+
                 });
                 t.Start();
             }

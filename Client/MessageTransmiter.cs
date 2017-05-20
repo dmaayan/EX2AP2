@@ -15,7 +15,6 @@ namespace Client
     {
         public event EventHandler<StatuesEventArgs> NotifyAboutMessage;
 
-
         /// <summary>
         /// client currently active
         /// </summary>
@@ -104,15 +103,16 @@ namespace Client
                 while (isOpen)
                 {
                     // read only if the last message received was already taken
-                    if (messageReceived == null)
+                    if (statues == null)
                     {
                         string result;
+                        Status status;
                         try
                         {
                             // get a message from the server and parse it to Statues
                             result = reader.ReadString();
                             statues = Statues.FromJson(result);
-                            
+                            status = statues.Stat;
                             NotifyAboutMessage?.Invoke(this, new StatuesEventArgs(statues));
                         }
                         catch (Exception e)
@@ -124,7 +124,7 @@ namespace Client
                             break;
                         }
                         // switch through the different options received from the server
-                        switch (statues.Stat)
+                        switch (status)
                         {
                             case Status.Disconnect:
                                 {
@@ -138,7 +138,7 @@ namespace Client
                                 }
                             case Status.PrintAndContinue:
                                 {
-                                    Console.WriteLine(statues.Message);
+                                    statues = null;
                                     continue;
                                 }
                             case Status.PrintAndStop:

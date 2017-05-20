@@ -42,8 +42,8 @@ namespace MazeGUI.multiPlayerMaze.view
 
         private void MoveOpponentPlayer(object sender, StatuesEventArgs statues)
         {
-            OpponentMazeControl.PositionPlayer((Direction)Enum.Parse(
-                                                typeof(Direction), statues.Stat.Message));
+            Direction direction = (Direction)Enum.Parse(typeof(Direction), statues.Stat.Message);
+            OpponentMazeControl.PositionPlayer(direction);
         }
 
         public string MazeName
@@ -84,6 +84,7 @@ namespace MazeGUI.multiPlayerMaze.view
                 if (model.IsMoveOk(PlayerMazeControl.PlayerPos, direction))
                 {
                     PlayerMazeControl.PositionPlayer(direction);
+                    model.SendMove(direction);
                 }
             }
 

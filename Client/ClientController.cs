@@ -51,7 +51,10 @@ namespace Client
 
             // execute command
             ICommand command = commands[args[0]];
-            command.Execute(args);
+            if (command.Execute(args) == Status.NoResponse)
+            {
+                return null;
+            }
             return mr.getStatues();
         }
     }

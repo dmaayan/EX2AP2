@@ -36,7 +36,7 @@ namespace Client
             {
                 string message = String.Join(" ", args);
                 messageRec.SendMessage(message);
-                return Status.KeepConnection;
+                return Status.NoResponse;
             }
             Console.WriteLine("Game is not on");
             return Status.Disconnect;

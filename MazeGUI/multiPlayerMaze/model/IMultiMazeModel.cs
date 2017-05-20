@@ -15,5 +15,6 @@ namespace MazeGUI.multiPlayerMaze.model
 
         Direction PlayMove();
         void Close();
+        void SendMove(Direction direction);
     }
 }

@@ -65,5 +65,10 @@ namespace MazeGUI.multiPlayerMaze.viewModel
         {
             return model.IsMoveOk(playerPos, direction);
         }
+
+        public void SendMove(Direction direction)
+        {
+            model.SendMove(direction);
+        }
     }
 }

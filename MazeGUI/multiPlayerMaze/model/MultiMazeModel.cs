@@ -33,9 +33,14 @@ namespace MazeGUI.multiPlayerMaze.model
         public void Close()
         {
 
-            Statues stat = ClientSingleton.Client.SendMesseage("Close " + MazeName);
+            Statues stat = ClientSingleton.Client.SendMesseage("close " + MazeName);
 
         }
 
+        public void SendMove(Direction direction)
+        {
+            Statues stat = ClientSingleton.Client.SendMesseage("play " + direction.ToString());
+            return;
+        }
     }
 }

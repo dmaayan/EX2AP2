@@ -63,16 +63,11 @@ namespace MazeGUI.multiPlayerSettings.viewModel
             else { return false; }
         }
        
-        public bool StartGame()
+        public Maze StartGame()
         {
-            Maze maze = model.StartGame();
-            if (maze != null)
-            {
-                new MultiMazesWindow(maze).Show();
-                return true;
-            }
-            else { return false; }
+            return model.StartGame();
         }
+
 
     }
 }

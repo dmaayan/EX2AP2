@@ -61,15 +61,9 @@ namespace MVC
                 Handler.SendToClient(Stat.ToJson(), client);
                 return Status.Close;
             }
-            // build the JSon string of the message to send to the other client
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("{");
-            sb.AppendLine("  \"Name\": \"" + maze.Name + "\"");
-            sb.AppendLine("  \"Direction\": \"" + move + "\"");
-            sb.AppendLine("}");
 
             // set the statues with the message, send to client and return
-            Stat.SetStatues(Status.PrintAndContinue, sb.ToString());
+            Stat.SetStatues(Status.PrintAndContinue, direction.ToString());
             Handler.SendToClient(Stat.ToJson(), otherPlayer.Client);
             return Status.KeepConnection;
         }

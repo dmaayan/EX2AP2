@@ -6,7 +6,7 @@ namespace MVC
     /// enum Status has 8 status, represent the current condotion
     /// </summary>
     public enum Status { KeepConnection = 0, Disconnect, PrintAndContinue,
-                    PrintAndStop, Error, Close, CloseAndDeliver, Exit };
+                    PrintAndStop, Error, Close, CloseAndDeliver, Exit , NoResponse};
 
     /// <summary>
     /// Statues has Status and string 
