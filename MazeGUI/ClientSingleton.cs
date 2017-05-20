@@ -11,6 +11,7 @@ namespace MazeGUI
 {
     public class ClientSingleton
     {
+
         private static ClientSingleton client;
         private int port;
         private string ip;
@@ -26,6 +27,11 @@ namespace MazeGUI
             // create the message transfering class and the controller
             mr = new MessageTransmiter(ep);
             clientController = new ClientController(mr);
+        }
+
+        public void SignForMessaging(EventHandler<StatuesEventArgs> onOpponentMove)
+        {
+            mr.NotifyAboutMessage += onOpponentMove;
         }
 
         public static ClientSingleton Client

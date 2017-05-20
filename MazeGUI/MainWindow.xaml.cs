@@ -42,7 +42,7 @@ namespace MazeGUI
             isSettingWinOpen = true;
         }
 
-        public void ChangeCloseStatus(object sender, EventArgs e) {
+        public void ChangeCloseStatus(object sender, System.EventArgs e) {
             isSettingWinOpen = false;
         }
 

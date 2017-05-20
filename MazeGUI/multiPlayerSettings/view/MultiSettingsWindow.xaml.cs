@@ -61,7 +61,7 @@ namespace MazeGUI.multiPlayerSettings.view
         {
                 ListGamesTextBlock.Visibility = Visibility.Hidden;
                 JoinButton.Visibility = Visibility.Hidden;
-                comboBox.Visibility = Visibility.Hidden;
+                ListComboBox.Visibility = Visibility.Hidden;
                 multiSettingsContol.Visibility = Visibility.Hidden;
                 waitLable.Visibility = Visibility.Visible;
                 //Maze maze = model.Connect();

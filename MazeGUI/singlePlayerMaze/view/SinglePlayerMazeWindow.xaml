@@ -1,8 +1,9 @@
-﻿<Window x:Name="singlePlayerMazeWindow" x:Class="MazeGUI.SinglePlayerMazeWindow"
+﻿<src:NonClosableWindow x:Name="singlePlayerMazeWindow" x:Class="MazeGUI.SinglePlayerMazeWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:src="clr-namespace:MazeGUI.etc"
         xmlns:local="clr-namespace:MazeGUI"
         xmlns:controls="clr-namespace:MazeGUI.userControls"
         mc:Ignorable="d"
@@ -31,4 +32,4 @@
                               MazeStartPoint="{Binding MazeStartPoint}"
                               MazeEndPoint="{Binding MazeEndPoint}"></controls:MazeControl>
     </Grid>
-</Window>
+</src:NonClosableWindow>

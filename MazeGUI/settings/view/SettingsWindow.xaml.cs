@@ -36,7 +36,7 @@ namespace MazeGUI.settings.view
             Close();
         }
 
-        private void BtnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, System.EventArgs e)
         {
             viewModel.ReloadSettings();
             MainWindow win = (MainWindow)Application.Current.MainWindow;

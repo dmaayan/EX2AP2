@@ -79,7 +79,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AbstractMazeModel.cs" />
+    <Compile Include="IMazeModel.cs" />
     <Compile Include="ClientSingleton.cs" />
+    <Compile Include="etc\NonClosableWindow.cs" />
+    <Compile Include="multiPlayerMaze\model\IMultiMazeModel.cs" />
+    <Compile Include="multiPlayerMaze\model\MultiMazeModel.cs" />
+    <Compile Include="multiPlayerMaze\viewModel\MultiMazeViewModel.cs" />
     <Compile Include="multiPlayerMaze\view\MultiMazesWindow.xaml.cs">
       <DependentUpon>MultiMazesWindow.xaml</DependentUpon>
     </Compile>
@@ -198,10 +204,7 @@
       <Name>SearchAlgorithmsLib</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="multiPlayerMaze\model\" />
-    <Folder Include="multiPlayerMaze\viewModel\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
       <Visible>False</Visible>
