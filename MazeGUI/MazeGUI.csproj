@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -79,7 +79,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AbstractMazeModel.cs" />
+    <Compile Include="IMazeModel.cs" />
     <Compile Include="ClientSingleton.cs" />
+    <Compile Include="etc\NonClosableWindow.cs" />
+    <Compile Include="multiPlayerMaze\model\IMultiMazeModel.cs" />
+    <Compile Include="multiPlayerMaze\model\MultiMazeModel.cs" />
+    <Compile Include="multiPlayerMaze\viewModel\MultiMazeViewModel.cs" />
     <Compile Include="multiPlayerMaze\view\MultiMazesWindow.xaml.cs">
       <DependentUpon>MultiMazesWindow.xaml</DependentUpon>
     </Compile>
