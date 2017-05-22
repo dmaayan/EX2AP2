@@ -88,28 +88,34 @@ namespace MazeGUI.multiPlayerMaze.view
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             model.CloseGame();
-            Close();
+            CloseGame();
         }
 
         private void OpponentPlay(object sender, StatuesEventArgs statues)
         {
             // Opponent made a move
-            if (statues.Stat.Stat == Status.PrintAndContinue)
+            if (statues.Stat.Stat == Status.Play)
             {
                 Direction direction = (Direction)Enum.Parse(typeof(Direction), statues.Stat.Message);
                 OpponentMazeControl.PositionPlayer(direction);
             }
             // Opponent end the game 
-            else if (statues.Stat.Stat == Status.Exit)
+            else if (statues.Stat.Stat == Status.CloseGame)
             {
                 MessageBox.Show("The other player end the game");
-                Close();
+                Dispatcher.Invoke(() =>
+                {
+                    CloseGame();
+                }); 
             }
             // Opponent won the game
-            else if (statues.Stat.Stat == Status.Close)
+            else if (statues.Stat.Stat == Status.Finish)
             {
                 MessageBox.Show("You lost!");
-                Close();
+                Dispatcher.Invoke(() =>
+                {
+                    CloseGame();
+                });
             }
         }
           
@@ -118,16 +124,27 @@ namespace MazeGUI.multiPlayerMaze.view
         {
             MessageBox.Show("You escaped!");
             model.FinishGame();
+            CloseGame();
+        }
+
+        private void CloseGame()
+        {
+            MainWindow win = (MainWindow)Application.Current.MainWindow;
+            win.Show();
             Close();
         }
 
-        /*
-        private void CloseGame()
+        private void NonClosableWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            model.CloseGame();
-            Close();
+            model.MoveOpponent -= OpponentPlay;
         }
-        */
+        /*
+private void CloseGame()
+{
+   model.CloseGame();
+   Close();
+}
+*/
         /*
         private void OpponentMove( )
         {

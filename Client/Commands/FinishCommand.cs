@@ -6,7 +6,7 @@ namespace Client.Commands
     /// <summary>
     /// command for exit client
     /// </summary>
-    public class ExitCommand : ICommand
+    public class FinishCommand : ICommand
     {
         /// <summary>
         /// send and receive messages
@@ -17,22 +17,22 @@ namespace Client.Commands
         /// constructor
         /// </summary>
         /// <param name="mr">is the messageTransmiter </param>
-        public ExitCommand(MessageTransmiter mr)
+        public FinishCommand(MessageTransmiter mr)
         {
             messageRec = mr;
         }
 
         /// <summary>
-        /// executes the exit command
+        /// executes the finish command
         /// </summary>
         /// <param name="args">arguments of the command</param>
         /// <param name="client">to give the command</param>
-        /// <returns></returns>
+        /// <returns>Status.Finish</returns>
         public Status Execute(string[] args, TcpClient client)
         {
             // close connection with the server
-            messageRec.Exit();
-            return Status.Exit;
+            messageRec.FinishGame();
+            return Status.Finish;
         }
     }
 }

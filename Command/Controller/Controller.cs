@@ -54,7 +54,8 @@ namespace MVC
             commands.Add("join", new JoinGameCommand(model, view));
             commands.Add("play", new PlayCommand(model, view));
             commands.Add("close", new CloseGameCommand(model, view));
-            commands.Add("exit", new ExitClientCommand(model, view));
+            commands.Add("finish", new FinishGameCommand(model, view));
+            commands.Add("exit", new ExitCommand(model, view));
         }
 
         /// <summary>
@@ -68,14 +69,7 @@ namespace MVC
             // split command
             string[] arr = commandLine.Split(' ');
             string commandKey = arr[0];
-            // check that the command is valid
-            if (!commands.ContainsKey(commandKey))
-            {
-                Statues stat = new Statues();
-                stat.SetStatues(Status.Disconnect, "Command not found");
-                view.SendToClient(stat.ToJson(), client);
-                return Status.Disconnect;
-            }
+
             // get command and execute it
             string[] args = arr.Skip(1).ToArray();
             ICommand command = commands[commandKey];

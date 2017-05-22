@@ -74,7 +74,7 @@ namespace MazeGUI.multiPlayerSettings.view
                 }
             } else
             {
-                MessageBox.Show("Problem occurred, please try again");
+                MessageBox.Show("List:Problem occurred, please try again");
             }
             
         }
@@ -107,7 +107,7 @@ namespace MazeGUI.multiPlayerSettings.view
                     }
                     else
                     {
-                        MessageBox.Show("Problem occurred, please try again");
+                        MessageBox.Show("Maze:Problem occurred, please try again");
                     }
 
                 });
@@ -129,13 +129,17 @@ namespace MazeGUI.multiPlayerSettings.view
                 MessageBox.Show("Game not available, choose another game");
             }
         }
-
+        
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show("Don't push it !!!! ");
+
+            /*
             MainWindow win = (MainWindow)Application.Current.MainWindow;
             model.BackToMenu();
             win.Show();
             Close();
+            */
         }
     }
 }
