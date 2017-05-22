@@ -116,8 +116,11 @@ namespace MazeGUI.multiPlayerSettings.view
 
         private void JoinButton_Click(object sender, RoutedEventArgs e)
         {
-            if (model.JoinGame((string)ListComboBox.SelectedItem))
+            Maze maze = model.JoinGame((string)ListComboBox.SelectedItem);
+
+            if (maze != null)
             {
+                new MultiMazesWindow(maze).Show();
                 Close();
             }
             else

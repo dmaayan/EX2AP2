@@ -16,7 +16,7 @@ namespace MazeGUI.etc
         private int port;
         private string ip;
         ClientController clientController;
-        MessageTransmiter mr;
+        MessageTransmiter messageTransmiter;
 
         private ClientSingleton()
         {
@@ -25,13 +25,13 @@ namespace MazeGUI.etc
             IPAddress ipAdress = IPAddress.Parse(ip);
             IPEndPoint ep = new IPEndPoint(ipAdress, port);
             // create the message transfering class and the controller
-            mr = new MessageTransmiter(ep);
-            clientController = new ClientController(mr);
+            messageTransmiter = new MessageTransmiter(ep);
+            clientController = new ClientController(messageTransmiter);
         }
 
-        public void SignForMessaging(EventHandler<StatuesEventArgs> onOpponentMove)
+        public void SignForMessaging(EventHandler<StatuesEventArgs> messageEventHandler)
         {
-            mr.NotifyAboutMessage += onOpponentMove;
+            messageTransmiter.NotifyAboutMessage += messageEventHandler;
         }
 
         public static ClientSingleton Client

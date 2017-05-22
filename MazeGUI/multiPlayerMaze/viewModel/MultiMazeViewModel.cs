@@ -18,12 +18,18 @@ namespace MazeGUI.multiPlayerMaze.viewModel
         public MultiMazeViewModel(IMultiMazeModel m)
         {
             model = m;
-            model.MoveOpponent += OnOpponentMove;
+            model.registerForMasseger += OnOpponentMove;
         }
 
-        public void Close()
+        // close game 
+        public void CloseGame()
         {
-            model.Close();
+            model.CloseGame();
+        }
+        // player won the game
+        public void FinishGame()
+        {
+            model.FinishGame();
         }
 
         public void OnOpponentMove(object o, StatuesEventArgs statues)

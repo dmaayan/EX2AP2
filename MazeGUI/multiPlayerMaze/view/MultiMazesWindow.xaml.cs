@@ -4,6 +4,7 @@ using MazeGUI.multiPlayerMaze.model;
 using MazeGUI.multiPlayerMaze.viewModel;
 using MazeGUI.userControls;
 using MazeLib;
+using MVC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,24 +27,13 @@ namespace MazeGUI.multiPlayerMaze.view
     public partial class MultiMazesWindow : NonClosableWindow
     {
         MultiMazeViewModel model;
+
         public MultiMazesWindow(Maze maze)
         {
             model = new MultiMazeViewModel(new MultiMazeModel(maze));
             this.DataContext = model;
-            model.MoveOpponent += MoveOpponentPlayer;
+            model.MoveOpponent += OpponentPlay;
             InitializeComponent();
-        }
-
-        private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-            model.Close();
-            Close();
-        }
-
-        private void MoveOpponentPlayer(object sender, StatuesEventArgs statues)
-        {
-            Direction direction = (Direction)Enum.Parse(typeof(Direction), statues.Stat.Message);
-            OpponentMazeControl.PositionPlayer(direction);
         }
 
         public string MazeName
@@ -95,10 +85,55 @@ namespace MazeGUI.multiPlayerMaze.view
             }
         }
 
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            model.CloseGame();
+            Close();
+        }
+
+        private void OpponentPlay(object sender, StatuesEventArgs statues)
+        {
+            // Opponent made a move
+            if (statues.Stat.Stat == Status.PrintAndContinue)
+            {
+                Direction direction = (Direction)Enum.Parse(typeof(Direction), statues.Stat.Message);
+                OpponentMazeControl.PositionPlayer(direction);
+            }
+            // Opponent end the game 
+            else if (statues.Stat.Stat == Status.Exit)
+            {
+                MessageBox.Show("The other player end the game");
+                Close();
+            }
+            // Opponent won the game
+            else if (statues.Stat.Stat == Status.Close)
+            {
+                MessageBox.Show("You lost!");
+                Close();
+            }
+        }
+          
+        // player won the game
         private void FinishGame()
         {
             MessageBox.Show("You escaped!");
-            
+            model.FinishGame();
+            Close();
         }
+
+        /*
+        private void CloseGame()
+        {
+            model.CloseGame();
+            Close();
+        }
+        */
+        /*
+        private void OpponentMove( )
+        {
+            Direction direction = (Direction)Enum.Parse(typeof(Direction), statues.Stat.Message);
+            OpponentMazeControl.PositionPlayer(direction);
+        }
+        */
     }
 }

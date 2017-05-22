@@ -10,10 +10,9 @@ using System.Threading.Tasks;
 
 namespace MazeGUI.multiPlayerMaze.model
 {
-
     public class MultiMazeModel : AbstractMazeModel, IMultiMazeModel
     {
-        public event EventHandler<StatuesEventArgs> MoveOpponent;
+        public event EventHandler<StatuesEventArgs> registerForMasseger;
 
         public MultiMazeModel(Maze m) : base(m)
         {
@@ -22,7 +21,7 @@ namespace MazeGUI.multiPlayerMaze.model
 
         public void OnOpponentMove(object o, StatuesEventArgs e)
         {
-            MoveOpponent(this, e);
+            registerForMasseger(this, e);
         }
 
         public Direction PlayMove()
@@ -30,11 +29,14 @@ namespace MazeGUI.multiPlayerMaze.model
             return Direction.Down;
         }
 
-        public void Close()
+        public void CloseGame()
         {
-
             Statues stat = ClientSingleton.Client.SendMesseage("close " + MazeName);
-
+        }
+        // finish, the player won the game
+        public void FinishGame()
+        {
+            Statues stat = ClientSingleton.Client.SendMesseage("finish " + MazeName);
         }
 
         public void SendMove(Direction direction)

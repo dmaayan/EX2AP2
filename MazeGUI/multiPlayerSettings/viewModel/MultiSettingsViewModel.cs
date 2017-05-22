@@ -52,15 +52,9 @@ namespace MazeGUI.multiPlayerSettings.viewModel
             return model.GetListGames();
         }
 
-        public bool JoinGame(string game)
+        public Maze JoinGame(string game)
         {
-            Maze maze = model.JoinGame(game);
-            if (maze != null)
-            {
-                new MultiMazesWindow(maze).Show();
-                return true;
-            }
-            else { return false; }
+           return model.JoinGame(game);
         }
        
         public Maze StartGame()
