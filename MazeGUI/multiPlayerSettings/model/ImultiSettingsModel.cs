@@ -20,5 +20,8 @@ namespace MazeGUI.multiPlayerSettings.model
         string[] GetListGames();
 
         Maze JoinGame(string game);
+
+        void BackToMenu();
+
     }
 }
