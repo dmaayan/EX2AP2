@@ -11,6 +11,9 @@ using System.Windows.Interop;
 
 namespace MazeGUI.etc
 {
+    /// <summary>
+    /// a window with no X button on the top
+    /// </summary>
     public class NonClosableWindow : Window
     {
         // cancel the control box of the window
@@ -23,18 +26,15 @@ namespace MazeGUI.etc
         [DllImport("user32.dll")]
         private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
 
+        /// <summary>
+        /// event to cancel the X button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void singlePlayerMazeWindow_Loaded(object sender, RoutedEventArgs e)
         {
             var hwnd = new WindowInteropHelper(this).Handle;
             SetWindowLong(hwnd, GWL_STYLE, GetWindowLong(hwnd, GWL_STYLE) & ~WS_SYSMENU);
         }
-
-        protected static Dictionary<Key, Direction> directions = new Dictionary<Key, Direction>
-        {
-            { Key.Up, Direction.Up },
-            { Key.Down, Direction.Down},
-            { Key.Left, Direction.Left},
-            { Key.Right, Direction.Right}
-        };
     }
 }

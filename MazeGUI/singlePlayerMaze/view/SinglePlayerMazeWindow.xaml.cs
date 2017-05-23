@@ -5,6 +5,7 @@ using MazeLib;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Collections.Generic;
 
 namespace MazeGUI
 {
@@ -16,7 +17,17 @@ namespace MazeGUI
         //initializing members
         private SinglePlayerMazeViewModel model;
         private bool isAnimating = false;
-        
+        /// <summary>
+        /// movement dictionary for use by the mazes
+        /// </summary>
+        protected static Dictionary<Key, Direction> directions = new Dictionary<Key, Direction>
+        {
+            { Key.Up, Direction.Up },
+            { Key.Down, Direction.Down},
+            { Key.Left, Direction.Left},
+            { Key.Right, Direction.Right}
+        };
+
         public SinglePlayerMazeWindow(Maze m)
         {
             model = new SinglePlayerMazeViewModel(new SinglePlayerMazeModel(m));

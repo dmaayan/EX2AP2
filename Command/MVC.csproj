@@ -72,10 +72,6 @@
     <Compile Include="Commands\StartGameCommand.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ex1\Ex1.csproj">
-      <Project>{82414EB6-207B-4A85-8E4F-57CFEA38C5DE}</Project>
-      <Name>Ex1</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SearchAlgorithmsLib\SearchAlgorithmsLib.csproj">
       <Project>{dd7b007a-d5dd-4144-a43e-8af6678c2076}</Project>
       <Name>SearchAlgorithmsLib</Name>

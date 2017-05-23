@@ -8,7 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Client
+namespace MazeGUI
 {
     /// <summary>
     /// sends and received messages to and from the server.

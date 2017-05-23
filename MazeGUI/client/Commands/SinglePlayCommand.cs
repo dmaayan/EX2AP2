@@ -1,14 +1,15 @@
-﻿using MVC;
-using System;
+﻿using System;
+using MVC;
 using System.Net.Sockets;
 
-namespace Client
+namespace MazeGUI.Commands
 {
     /// <summary>
-    /// command for close game
+    /// command for single play
     /// </summary>
-    public class CloseGameCommand : ICommand
+    public class SinglePlayCommand : ICommand
     {
+    
         /// <summary>
         /// send and receive messages
         /// </summary>
@@ -18,28 +19,21 @@ namespace Client
         /// constructor
         /// </summary>
         /// <param name="mr">is the messageTransmiter </param>
-        public CloseGameCommand(MessageTransmiter mr)
+        public SinglePlayCommand(MessageTransmiter mr)
         {
             messageRec = mr;
         }
 
         /// <summary>
-        /// executes the close command
+        /// executes a single game command
         /// </summary>
         /// <param name="args">arguments of the command</param>
         /// <param name="client">to give the command</param>
-        /// <returns></returns>
+        /// <returns>the Status</returns>
         public Status Execute(string[] args, TcpClient client)
         {
-            // if the connection is active
-            if (messageRec.IsMultiActive)
-            {
-                string message = String.Join(" ", args);
-                // send and receive a message
-                messageRec.SendMessage(message);
-                return Status.Close;
-            }
-            Console.WriteLine("Can't close a game without playing");
+            string message = String.Join(" ", args);
+            messageRec.SendSingleMessage(message);
             return Status.Disconnect;
         }
     }

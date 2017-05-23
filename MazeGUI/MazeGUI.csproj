@@ -79,6 +79,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="client\ClientController.cs" />
+    <Compile Include="client\Commands\CloseCommand.cs" />
+    <Compile Include="client\Commands\FinishCommand.cs" />
+    <Compile Include="client\Commands\MultiPlayCommand.cs" />
+    <Compile Include="client\Commands\SinglePlayCommand.cs" />
+    <Compile Include="client\Commands\StartMultiPlayCommand.cs" />
+    <Compile Include="client\MessageTransmiter.cs" />
+    <Compile Include="client\StatuesEventArgs.cs" />
     <Compile Include="etc\AbstractMazeModel.cs" />
     <Compile Include="etc\IMazeModel.cs" />
     <Compile Include="etc\ClientSingleton.cs" />
@@ -191,10 +199,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Client\Client.csproj">
-      <Project>{B48B28B0-BB60-455B-ABD4-1561F8A95470}</Project>
-      <Name>Client</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Command\MVC.csproj">
       <Project>{AB440259-FC08-4F8D-B8BD-F96F70EF7E66}</Project>
       <Name>MVC</Name>

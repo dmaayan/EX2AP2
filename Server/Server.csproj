@@ -51,10 +51,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Client\Client.csproj">
-      <Project>{b48b28b0-bb60-455b-abd4-1561f8a95470}</Project>
-      <Name>Client</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Command\MVC.csproj">
       <Project>{ab440259-fc08-4f8d-b8bd-f96f70ef7e66}</Project>
       <Name>MVC</Name>

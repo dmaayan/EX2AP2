@@ -4,7 +4,7 @@ using System.Net.Sockets;
 namespace Client.Commands
 {
     /// <summary>
-    /// command for exit client
+    /// command for finish the game
     /// </summary>
     public class FinishCommand : ICommand
     {

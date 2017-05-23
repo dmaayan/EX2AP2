@@ -2,12 +2,12 @@
 using System;
 using System.Net.Sockets;
 
-namespace Client
+namespace MazeGUI.Commands
 {
     /// <summary>
     /// command for close game
     /// </summary>
-    public class CloseGameCommand : ICommand
+    public class CloseCommand : ICommand
     {
         /// <summary>
         /// send and receive messages
@@ -18,7 +18,7 @@ namespace Client
         /// constructor
         /// </summary>
         /// <param name="mr">is the messageTransmiter </param>
-        public CloseGameCommand(MessageTransmiter mr)
+        public CloseCommand(MessageTransmiter mr)
         {
             messageRec = mr;
         }

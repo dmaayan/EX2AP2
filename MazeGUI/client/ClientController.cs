@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MazeGUI.Commands;
 using MVC;
-using Client.Commands;
+using System.Collections.Generic;
 
-namespace Client
+namespace MazeGUI
 {
     /// <summary>
     /// use commands design to use the user commands
@@ -35,7 +34,7 @@ namespace Client
             commands.Add("start", new StartMultiPlayCommand(mr));
             commands.Add("join", new StartMultiPlayCommand(mr));
             commands.Add("play", new MultiPlayCommand(mr));
-            commands.Add("close", new CloseGameCommand(mr));
+            commands.Add("close", new CloseCommand(mr));
             commands.Add("finish", new FinishCommand(mr));
         }
 
