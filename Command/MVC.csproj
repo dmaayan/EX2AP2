@@ -49,7 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\ExitClientCommand.cs" />
+    <Compile Include="Commands\ExitCommand.cs" />
+    <Compile Include="Commands\FinishGameCommand.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Statues.cs" />
     <Compile Include="View\ClientHandler.cs" />

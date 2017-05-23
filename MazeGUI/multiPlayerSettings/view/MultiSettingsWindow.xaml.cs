@@ -74,7 +74,7 @@ namespace MazeGUI.multiPlayerSettings.view
                 }
             } else
             {
-                MessageBox.Show("Problem occurred, please try again");
+                MessageBox.Show("List:Problem occurred, please try again");
             }
             
         }
@@ -91,7 +91,8 @@ namespace MazeGUI.multiPlayerSettings.view
                 JoinButton.Visibility = Visibility.Hidden;
                 ListComboBox.Visibility = Visibility.Hidden;
                 multiSettingsContol.Visibility = Visibility.Hidden;
-                waitLable.Visibility = Visibility.Visible;
+                waitLabel.Visibility = Visibility.Visible;
+                backButton.Visibility = Visibility.Visible;
 
                 Task t = new Task(() =>
                 {
@@ -106,7 +107,7 @@ namespace MazeGUI.multiPlayerSettings.view
                     }
                     else
                     {
-                        MessageBox.Show("Problem occurred, please try again");
+                        MessageBox.Show("Maze:Problem occurred, please try again");
                     }
 
                 });
@@ -125,8 +126,20 @@ namespace MazeGUI.multiPlayerSettings.view
             }
             else
             {
-                MessageBox.Show("Game not evailable, choosh other game");
+                MessageBox.Show("Game not available, choose another game");
             }
+        }
+        
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Don't push it !!!! ");
+
+            /*
+            MainWindow win = (MainWindow)Application.Current.MainWindow;
+            model.BackToMenu();
+            win.Show();
+            Close();
+            */
         }
     }
 }

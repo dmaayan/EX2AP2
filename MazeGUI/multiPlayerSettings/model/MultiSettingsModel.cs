@@ -76,5 +76,10 @@ namespace MazeGUI.multiPlayerSettings.model
                 return null;
             }
         }
+        public void BackToMenu()
+        {
+
+        }
+
     }
 }

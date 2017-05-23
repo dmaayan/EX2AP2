@@ -34,7 +34,7 @@ namespace MazeGUI.multiPlayerMaze.viewModel
 
         public void OnOpponentMove(object o, StatuesEventArgs statues)
         {
-            MoveOpponent(o, statues);
+            MoveOpponent?.Invoke(o, statues);
         }
 
         public string MazeName

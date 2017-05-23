@@ -31,7 +31,7 @@ namespace MazeGUI.etc
 
         public void SignForMessaging(EventHandler<StatuesEventArgs> messageEventHandler)
         {
-            messageTransmiter.NotifyAboutMessage += messageEventHandler;
+            messageTransmiter.SignForEvent(messageEventHandler);
         }
 
         public static ClientSingleton Client

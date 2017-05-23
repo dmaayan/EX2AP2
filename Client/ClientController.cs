@@ -36,7 +36,7 @@ namespace Client
             commands.Add("join", new StartMultiPlayCommand(mr));
             commands.Add("play", new MultiPlayCommand(mr));
             commands.Add("close", new CloseGameCommand(mr));
-            commands.Add("exit", new ExitCommand(mr));
+            commands.Add("finish", new FinishCommand(mr));
         }
 
         /// <summary>
@@ -51,10 +51,12 @@ namespace Client
 
             // execute command
             ICommand command = commands[args[0]];
-            if (command.Execute(args) == Status.NoResponse)
+            Status stat = command.Execute(args);
+            if (stat == Status.Play || stat == Status.Finish || stat == Status.Close)
             {
                 return null;
             }
+            // get response from the server
             return mr.getStatues();
         }
     }

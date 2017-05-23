@@ -43,7 +43,7 @@ namespace MVC
             // get the other player
             TcpClient otherClient = game.GetOtherPlayer(client).Client;
             // set the statues to the other player and return
-            Stat.SetStatues(Status.PrintAndStop, "Game named: " + name + " have been closed");
+            Stat.SetStatues(Status.CloseGame, "Game named: " + name + " have been closed");
             Handler.SendToClient(Stat.ToJson(), otherClient);
             return Status.Disconnect;
         }

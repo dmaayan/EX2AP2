@@ -1,5 +1,6 @@
 ﻿using MVC;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
@@ -13,7 +14,7 @@ namespace Client
     /// </summary>
     public class MessageTransmiter
     {
-        public event EventHandler<StatuesEventArgs> NotifyAboutMessage;
+        private event EventHandler<StatuesEventArgs> NotifyAboutMessage;
 
         /// <summary>
         /// client currently active
@@ -36,13 +37,12 @@ namespace Client
         /// </summary>
         private BinaryWriter writer;
         /// <summary>
-        /// statues received from the server
-        /// </summary>
-        private Statues messageReceived;
-        /// <summary>
         /// statues of the send returned from the server
         /// </summary>
         private Statues statues;
+
+        private List<EventHandler<StatuesEventArgs>> delegates;
+
         /// <summary>
         /// wait for messages from the server in multiplayer connection
         /// </summary>
@@ -64,10 +64,17 @@ namespace Client
         public MessageTransmiter(IPEndPoint endPoint)
         {
             ep = endPoint;
-            messageReceived = null;
             isOpen = false;
             isMultiActive = false;
             statues = null;
+            delegates = new List<EventHandler<StatuesEventArgs>>();
+        }
+
+
+        public void SignForEvent(EventHandler<StatuesEventArgs> messageEventHandler)
+        {
+            NotifyAboutMessage += messageEventHandler;
+            delegates.Add(messageEventHandler);
         }
 
         /// <summary>
@@ -85,7 +92,6 @@ namespace Client
         public void Open()
         {
             // sets bools to true and message to null
-            messageReceived = null;
             isMultiActive = true;
             isOpen = true;
 
@@ -136,17 +142,24 @@ namespace Client
                                     Close();
                                     break;
                                 }
-                            case Status.PrintAndContinue:
+                            case Status.Play:
                                 {
                                     statues = null;
                                     continue;
                                 }
-                            case Status.PrintAndStop:
+                            case Status.CloseGame:
                                 {
-                                    // print the message and close the connection
-                                    Console.WriteLine(statues.Message);
+                                    // close the connection
                                     writer.Write("exit");
-                                    string feedback = reader.ReadString();
+                                    statues = null;
+                                    Close();
+                                    break;
+                                }
+                            case Status.Finish:
+                                {
+                                    // close the connection
+                                    writer.Write("exit");
+                                    statues = null;
                                     Close();
                                     break;
                                 }
@@ -161,8 +174,6 @@ namespace Client
                                     break;
                                 }
                         }
-                        // put the message from the server into the messageReceived var.
-                        messageReceived = statues;
                     }
                     // wait for some one to receive the message
                     else
@@ -186,28 +197,34 @@ namespace Client
             reader.Dispose();
             stream.Dispose();
             client.Close();
+            foreach(EventHandler<StatuesEventArgs> e in delegates)
+            {
+                NotifyAboutMessage -= e;
+            }
+            delegates.Clear();
         }
 
         /// <summary>
         /// if there is a connection with the server, close it and update the server
         /// </summary>
-        public void Exit()
+        public void FinishGame()
         {
             // if there is a connection
             if (isOpen)
             {
-                // set bools to false
-                isMultiActive = false;
-                isOpen = false;
-                // send exit message to the server for clean disconnect
-                writer.Write("exit");
-                GetMassage();
+                writer.Write("finish");
+
+                //// set bools to false
+                //isMultiActive = false;
+                //isOpen = false;
+                //// send exit message to the server for clean disconnect
+                //getStatues();
                 receiver.Wait();
-                // dispose all resources
-                stream.Dispose();
-                reader.Dispose();
-                writer.Dispose();
-                client.Close();
+                //// dispose all resources
+                //stream.Dispose();
+                //reader.Dispose();
+                //writer.Dispose();
+                //client.Close();
             }
         }
 
@@ -250,22 +267,22 @@ namespace Client
             newClient.Close();
         }
 
-        /// <summary>
-        /// gets a message from the server using the Open connection
-        /// </summary>
-        /// <returns>the message received from the server</returns>
-        public Statues GetMassage()
-        {
-            // wait for the receiver to get a message
-            while (messageReceived == null)
-            {
-                Thread.Sleep(1);
-            }
-            // save the message at current and reset the messageReceiverd to null
-            Statues current = messageReceived;
-            messageReceived = null;
-            return current;
-        }
+        ///// <summary>
+        ///// gets a message from the server using the Open connection
+        ///// </summary>
+        ///// <returns>the message received from the server</returns>
+        //public Statues GetMassage()
+        //{
+        //    // wait for the receiver to get a message
+        //    while (messageReceived == null)
+        //    {
+        //        Thread.Sleep(1);
+        //    }
+        //    // save the message at current and reset the messageReceiverd to null
+        //    Statues current = messageReceived;
+        //    messageReceived = null;
+        //    return current;
+        //}
 
         public Statues getStatues()
         {

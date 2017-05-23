@@ -62,6 +62,11 @@ namespace MazeGUI.multiPlayerSettings.viewModel
             return model.StartGame();
         }
 
+        public void BackToMenu()
+        {
+            model.BackToMenu();
+        }
+
 
     }
 }

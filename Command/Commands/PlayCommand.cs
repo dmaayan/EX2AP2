@@ -63,7 +63,7 @@ namespace MVC
             }
 
             // set the statues with the message, send to client and return
-            Stat.SetStatues(Status.PrintAndContinue, direction.ToString());
+            Stat.SetStatues(Status.Play, direction.ToString());
             Handler.SendToClient(Stat.ToJson(), otherPlayer.Client);
             return Status.KeepConnection;
         }

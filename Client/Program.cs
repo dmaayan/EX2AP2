@@ -24,7 +24,6 @@ namespace Client
             // create the message transfering class and the controller
             MessageTransmiter mr = new MessageTransmiter(ep);
             ClientController clientController = new ClientController(mr);
-            Status status;
             // repeat until status from the command is exit
             //do
             //{
