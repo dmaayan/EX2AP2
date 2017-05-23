@@ -18,10 +18,12 @@ namespace MazeGUI
         /// the model of the view
         /// </summary>
         private SinglePlayerMazeViewModel model;
+
         /// <summary>
         /// is currently animating the solution
         /// </summary>
         private bool isAnimating = false;
+
         /// <summary>
         /// movement dictionary for use by the mazes
         /// </summary>

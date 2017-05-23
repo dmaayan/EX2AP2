@@ -124,8 +124,8 @@ namespace MazeGUI.multiPlayerMaze.view
         /// <summary>
         /// click event on the back button
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">the button</param>
+        /// <param name="e">Routed event args</param>
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             // let the server know about closing the game

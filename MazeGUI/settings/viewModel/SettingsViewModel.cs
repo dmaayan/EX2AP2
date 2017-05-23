@@ -1,5 +1,4 @@
-﻿
-namespace MazeGUI
+﻿namespace MazeGUI
 {
     /// <summary>
     /// The view model of settings. inherits ViewModel
@@ -14,7 +13,7 @@ namespace MazeGUI
         /// <summary>
         /// constructor
         /// </summary>
-        /// <param name="mod"></param>
+        /// <param name="mod">the modlel</param>
         public SettingsViewModel(ISettingsModel mod)
         {
             model = mod;

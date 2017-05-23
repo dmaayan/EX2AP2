@@ -1,10 +1,6 @@
 ﻿using MazeGUI.etc;
 using MazeLib;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MazeGUI.multiPlayerMaze.model
 {
@@ -17,14 +13,17 @@ namespace MazeGUI.multiPlayerMaze.model
         /// event to get messages received from the server
         /// </summary>
         event EventHandler<StatuesEventArgs> registerForMessages;
+
         /// <summary>
         /// close the game
         /// </summary>
         void CloseGame();
+
         /// <summary>
         /// finished game
         /// </summary>
         void FinishGame();
+
         /// <summary>
         /// send a move to the other player
         /// </summary>

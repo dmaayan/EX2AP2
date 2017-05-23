@@ -4,13 +4,16 @@ using System.Windows.Media.Imaging;
 
 namespace MazeGUI.etc
 {
+    /// <summary>
+    /// Color factory, match to each char the Color or image
+    /// </summary>
     public class ColorFactory
     {
         /// <summary>
-        /// returns the color of the using the chars
+        /// returns the color or image of the using the chars
         /// </summary>
         /// <param name="c">is the char</param>
-        /// <returns>black or white</returns>
+        /// <returns>black or white or image </returns>
         public static Brush GetColor(char c)
         {
             switch (c)
@@ -24,7 +27,9 @@ namespace MazeGUI.etc
                 case '#':
                     {
                         // the exit point Image
-                        return new ImageBrush(new BitmapImage(new Uri(@"../../Images/key.jpg", UriKind.Relative)));
+                        return new ImageBrush(new BitmapImage
+                                             (new Uri(@"../../Images/key.jpg",
+                                              UriKind.Relative)));
                     }
                 default:
                     {

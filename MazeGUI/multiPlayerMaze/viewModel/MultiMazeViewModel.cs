@@ -13,10 +13,12 @@ namespace MazeGUI.multiPlayerMaze.viewModel
         /// event to get messages received from the server
         /// </summary>
         public event EventHandler<StatuesEventArgs> MoveOpponent;
+
         /// <summary>
         /// the model
         /// </summary>
         private IMultiMazeModel model;
+
         /// <summary>
         /// constructor
         /// </summary>

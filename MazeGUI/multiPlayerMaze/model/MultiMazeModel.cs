@@ -14,6 +14,7 @@ namespace MazeGUI.multiPlayerMaze.model
         /// event to get messages received from the server
         /// </summary>
         public event EventHandler<StatuesEventArgs> registerForMessages;
+
         /// <summary>
         /// constructor
         /// </summary>

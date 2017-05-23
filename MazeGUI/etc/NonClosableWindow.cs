@@ -1,12 +1,6 @@
-﻿using MazeLib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
 using System.Windows.Interop;
 
 namespace MazeGUI.etc
@@ -29,8 +23,8 @@ namespace MazeGUI.etc
         /// <summary>
         /// event to cancel the X button
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">the window</param>
+        /// <param name="e">Routed event args</param>
         private void singlePlayerMazeWindow_Loaded(object sender, RoutedEventArgs e)
         {
             var hwnd = new WindowInteropHelper(this).Handle;

@@ -16,31 +16,36 @@ namespace MVC
         /// all the games waiting for a second player
         /// </summary>
         private Dictionary<string, Maze> waitingList;
+
         /// <summary>
         /// all games currently active
         /// </summary>
         private Dictionary<string, Maze> activeGames;
+
         /// <summary>
         /// all the single game mazes
         /// </summary>
         private Dictionary<string, Maze> singlePlayerMazes;
+
         /// <summary>
         /// all the multiplayer games
         /// </summary>
         private Dictionary<string, Maze> multiPlayerMazes;
+
         /// <summary>
         /// all the solutions to the single game mazes
         /// </summary>
         private Dictionary<string, MazeSolution> singlePlayerSolved;
+
         /// <summary>
         /// maze name to game dictionary
         /// </summary>
         private Dictionary<string, Game> mazeNameToGame;
+
         /// <summary>
         /// client to maze dictionary
         /// </summary>
         private Dictionary<TcpClient, string> clientToMazeName;
-
 
         /// <summary>
         /// constructor

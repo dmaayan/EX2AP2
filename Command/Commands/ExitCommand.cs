@@ -14,8 +14,7 @@ namespace MVC
         /// <param name="m">model</param>
         /// <param name="ic">view</param>
         public ExitCommand(IModel model, IClientHandler clientHandle) :
-            base(model, clientHandle)
-        { }
+            base(model, clientHandle) { }
 
         /// <summary>
         /// executes the command given

@@ -57,7 +57,7 @@ namespace MazeGUI
                 return null;
             }
             // get response from the server
-            return mr.getStatues();
+            return mr.GetStatues();
         }
     }
 }

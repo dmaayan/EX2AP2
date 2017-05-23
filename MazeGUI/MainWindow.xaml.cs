@@ -2,7 +2,6 @@
 using MazeGUI.settings.view;
 using System.Windows;
 
-
 namespace MazeGUI
 {
     /// <summary>

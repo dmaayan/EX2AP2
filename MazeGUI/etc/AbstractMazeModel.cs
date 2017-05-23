@@ -12,10 +12,12 @@ namespace MazeGUI.etc
         /// maze of the model
         /// </summary>
         private Maze maze;
+
         /// <summary>
         /// the string representation of the maze
         /// </summary>
         private string mazeString;
+
         /// <summary>
         /// constructor
         /// </summary>

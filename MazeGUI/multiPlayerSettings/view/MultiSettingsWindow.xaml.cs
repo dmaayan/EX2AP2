@@ -171,10 +171,5 @@ namespace MazeGUI.multiPlayerSettings.view
                 MessageBox.Show("Game not available, choose another game");
             }
         }
-
-        private void NonClosableWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-        
-        }
     }
 }

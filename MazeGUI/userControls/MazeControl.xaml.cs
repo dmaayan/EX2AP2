@@ -180,25 +180,40 @@ namespace MazeGUI.userControls
         }
 
 
-        //Using a DependencyProperty as the backing store for Maze.This enables animation, styling, binding, etc...
+        /// <summary>
+        /// Using a DependencyProperty as the backing store for Maze.
+        /// </summary>
         public static readonly DependencyProperty RowsProperty =
-            DependencyProperty.Register("Rows", typeof(int), typeof(MazeControl), new PropertyMetadata(default(int)));
+            DependencyProperty.Register("Rows", typeof(int), typeof(MazeControl),
+                                        new PropertyMetadata(default(int)));
 
-        //Using a DependencyProperty as the backing store for Maze.This enables animation, styling, binding, etc...
+        /// <summary>
+        /// Using a DependencyProperty as the backing store for Maze.
+        /// </summary>
         public static readonly DependencyProperty ColsProperty =
-            DependencyProperty.Register("Cols", typeof(int), typeof(MazeControl), new PropertyMetadata(default(int)));
+            DependencyProperty.Register("Cols", typeof(int), typeof(MazeControl),
+                                        new PropertyMetadata(default(int)));
 
-        // Using a DependencyProperty as the backing store for Maze.  This enables animation, styling, binding, etc...
+        /// <summary>
+        /// Using a DependencyProperty as the backing store for Maze.
+        /// </summary>
         public static readonly DependencyProperty MazeStringProperty =
-            DependencyProperty.Register("MazeString", typeof(string), typeof(MazeControl), new PropertyMetadata(default(string)));
+            DependencyProperty.Register("MazeString", typeof(string), typeof(MazeControl),
+                                        new PropertyMetadata(default(string)));
 
-        // Using a DependencyProperty as the backing store for Maze.  This enables animation, styling, binding, etc...
+        /// <summary>
+        /// Using a DependencyProperty as the backing store for Maze.
+        /// </summary>
         public static readonly DependencyProperty MazeStartPointProperty =
-            DependencyProperty.Register("MazeStartPoint", typeof(Position), typeof(MazeControl), new PropertyMetadata(default(Position)));
+            DependencyProperty.Register("MazeStartPoint", typeof(Position), typeof(MazeControl),
+                                        new PropertyMetadata(default(Position)));
 
-        // Using a DependencyProperty as the backing store for Maze.  This enables animation, styling, binding, etc...
+        /// <summary>
+        /// Using a DependencyProperty as the backing store for Maze.
+        /// </summary>
         public static readonly DependencyProperty MazeEndPointProperty =
-            DependencyProperty.Register("MazeEndPoint", typeof(Position), typeof(MazeControl), new PropertyMetadata(default(Position)));
+            DependencyProperty.Register("MazeEndPoint", typeof(Position), typeof(MazeControl),
+                                        new PropertyMetadata(default(Position)));
 
         /// <summary>
         /// rows property

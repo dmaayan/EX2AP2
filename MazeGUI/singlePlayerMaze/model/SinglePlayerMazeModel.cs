@@ -2,11 +2,6 @@
 using MazeLib;
 using MVC;
 using SearchAlgorithmsLib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MazeGUI.singlePlayerMaze.model
 {
@@ -19,6 +14,7 @@ namespace MazeGUI.singlePlayerMaze.model
         /// the search algorithm to solve the mazes with
         /// </summary>
         private int searchAlgoritm;
+
         /// <summary>
         /// the maze solution. requested only once from the server
         /// </summary>
@@ -43,9 +39,8 @@ namespace MazeGUI.singlePlayerMaze.model
             if (mazeSolution == null)
             {
                 // ask for a solution from the server
-                Statues stat = ClientSingleton.Client.SendMesseage("solve " +
-                                                                    MazeName + " " +
-                                                                    searchAlgoritm);
+                Statues stat = ClientSingleton.Client.SendMesseage("solve " +MazeName +
+                                                                   " " + searchAlgoritm);
                 // if received null from the server
                 if (stat == null)
                 {

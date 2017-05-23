@@ -1,5 +1,4 @@
-﻿
-namespace MazeGUI
+﻿namespace MazeGUI
 {
     /// <summary>
     /// The model of settings. inherits ISettingsModel

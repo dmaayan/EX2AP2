@@ -19,42 +19,52 @@ namespace MazeGUI
         /// event to notify all about messages received from the server
         /// </summary>
         private event EventHandler<StatuesEventArgs> NotifyAboutMessage;
+
         /// <summary>
         /// client currently active
         /// </summary>
         private TcpClient client;
+
         /// <summary>
         /// the end point to the connection
         /// </summary>
         private IPEndPoint ep;
+
         /// <summary>
         /// the network stream
         /// </summary>
         private NetworkStream stream;
+
         /// <summary>
         /// read messages from the server
         /// </summary>
         private BinaryReader reader;
+
         /// <summary>
         /// write messages to the server
         /// </summary>
         private BinaryWriter writer;
+
         /// <summary>
         /// statues of the send returned from the server
         /// </summary>
         private Statues statues;
+
         /// <summary>
         /// all the delegates signed for the event
         /// </summary>
         private List<EventHandler<StatuesEventArgs>> delegates;
+
         /// <summary>
         /// wait for messages from the server in multiplayer connection
         /// </summary>
         private Task receiver;
+
         /// <summary>
         /// true if there is a connection Open
         /// </summary>
         private bool isOpen;
+
         /// <summary>
         /// true if there is a game
         /// </summary>
@@ -264,7 +274,7 @@ namespace MazeGUI
         /// gets a statues from the server using the Open connection
         /// </summary>
         /// <returns>the statues received from the server</returns>
-        public Statues getStatues()
+        public Statues GetStatues()
         {
             // wait for the receiver to get a message
             while (statues == null)

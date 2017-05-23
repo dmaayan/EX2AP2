@@ -1,5 +1,4 @@
-﻿
-namespace MazeGUI
+﻿namespace MazeGUI
 {
     /// <summary>
     /// ISettingsModel is an interface of the modles 

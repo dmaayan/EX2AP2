@@ -1,10 +1,6 @@
 ﻿using MVC;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace MazeGUI.etc
@@ -18,18 +14,22 @@ namespace MazeGUI.etc
         /// the singleton
         /// </summary>
         private static ClientSingleton client;
+
         /// <summary>
         /// port to the server
         /// </summary>
         private int port;
+
         /// <summary>
         /// ip of the server
         /// </summary>
         private string ip;
+
         /// <summary>
         /// client controller
         /// </summary>
         ClientController clientController;
+
         /// <summary>
         /// message transmiter. sends messages to the server and receive
         /// </summary>
@@ -77,7 +77,7 @@ namespace MazeGUI.etc
         /// sends a message using the client
         /// </summary>
         /// <param name="message">to send to the server</param>
-        /// <returns></returns>
+        /// <returns>the Statues</returns>
         public Statues SendMesseage(string message)
         {
             Statues status;

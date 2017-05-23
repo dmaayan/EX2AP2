@@ -2,7 +2,6 @@
 using System.Configuration;
 using System.Net;
 
-
 namespace Server
 {
     /// <summary>
