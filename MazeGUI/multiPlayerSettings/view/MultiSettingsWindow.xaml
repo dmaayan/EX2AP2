@@ -15,8 +15,6 @@
         <Button x:Name="JoinButton" Content="Join" HorizontalAlignment="Left" Margin="250,45,0,0" VerticalAlignment="Top" Width="33" Height="19" Padding="1,5,1,1" FontSize="10" FontWeight="Bold" Click="JoinButton_Click"/>
         <ComboBox x:Name="ListComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="82" Margin="163,44,0,0" DropDownOpened="ListComboBox_DropDownOpened"  />
         <Label x:Name="waitLabel" Content="Waiting for other player" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="Hidden"/>
-        <Button x:Name="backButton" Content="Back to menu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="95" Margin="108,227,0,0" Click="backButton_Click" Height="22" Visibility="Hidden"/>
-
 
     </Grid>
 </Window>
