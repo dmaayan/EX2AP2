@@ -1,4 +1,5 @@
-﻿using MazeGUI.singlePlayerSettings.model;
+﻿using MazeGUI.etc;
+using MazeGUI.singlePlayerSettings.model;
 using MazeGUI.singlePlayerSettings.viewModel;
 using MazeLib;
 using System;
@@ -21,7 +22,7 @@ namespace MazeGUI
     /// <summary>
     /// Interaction logic for SinglePlayerSettingsWindow.xaml
     /// </summary>
-    public partial class SinglePlayerSettingsWindow : Window
+    public partial class SinglePlayerSettingsWindow : NonClosableWindow
     {
         SingleSettingsViewModel model;
 

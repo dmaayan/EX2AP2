@@ -1,12 +1,13 @@
-﻿<Window
+﻿<src:NonClosableWindow
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:src="clr-namespace:MazeGUI.etc"
         xmlns:local="clr-namespace:MazeGUI.multiPlayerSettings.view"
         xmlns:userControls="clr-namespace:MazeGUI.userControls" x:Class="MazeGUI.multiPlayerSettings.view.MultiSettingsWindow"
         mc:Ignorable="d"
-        Title="MultiSettingsWindow" Height="340" Width="310">
+        Title="MultiSettingsWindow" Height="340" Width="310" Loaded="singlePlayerMazeWindow_Loaded">
     <Grid>
 
 
@@ -19,4 +20,4 @@
 
 
     </Grid>
-</Window>
+</src:NonClosableWindow>

@@ -113,7 +113,6 @@
     <Compile Include="singlePlayerMaze\model\ISinglePlayerMazeModel.cs" />
     <Compile Include="singlePlayerMaze\model\SinglePlayerMazeModel.cs" />
     <Compile Include="singlePlayerMaze\viewModel\SinglePlayerMazeViewModel.cs" />
-    <Compile Include="MazePlayer.cs" />
     <Compile Include="singlePlayerMaze\view\SinglePlayerMazeWindow.xaml.cs">
       <DependentUpon>SinglePlayerMazeWindow.xaml</DependentUpon>
     </Compile>

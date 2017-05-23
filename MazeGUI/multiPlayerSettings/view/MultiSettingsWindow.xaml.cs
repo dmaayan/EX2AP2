@@ -16,13 +16,14 @@ using System.Windows.Shapes;
 using MazeGUI.multiPlayerMaze.view;
 using System.Collections.ObjectModel;
 using MazeLib;
+using MazeGUI.etc;
 
 namespace MazeGUI.multiPlayerSettings.view
 {
     /// <summary>
     /// Interaction logic for MultiSettingsWindow.xaml
     /// </summary>
-    public partial class MultiSettingsWindow : Window
+    public partial class MultiSettingsWindow : NonClosableWindow
     {
         private MultiSettingsViewModel model;
         public ObservableCollection<string> gamesList = new ObservableCollection<string>();
@@ -143,6 +144,11 @@ namespace MazeGUI.multiPlayerSettings.view
             win.Show();
             Close();
             */
+        }
+
+        private void NonClosableWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+        
         }
     }
 }

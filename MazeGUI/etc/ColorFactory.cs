@@ -28,7 +28,7 @@ namespace MazeGUI.etc
                     }
                 default:
                     {
-                        // undefined char color
+                        // all other chars
                         return Brushes.White;
                     }
             }

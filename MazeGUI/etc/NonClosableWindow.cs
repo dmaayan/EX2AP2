@@ -14,7 +14,7 @@ namespace MazeGUI.etc
     /// <summary>
     /// a window with no X button on the top
     /// </summary>
-    public class NonClosableWindow : Window
+    public partial class NonClosableWindow : Window
     {
         // cancel the control box of the window
         private const int GWL_STYLE = -16;

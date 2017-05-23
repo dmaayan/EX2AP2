@@ -1,9 +1,5 @@
 ﻿using MazeLib;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MazeGUI.etc
 {
@@ -38,6 +34,7 @@ namespace MazeGUI.etc
         {
             get { return maze.Name; }
         }
+
         /// <summary>
         /// getter for the maze columns
         /// </summary>
@@ -45,6 +42,7 @@ namespace MazeGUI.etc
         {
             get { return maze.Cols; }
         }
+
         /// <summary>
         /// getter for the maze rows
         /// </summary>
@@ -52,6 +50,7 @@ namespace MazeGUI.etc
         {
             get { return maze.Rows; }
         }
+
         /// <summary>
         /// getter for the maze string representation
         /// </summary>
