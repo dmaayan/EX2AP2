@@ -41,15 +41,15 @@ namespace MazeGUI.userControls
             InitializeComponent();
         }
 
-        private void start(object sender, RoutedEventArgs e)
+        private void Start(object sender, RoutedEventArgs e)
         {
             canvasBorder.BorderThickness = new Thickness(0.2);
             mazeCanvas.Width = rectSizePX * Rows;
             mazeCanvas.Height = rectSizePX * Cols;
-            initializeMazeLabels();
+            InitializeMazeLabels();
         }
 
-        private void initializeMazeLabels()
+        private void InitializeMazeLabels()
         {
             double rectHeight = rectSizePX;
             double rectWidth = rectSizePX;

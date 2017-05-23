@@ -5,7 +5,7 @@ using MazeLib;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-
+//TODO - user animation
 namespace MazeGUI
 {
     /// <summary>

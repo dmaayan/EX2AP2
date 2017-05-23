@@ -7,10 +7,14 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" 
              d:DesignWidth="300">
-    <Viewbox Loaded="start" >
+    <Viewbox Loaded="Start" >
         <Border x:Name="canvasBorder" BorderBrush="Black">
             <Canvas x:Name="mazeCanvas" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Black">
-                <Rectangle x:Name="player" Fill="Aquamarine" Panel.ZIndex="2"></Rectangle>
+                <Rectangle x:Name="player" Panel.ZIndex="2">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="/MazeGUI;component/Images/player.png" Stretch="Uniform"/>
+                    </Rectangle.Fill>
+                </Rectangle>
             </Canvas>
         </Border>
     </Viewbox>
