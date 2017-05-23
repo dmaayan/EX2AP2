@@ -1,0 +1,499 @@
+commit ee7b7e9072f243fab6302778ae60a84cfe54c58b
+Author: nweichse <nweichse@NWEICHSE-MOBL>
+Date:   Tue May 23 22:12:09 2017 +0300
+
+    nevo finished all of his comments
+
+commit 4b940e19e0d7de889e1be5c08eb607b7120e2306
+Merge: f848059 d1b49fd
+Author: nweichse <nweichse@NWEICHSE-MOBL>
+Date:   Tue May 23 21:05:13 2017 +0300
+
+    solving files
+
+commit f84805996385d48c253364ff47b7ed091308df7b
+Author: nweichse <nweichse@NWEICHSE-MOBL>
+Date:   Tue May 23 21:02:05 2017 +0300
+
+    comments until multi maze window
+
+commit d1b49fd73d646c1f2c870e455b6556984ceb4d23
+Author: Maayan <damaayan@gmail.com>
+Date:   Tue May 23 20:56:43 2017 +0300
+
+    end point image
+
+commit 8ffa96e31c8020bec02c19028a17963f840c3d1f
+Author: nweichse <nweichse@NWEICHSE-MOBL>
+Date:   Tue May 23 20:11:59 2017 +0300
+
+    partial commented
+
+commit 9fd78b6fee150ede02745d5d62481e18acd38eb4
+Merge: 7da7753 58f6d32
+Author: Maayan <damaayan@gmail.com>
+Date:   Tue May 23 13:00:16 2017 +0300
+
+    Merge branch 'master' of https://github.com/dmaayan/ex2ap2
+
+commit 7da7753314fe8c1ffb2556a0bd818d7ef513d2d6
+Author: Maayan <damaayan@gmail.com>
+Date:   Tue May 23 12:59:18 2017 +0300
+
+    added player image
+
+commit 58f6d32e6d7859f1963e279473b080d12226d12f
+Author: nweichse <nweichse@NWEICHSE-MOBL>
+Date:   Tue May 23 11:50:45 2017 +0300
+
+    finished changed names
+
+commit bc00ca06d3e3c23d565642c7343f8d4ddc83465a
+Merge: 41c1094 f1bbdd2
+Author: nweichse <nweichse@NWEICHSE-MOBL>
+Date:   Tue May 23 11:49:52 2017 +0300
+
+    changed names
+
+commit 41c1094d500614d92f4998a70cabf58af8b1ddc8
+Author: nweichse <nweichse@NWEICHSE-MOBL>
+Date:   Tue May 23 11:48:28 2017 +0300
+
+    changed names
+
+commit f1bbdd2004e91b151d20f27ef05d586f89b4e060
+Author: Maayan <damaayan@gmail.com>
+Date:   Tue May 23 00:40:59 2017 +0300
+
+    finished multiplayer game. changes status enums
+
+commit 33f5857567b9c72882da44065d6da49f343ce5cb
+Author: Maayan <damaayan@gmail.com>
+Date:   Mon May 22 22:16:12 2017 +0300
+
+    MultiSettingsWindow  - back button
+
+commit a3d85ea6a4f22826814401d232d72441ab77ef80
+Author: Maayan <damaayan@gmail.com>
+Date:   Mon May 22 21:33:41 2017 +0300
+
+    multi player maze window - clos and finish  methods
+
+commit 84410d1eaa3881697b86145aa3ac5ea4e9759685
+Author: nweichse <nweichse@NWEICHSE-MOBL>
+Date:   Sun May 21 02:06:24 2017 +0300
+
+    multiplayer working with sync. needs testing
+
+commit a2db4374e8b775fed55e7ebe3e7ee05b1dd93546
+Author: nweichse <nweichse@NWEICHSE-MOBL>
+Date:   Sat May 20 23:32:08 2017 +0300
+
+    fixed
+
+commit 37207f1c6b968ee7472a17f0d0e5f38911f7751a
+Merge: d3fed6e 67d1186
+Author: nweichse <nweichse@NWEICHSE-MOBL>
+Date:   Sat May 20 23:22:29 2017 +0300
+
+    compared files again
+
+commit d3fed6ee8fb1a2541c406393e750e8ce7a676d34
+Merge: 2242496 c0aae0a
+Author: nweichse <nweichse@NWEICHSE-MOBL>
+Date:   Sat May 20 23:21:05 2017 +0300
+
+    compared with files
+
+commit 22424960391e87a476a21f558fe2081648d8c4e5
+Author: nweichse <nweichse@NWEICHSE-MOBL>
+Date:   Sat May 20 23:17:23 2017 +0300
+
+    commit
+
+commit 67d1186ef3ff1c9e2b36d9508dbd3efef019b64e
+Author: Maayan <damaayan@gmail.com>
+Date:   Sat May 20 23:14:41 2017 +0300
+
+    after balagan
+
+commit c0aae0a3c6098a608ff24da31f73af30a1bc8224
+Merge: 6a2ad0a 1a00b4f
+Author: Maayan <damaayan@gmail.com>
+Date:   Sat May 20 22:57:49 2017 +0300
+
+    after marge
+
+commit 6a2ad0a5d7ac810bb23b9f4cbb5a6913ad7c8b39
+Author: Maayan <damaayan@gmail.com>
+Date:   Sat May 20 22:38:28 2017 +0300
+
+    main window
+
+commit 1a00b4f1e07144a3d7d4c1c0989eac6595359131
+Merge: 7170c4a f0ea54c
+Author: nweichse <nweichse@NWEICHSE-MOBL>
+Date:   Sat May 20 21:49:28 2017 +0300
+
+    sync
+
+commit 7170c4afa84f9b16fc98409cbaa32888a2c52dfa
+Author: nweichse <nweichse@NWEICHSE-MOBL>
+Date:   Sat May 20 21:48:17 2017 +0300
+
+    multiplayer game working
+
+commit f0ea54c6628beee0c8ecffcf26445ca80adc4932
+Author: Maayan <damaayan@gmail.com>
+Date:   Sat May 20 19:39:13 2017 +0300
+
+    multi settings done !!
+
+commit 9bb7f43bd1ad53e3248a18da7c1ec7a589a08b8a
+Merge: 4e63f63 a4cc8d9
+Author: Maayan <damaayan@gmail.com>
+Date:   Fri May 19 15:11:15 2017 +0300
+
+    Merge branch 'master' of https://github.com/dmaayan/ex2ap2
+
+commit 4e63f63cbdc0e4f0fb492a2f888ba4b8408ff55e
+Author: Maayan <damaayan@gmail.com>
+Date:   Fri May 19 15:10:06 2017 +0300
+
+    multi player settings - advanced
+
+commit a4cc8d94f3d545c1ac7710eb4db85093d4a885ef
+Merge: 6f159ae cde507a
+Author: nweichse <nweichse@NWEICHSE-MOBL>
+Date:   Fri May 19 14:25:21 2017 +0300
+
+    Merge branch 'master' of https://github.com/dmaayan/ex2ap2.git
+
+commit 6f159aee138fb8e991120487c935855e7d991e7f
+Author: nweichse <nweichse@NWEICHSE-MOBL>
+Date:   Fri May 19 14:24:42 2017 +0300
+
+    single player game is working with animation
+
+commit cde507ae007fadbddd124a3421dff572afd9c3fb
+Author: Maayan <damaayan@gmail.com>
+Date:   Fri May 19 02:47:13 2017 +0300
+
+    single control settings done
+    multi player settings window - design don
+
+commit 7631468c93cd91b22ea563903abf3e777df66704
+Author: nweichse <nweichse@NWEICHSE-MOBL>
+Date:   Fri May 19 02:45:13 2017 +0300
+
+    animation not working
+
+commit 72b0bc559d0156f181320acd59158d9a65e478dd
+Merge: 1de1020 9e85315
+Author: Maayan <damaayan@gmail.com>
+Date:   Thu May 18 22:41:03 2017 +0300
+
+    user conrol after commit
+
+commit 1de102026852c6bb2ecfc0702bbe382bf4a1f862
+Author: Maayan <damaayan@gmail.com>
+Date:   Thu May 18 22:31:27 2017 +0300
+
+    user control
+
+commit 9e85315e770a6d1eaabc1de3a1ab9a5b859c0be8
+Author: nweichse <nweichse@NWEICHSE-MOBL>
+Date:   Thu May 18 22:30:10 2017 +0300
+
+    maze control working
+
+commit 3340d600f70d1db223ce0ea00a732560130904aa
+Author: nweichse <nweichse@NWEICHSE-MOBL>
+Date:   Wed May 17 21:08:59 2017 +0300
+
+    dependancy working. maze showing
+
+commit d91acab191bce2d152efe3544a528f6349001ff6
+Merge: 2d891d7 b0218a7
+Author: nweichse <nweichse@NWEICHSE-MOBL>
+Date:   Sat May 13 21:23:13 2017 +0300
+
+    Merge branch 'master' of https://github.com/dmaayan/ex2ap2.git
+
+commit 2d891d775dd8a46ecbd2205f05a65b61ed6c5979
+Author: nweichse <nweichse@NWEICHSE-MOBL>
+Date:   Sat May 13 21:23:00 2017 +0300
+
+    maze control added
+
+commit b0218a7ee843dfe67095b7a9d55b8e787cc0da8d
+Author: Maayan <damaayan@gmail.com>
+Date:   Sat May 13 21:18:39 2017 +0300
+
+    settings
+
+commit 0186e1bc470f6e591b5d6738bdf0450c21d78cde
+Author: Maayan <damaayan@gmail.com>
+Date:   Tue May 9 02:35:15 2017 +0300
+
+    settings window -  finished
+    single player setting window - not finished
+
+commit e9037d41c44adf166fa6bb7327f58546830771fe
+Merge: 9a09d82 0dba91a
+Author: nweichse <nevo12345@gmail.com>
+Date:   Sun Apr 23 21:36:58 2017 +0300
+
+    Merge branch 'master' of https://github.com/nevow/ex1ap2.git
+
+commit 9a09d82b8d69683122fa3e921d9e3f90c6b5235b
+Author: nweichse <nevo12345@gmail.com>
+Date:   Sun Apr 23 21:36:55 2017 +0300
+
+    without etc
+
+commit 0dba91ab22abc77584ece278b3694096c47c9065
+Author: Maayan <damaayan@gmail.com>
+Date:   Sun Apr 23 21:34:24 2017 +0300
+
+    working
+
+commit f85fa6f71d7529b38d665494459863d85e288009
+Author: Maayan <damaayan@gmail.com>
+Date:   Sun Apr 23 21:19:18 2017 +0300
+
+    finished comments
+
+commit aefde3094a5313dcd6df4c48d596823fbc93b3df
+Merge: 49d173f 3a9f51a
+Author: Maayan <damaayan@gmail.com>
+Date:   Sun Apr 23 19:54:18 2017 +0300
+
+    need schanges
+
+commit 3a9f51ab440cf4743cd18170b1f22f8ab16aa15e
+Author: Maayan <damaayan@gmail.com>
+Date:   Sun Apr 23 19:48:56 2017 +0300
+
+    SearchAlgorithmsLib comments
+
+commit 49d173fb18bfebbfa19404db94fc027a06816bb7
+Author: nweichse <nevo12345@gmail.com>
+Date:   Sun Apr 23 02:57:24 2017 +0300
+
+    comments over commands and half MVC
+
+commit 9f91e944dd3eac033f6c5936abf74b0dbe85654a
+Author: nweichse <nevo12345@gmail.com>
+Date:   Fri Apr 21 13:39:31 2017 +0300
+
+    ex1 after comments
+
+commit cc1898e20e5647e18d71acc8b7b7b7675abd1f66
+Merge: eec2fa9 00a713e
+Author: Maayan <damaayan@gmail.com>
+Date:   Fri Apr 21 13:19:44 2017 +0300
+
+    Merge branch 'maayan'
+
+commit 00a713ea56f250cd5189d2d202c26b6c871de2ad
+Author: Maayan <damaayan@gmail.com>
+Date:   Fri Apr 21 13:18:03 2017 +0300
+
+    comments finish:
+    BFS
+    ISearchable
+    ISearcher
+
+commit eec2fa9715680f6c2299ce0530d02a7094fe8612
+Author: nweichse <nevo12345@gmail.com>
+Date:   Fri Apr 21 13:12:48 2017 +0300
+
+    comments over client-server-model.
+    app.config settings  and information text
+
+commit 83308d201dd4eb974fe9f4dada030ce71d82586b
+Author: nweichse <nevo12345@gmail.com>
+Date:   Thu Apr 20 19:55:40 2017 +0300
+
+    working after client controller added.
+
+commit 55a79b0ae8e76c963e284df0e5440b2fde9241db
+Author: Maayan <damaayan@gmail.com>
+Date:   Mon Apr 17 16:47:08 2017 +0300
+
+    SinglePlayCommand, MultiPlayCommand
+
+commit 53f1d4be60f79042982521e647ed28d34a6b72f7
+Author: nweichse <nevo12345@gmail.com>
+Date:   Mon Apr 17 09:23:14 2017 +0300
+
+    command server and client working
+
+commit a8b955b281da2be24f6a1f8e5a040297ad6d6afb
+Author: Maayan <damaayan@gmail.com>
+Date:   Sat Apr 15 23:52:02 2017 +0300
+
+    server and client check
+
+commit c51da31e560d667ac6085be9dfd0ebcf078d9e40
+Merge: ac06a8e fdf2b71
+Author: Maayan <damaayan@gmail.com>
+Date:   Sat Apr 15 20:55:51 2017 +0300
+
+    after comit
+
+commit fdf2b7174cfd789a96cb95a64578cf0ffc322ffe
+Author: nweichse <nevo12345@gmail.com>
+Date:   Sat Apr 15 20:53:28 2017 +0300
+
+    controller
+
+commit ac06a8ef9b463ce23701acc6d741ca92185d115e
+Author: Maayan <damaayan@gmail.com>
+Date:   Sat Apr 15 20:52:08 2017 +0300
+
+    client handler
+
+commit be0b1dbe55da63ed2c41cc712a90d784f22522b4
+Author: Maayan <damaayan@gmail.com>
+Date:   Sat Apr 8 19:01:03 2017 +0300
+
+    part 2
+
+commit 088869da06bd8ec000c6652391ae666762ac4f1d
+Author: nweichse <nevo12345@gmail.com>
+Date:   Sat Apr 8 16:04:17 2017 +0300
+
+    middle change
+
+commit ac499e5ef0a9b94a089bb888a759137fc96eeae0
+Author: Maayan <damaayan@gmail.com>
+Date:   Sat Apr 8 00:55:47 2017 +0300
+
+    checking
+
+commit 988329910a760ab6a97beb084fe6e2a0b393bfce
+Merge: ae90e12 e6d5421
+Author: Maayan <damaayan@gmail.com>
+Date:   Fri Apr 7 23:55:18 2017 +0300
+
+    maze adapter
+
+commit ae90e12267accd60c0535c5bbbf4ad855ef72af7
+Author: Maayan <damaayan@gmail.com>
+Date:   Fri Apr 7 23:52:50 2017 +0300
+
+    maze adapter
+
+commit e6d542193e19adb31c3047227ed27130f7eb8c57
+Author: nweichse <nevo12345@gmail.com>
+Date:   Fri Apr 7 20:24:20 2017 +0300
+
+    dll added and program
+
+commit dd950ba0a691c57506dac8fbb0ecd38c0e0faa1b
+Author: Maayan <damaayan@gmail.com>
+Date:   Wed Apr 5 22:37:41 2017 +0300
+
+    BFS, abstract classes, interfaces are  ready
+
+commit 7402ed0bc9d0deb3fd9146740d10d11c7a5fd860
+Merge: a8fd65f 0ade51e
+Author: Maayan <damaayan@gmail.com>
+Date:   Tue Apr 4 22:21:59 2017 +0300
+
+    searcher
+
+commit a8fd65fe5a3260c4fe22bef577379ca97b56c06c
+Author: Maayan <damaayan@gmail.com>
+Date:   Tue Apr 4 22:18:41 2017 +0300
+
+    isearcher
+
+commit 0ade51e6533dad4362a9edf1f7e12b47b68ea380
+Author: nweichse <nevo12345@gmail.com>
+Date:   Tue Apr 4 22:13:38 2017 +0300
+
+    solution and DFS
+
+commit 9a5ebb38a1cf695e09533f9c72f661efc541efb8
+Merge: 7fdeb64 ae187d8
+Author: nweichse <nevo12345@gmail.com>
+Date:   Tue Apr 4 20:23:39 2017 +0300
+
+    Merge branch 'master' of https://github.com/nevow/ex1ap2.git
+
+commit 7fdeb645c4eccaaaf7ab2c68d39ac9ccf266e510
+Author: nweichse <nevo12345@gmail.com>
+Date:   Tue Apr 4 20:23:18 2017 +0300
+
+    classes files
+
+commit ae187d88cbf122eb7c5c13e70c7ca340634f73e6
+Merge: d5982d8 149cb1b
+Author: Maayan <damaayan@gmail.com>
+Date:   Sat Apr 1 20:57:21 2017 +0300
+
+    with search
+
+commit d5982d8a558ef9466ae5a995ec62bc4b8e1bbe6d
+Author: Maayan <damaayan@gmail.com>
+Date:   Sat Apr 1 20:51:13 2017 +0300
+
+    try to cummit 4
+
+commit 149cb1bc4f78fbb5522ca829ed4f0b9aba823617
+Author: nweichse <nevo12345@gmail.com>
+Date:   Sat Apr 1 20:40:57 2017 +0300
+
+    abstract ISearchable
+
+commit 16d1271cf90fd89a0ffcbf07593a03469c8d779f
+Merge: badda2b 78f7cd5
+Author: nweichse <nevo12345@gmail.com>
+Date:   Sat Apr 1 19:26:20 2017 +0300
+
+    Merge remote-tracking branch 'refs/remotes/origin/nevo'
+
+commit 78f7cd553bf079355213ecb2b4376e945ae8ef7b
+Author: nweichse <nevo12345@gmail.com>
+Date:   Sat Apr 1 19:24:19 2017 +0300
+
+    commit to branch nevo
+
+commit badda2b51a437aa3d1ecc459ecec02b2cfbe13b2
+Author: Maayan <damaayan@gmail.com>
+Date:   Sat Apr 1 19:14:47 2017 +0300
+
+    try commit 2
+
+commit 01d48908beca8fb158782ffa76084afec9f866e0
+Author: Maayan <damaayan@gmail.com>
+Date:   Sat Apr 1 19:10:31 2017 +0300
+
+    try to branch
+
+commit 676c0f7e75a75bd3de89b91922f21c5fc3f0dc48
+Author: Maayan <damaayan@gmail.com>
+Date:   Sat Apr 1 19:03:37 2017 +0300
+
+    try to commit
+
+commit 334f77b23460d8a3ee8016311a4bad3345983877
+Author: nweichse <nevo12345@gmail.com>
+Date:   Sat Apr 1 18:49:09 2017 +0300
+
+    hello world
+
+commit 3e3d483610edeb01e270b8d79309a8b8dc6aa60c
+Author: nweichse <nweichse@NWEICHSE-MOBL>
+Date:   Sat Apr 1 18:35:32 2017 +0300
+
+    Add project files.
+
+commit 5959ad65d859c092d5e7ed05b880680e9d57953d
+Author: nweichse <nweichse@NWEICHSE-MOBL>
+Date:   Sat Apr 1 18:35:31 2017 +0300
+
+    Add .gitignore and .gitattributes.

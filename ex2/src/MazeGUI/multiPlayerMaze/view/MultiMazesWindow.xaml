@@ -1,0 +1,47 @@
+﻿<src:NonClosableWindow x:Class="MazeGUI.multiPlayerMaze.view.MultiMazesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MazeGUI.multiPlayerMaze.view"
+        xmlns:src="clr-namespace:MazeGUI.etc"
+        xmlns:controls="clr-namespace:MazeGUI.userControls"
+        mc:Ignorable="d"
+        Title="MultiMazesWindow" Height="600" Width="900" KeyDown="NonClosableWindow_KeyDown" Closing="NonClosableWindow_Closing" Loaded="singlePlayerMazeWindow_Loaded">
+    <StackPanel>
+        <Button x:Name="BackButton" Content="Back to main manu" Grid.Column="1" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="125" Click="BackButton_Click" />
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="5" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <controls:MazeControl x:Name="PlayerMazeControl" 
+                                  Grid.Row="1" 
+                                  HorizontalAlignment="Center" 
+                                  VerticalAlignment="Center" 
+                                  Cols="{Binding Cols}" 
+                                  Rows="{Binding Rows}"
+                                  MazeString="{Binding MazeString}"
+                                  MazeStartPoint="{Binding MazeStartPoint}"
+                                  MazeEndPoint="{Binding MazeEndPoint}" Margin="10"></controls:MazeControl>
+            <controls:MazeControl x:Name="OpponentMazeControl" 
+                                  Grid.Column="1" 
+                                  Grid.Row="1" 
+                                  HorizontalAlignment="Center" 
+                                  VerticalAlignment="Center" 
+                                  Cols="{Binding Cols}" 
+                                  Rows="{Binding Rows}"
+                                  MazeString="{Binding MazeString}"
+                                  MazeStartPoint="{Binding MazeStartPoint}"
+                                  MazeEndPoint="{Binding MazeEndPoint}" Margin="10"></controls:MazeControl>
+            <Label x:Name="userLabel" Content="My board" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center"/>
+            <Label x:Name="opponentLabel" Content="Other player's board" HorizontalAlignment="Center" Margin="37.8,7,47.6,7" VerticalAlignment="Center" Grid.Column="1"/>
+        </Grid>
+    </StackPanel>
+</src:NonClosableWindow>

@@ -1,0 +1,47 @@
+﻿<src:NonClosableWindow x:Name="SettingsWindow1" x:Class="MazeGUI.settings.view.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:src="clr-namespace:MazeGUI.etc"
+        xmlns:local="clr-namespace:MazeGUI.settings.view"
+        mc:Ignorable="d"
+        Title="Settings" Height="500" Width="500" Background="#FFF3E3D2" Closing="SettingsWindow1_Closing" Loaded="singlePlayerMazeWindow_Loaded">
+    <Grid x:Name="SettingsWindowGrid" Height="408" VerticalAlignment="Top" Margin="96,0" HorizontalAlignment="Center" Width="300" RenderTransformOrigin="0.288,0.558">
+        <Button x:Name="OkButton" HorizontalAlignment="Left" VerticalAlignment="Top" Width="130" Height="36" Background="#FF1755C1" RenderTransformOrigin="0.5,0.5" Margin="0,371,0,0" Content="ok" FontWeight="Bold" Click="BtnOK_Click">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="-0.395"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="-0.493"/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="130" Height="36" Background="#FF1755C1" RenderTransformOrigin="0.5,0.5" Margin="168,371,0,0" FontWeight="Bold" Click="BtnCancel_Click">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="-0.395"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="-0.493"/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Label x:Name="IPLabel" Content="IP :" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top" Width="118" HorizontalContentAlignment="Center" Background="#FFD1F0F3" FontWeight="Bold"/>
+        <Label x:Name="PortLabel" Content="Port :" HorizontalAlignment="Left" Margin="10,108,0,0" VerticalAlignment="Top" Width="118" HorizontalContentAlignment="Center" Background="#FFD1F0F3" FontWeight="Bold"/>
+        <Label x:Name="RowsLabel" Content="Rows :" HorizontalAlignment="Left" Margin="10,152,0,0" VerticalAlignment="Top" Width="118" HorizontalContentAlignment="Center" Background="#FFD1F0F3" FontWeight="Bold"/>
+        <Label x:Name="ColmLabel" Content="Columns :" HorizontalAlignment="Left" Margin="10,197,0,0" VerticalAlignment="Top" Width="118" HorizontalContentAlignment="Center" Background="#FFD1F0F3" FontWeight="Bold"/>
+        <ComboBox x:Name="cboSearchAlgo" HorizontalAlignment="Left"
+                        SelectedIndex="{Binding SearchAlgorithm}" IsEditable="False" Margin="128,245,0,137" Width="127">
+            <ComboBoxItem>BFS</ComboBoxItem>
+            <ComboBoxItem>DFS</ComboBoxItem>
+        </ComboBox>
+        <Label x:Name="SearchAlgoLabel" Content="Search Algoritem :" HorizontalAlignment="Left" Margin="10,245,0,0" VerticalAlignment="Top" Width="118" HorizontalContentAlignment="Center" Background="#FFD1F0F3" FontWeight="Bold"/>
+        <TextBox x:Name="IPTextBox" HorizontalAlignment="Left" Height="26" Margin="128,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="127" Text="{Binding ServerIP}"/>
+        <TextBox x:Name="PortTextBox" HorizontalAlignment="Left" Height="26" Margin="128,108,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="127" Text="{Binding ServerPort}"/>
+        <TextBox x:Name="RowsTextBox" HorizontalAlignment="Left" Height="26" Margin="128,152,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="127" Text="{Binding MazeRows}"/>
+        <TextBox x:Name="colmTextBox" HorizontalAlignment="Left" Height="26" Margin="128,197,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="127" Text="{Binding MazeCols}"/>
+
+    </Grid>
+</src:NonClosableWindow>
