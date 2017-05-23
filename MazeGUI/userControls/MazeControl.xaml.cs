@@ -41,15 +41,15 @@ namespace MazeGUI.userControls
             InitializeComponent();
         }
 
-        private void start(object sender, RoutedEventArgs e)
+        private void Start(object sender, RoutedEventArgs e)
         {
             canvasBorder.BorderThickness = new Thickness(0.2);
             mazeCanvas.Width = rectSizePX * Rows;
             mazeCanvas.Height = rectSizePX * Cols;
-            initializeMazeLabels();
+            InitializeMazeLabels();
         }
 
-        private void initializeMazeLabels()
+        private void InitializeMazeLabels()
         {
             double rectHeight = rectSizePX;
             double rectWidth = rectSizePX;
@@ -57,22 +57,23 @@ namespace MazeGUI.userControls
             player.Height = rectHeight;
             double distanceFromLeft = 0;
             double distanceFromTop = 0;
-
+            char sign;
             for (int i = 0; i < Rows; i++)
             {
                 distanceFromLeft = 0;
                 for (int j = 0; j < Cols; j++)
                 {
-
                     Rectangle rectangle = new Rectangle();
                     rectangle.Width = rectWidth;
                     rectangle.Height = rectHeight;
                     Canvas.SetLeft(rectangle, distanceFromLeft);
                     Canvas.SetTop(rectangle, distanceFromTop);
-                    rectangle.Fill = ColorFactory.GetColor(MazeString[i * Cols + j]);
+                    sign = MazeString[i * Cols + j];
+                    rectangle.Fill = ColorFactory.GetColor(sign);
                     rects.Add(rectangle);
                     mazeCanvas.Children.Add(rectangle);
                     distanceFromLeft = (distanceFromLeft + rectWidth);
+    
                 }
                 distanceFromTop = (distanceFromTop + rectHeight);
             }

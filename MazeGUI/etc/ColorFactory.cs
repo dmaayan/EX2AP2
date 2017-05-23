@@ -1,4 +1,6 @@
-﻿using System.Windows.Media;
+﻿using System;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace MazeGUI.etc
 {
@@ -17,6 +19,12 @@ namespace MazeGUI.etc
                     {
                         // a wall color
                         return Brushes.Black;
+                    }
+
+                case '#':
+                    {
+                        // the exit point Image
+                        return new ImageBrush(new BitmapImage(new Uri(@"../../Images/key.jpg", UriKind.Relative)));
                     }
                 default:
                     {
