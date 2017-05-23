@@ -1,4 +1,6 @@
-﻿using System.Windows.Media;
+﻿using System;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace MazeGUI.etc
 {
@@ -26,8 +28,8 @@ namespace MazeGUI.etc
                     }
                 case '#':
                     {
-                        // the exit color
-                        return Brushes.Green;
+                        // the exit point Image
+                        return new ImageBrush(new BitmapImage(new Uri(@"../../Images/key.jpg", UriKind.Relative)));
                     }
                 default:
                     {

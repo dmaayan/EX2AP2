@@ -223,5 +223,8 @@
   <ItemGroup>
     <Resource Include="Images\player.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\key.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
