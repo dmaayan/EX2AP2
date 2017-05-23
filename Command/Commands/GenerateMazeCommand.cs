@@ -27,14 +27,6 @@ namespace MVC
         {
             try
             {
-                // checks that the argument length is valid
-                if (args.Length != 3)
-                {
-                    // set the statues, send to client and return
-                    Stat.SetStatues(Status.Error, "Parameter does not match");
-                    Handler.SendToClient(Stat.ToJson(), client);
-                    return Status.Disconnect;
-                }
                 // get the name and sizes
                 string name = args[0];
                 int rows = int.Parse(args[1]);

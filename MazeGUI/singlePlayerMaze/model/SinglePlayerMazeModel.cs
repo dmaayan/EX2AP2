@@ -25,8 +25,11 @@ namespace MazeGUI.singlePlayerMaze.model
             if (mazeSolution == null)
             {
                 Statues stat = ClientSingleton.Client.SendMesseage("solve " + MazeName + " " + searchAlgoritm);
+                if (stat == null)
+                {
+                    return null;
+                }
                 mazeSolution = MazeSolution.FromJson(stat.Message);
-                
             }
             return mazeSolution;
         }

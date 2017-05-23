@@ -23,8 +23,9 @@ namespace MVC
         /// <returns>the status of the command</returns>
         public override Status Execute(string[] args, TcpClient client)
         {
-            // get the game played by this client if exist
-            Game game = Model.GetGameOfPlayer(client);
+            string name = args[0];
+            // get its game
+            Game game = Model.CloseGame(name, client);
             if (game == null)
             {
                 // set the statues, send to client and return
@@ -36,7 +37,7 @@ namespace MVC
             Stat.SetStatues(Status.Close, "Game is closing");
             Handler.SendToClient(Stat.ToJson(), client);
 
-            // inform the other plaayer that its game have been closed
+            // inform the other player that its game have been closed
             Player otherPlayer = game.GetOtherPlayer(client);
             Stat.SetStatues(Status.Finish, "Closed game");
             Handler.SendToClient(Stat.ToJson(), otherPlayer.Client);

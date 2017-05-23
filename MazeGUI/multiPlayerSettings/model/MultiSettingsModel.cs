@@ -41,41 +41,35 @@ namespace MazeGUI.multiPlayerSettings.model
 
         public Maze StartGame()
         {
-            try
-            {
-                Statues stat = ClientSingleton.Client.SendMesseage("start " + mazeName + " " + Rows + " " + Cols);
-                return Maze.FromJSON(stat.Message);
-            }catch (Exception)
+            Statues stat = ClientSingleton.Client.SendMesseage("start " + mazeName + " " + Rows + " " + Cols);
+            if (stat == null)
             {
                 return null;
             }
+            return Maze.FromJSON(stat.Message);
+
         }
 
         public string[] GetListGames()
         {
-            try
-            {
-                Statues stat = ClientSingleton.Client.SendMesseage("list");
-                return JsonConvert.DeserializeObject<string[]>(stat.Message);
-            }
-            catch (Exception)
+            Statues stat = ClientSingleton.Client.SendMesseage("list");
+            if (stat == null)
             {
                 return null;
             }
+            return JsonConvert.DeserializeObject<string[]>(stat.Message);
         }
 
         public Maze JoinGame(string game)
         {
-            try
-            {
-                Statues stat = ClientSingleton.Client.SendMesseage("join " + game);
-                return Maze.FromJSON(stat.Message);
-            }
-            catch (Exception)
+            Statues stat = ClientSingleton.Client.SendMesseage("join " + game);
+            if (stat == null)
             {
                 return null;
             }
+            return Maze.FromJSON(stat.Message);
         }
+
         public void BackToMenu()
         {
 

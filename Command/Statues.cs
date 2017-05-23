@@ -3,10 +3,9 @@
 namespace MVC
 {
     /// <summary>
-    /// enum Status has 8 status, represent the current condotion
+    /// enum Status has 6 status, represent the current condotion
     /// </summary>
-    public enum Status { KeepConnection = 0, Disconnect, PrintAndContinue,
-                    CloseGame, Error, Close, CloseAndDeliver, Finish, Play };
+    public enum Status { KeepConnection = 0, Disconnect, CloseGame, Close, Finish, Play };
 
     /// <summary>
     /// Statues has Status and string 

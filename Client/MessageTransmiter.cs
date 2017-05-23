@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Client
 {
@@ -14,8 +15,10 @@ namespace Client
     /// </summary>
     public class MessageTransmiter
     {
+        /// <summary>
+        /// event to notify all about messages received from the server
+        /// </summary>
         private event EventHandler<StatuesEventArgs> NotifyAboutMessage;
-
         /// <summary>
         /// client currently active
         /// </summary>
@@ -40,9 +43,10 @@ namespace Client
         /// statues of the send returned from the server
         /// </summary>
         private Statues statues;
-
+        /// <summary>
+        /// all the delegates signed for the event
+        /// </summary>
         private List<EventHandler<StatuesEventArgs>> delegates;
-
         /// <summary>
         /// wait for messages from the server in multiplayer connection
         /// </summary>
@@ -55,7 +59,6 @@ namespace Client
         /// true if there is a game
         /// </summary>
         private bool isMultiActive;
-
 
         /// <summary>
         /// constructor
@@ -70,10 +73,14 @@ namespace Client
             delegates = new List<EventHandler<StatuesEventArgs>>();
         }
 
-
+        /// <summary>
+        /// add event handler to the event
+        /// </summary>
+        /// <param name="messageEventHandler">event to add</param>
         public void SignForEvent(EventHandler<StatuesEventArgs> messageEventHandler)
         {
             NotifyAboutMessage += messageEventHandler;
+            // record all incoming delegates
             delegates.Add(messageEventHandler);
         }
 
@@ -123,11 +130,11 @@ namespace Client
                         }
                         catch (Exception e)
                         {
+                            MessageBox.Show("Connect to the server have been closed");
                             // an error in the connection
                             statues = new Statues();
-                            statues.SetStatues(Status.Close, "Error" + e.ToString());
-                            result = "Error";
-                            break;
+                            statues.SetStatues(Status.Close, "Error receiveing message from the server");
+                            status = Status.Disconnect;
                         }
                         // switch through the different options received from the server
                         switch (status)
@@ -151,7 +158,6 @@ namespace Client
                                 {
                                     // close the connection
                                     writer.Write("exit");
-                                    statues = null;
                                     Close();
                                     break;
                                 }
@@ -159,14 +165,7 @@ namespace Client
                                 {
                                     // close the connection
                                     writer.Write("exit");
-                                    statues = null;
                                     Close();
-                                    break;
-                                }
-                            case Status.Error:
-                                {
-                                    // print the error message
-                                    Console.WriteLine(statues.Message);
                                     break;
                                 }
                             default:
@@ -191,40 +190,34 @@ namespace Client
         /// </summary>
         public void Close()
         {
+            // turn off the flags
             isMultiActive = false;
             isOpen = false;
+            // dispose of the stream resourecs
             writer.Dispose();
             reader.Dispose();
             stream.Dispose();
             client.Close();
-            foreach(EventHandler<StatuesEventArgs> e in delegates)
+            // unsign all the delegates in the event
+            foreach (EventHandler<StatuesEventArgs> e in delegates)
             {
                 NotifyAboutMessage -= e;
             }
             delegates.Clear();
+            statues = null;
         }
 
         /// <summary>
         /// if there is a connection with the server, close it and update the server
         /// </summary>
-        public void FinishGame()
+        public void FinishGame(string[] args)
         {
             // if there is a connection
             if (isOpen)
             {
-                writer.Write("finish");
+                writer.Write(String.Join(" ", args));
 
-                //// set bools to false
-                //isMultiActive = false;
-                //isOpen = false;
-                //// send exit message to the server for clean disconnect
-                //getStatues();
                 receiver.Wait();
-                //// dispose all resources
-                //stream.Dispose();
-                //reader.Dispose();
-                //writer.Dispose();
-                //client.Close();
             }
         }
 
@@ -267,29 +260,23 @@ namespace Client
             newClient.Close();
         }
 
-        ///// <summary>
-        ///// gets a message from the server using the Open connection
-        ///// </summary>
-        ///// <returns>the message received from the server</returns>
-        //public Statues GetMassage()
-        //{
-        //    // wait for the receiver to get a message
-        //    while (messageReceived == null)
-        //    {
-        //        Thread.Sleep(1);
-        //    }
-        //    // save the message at current and reset the messageReceiverd to null
-        //    Statues current = messageReceived;
-        //    messageReceived = null;
-        //    return current;
-        //}
-
+        /// <summary>
+        /// gets a statues from the server using the Open connection
+        /// </summary>
+        /// <returns>the statues received from the server</returns>
         public Statues getStatues()
         {
             // wait for the receiver to get a message
             while (statues == null)
             {
-                Thread.Sleep(1);
+                if (isOpen)
+                {
+                    Thread.Sleep(1);
+                }
+                else
+                {
+                    return null;
+                }
             }
             // save the message at current and reset the messageReceiverd to null
             Statues current = statues;

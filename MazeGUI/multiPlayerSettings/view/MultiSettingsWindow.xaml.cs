@@ -72,11 +72,7 @@ namespace MazeGUI.multiPlayerSettings.view
                 {
                     gamesList.Add(game);
                 }
-            } else
-            {
-                MessageBox.Show("List:Problem occurred, please try again");
             }
-            
         }
 
         private void OKButton_Click(object sender, RoutedEventArgs e)
@@ -84,35 +80,42 @@ namespace MazeGUI.multiPlayerSettings.view
             if (MazeName == null)
             {
                 MessageBox.Show("Enter Maze Name");
+                return;
             }
-            else
+
+            ListGamesTextBlock.Visibility = Visibility.Hidden;
+            JoinButton.Visibility = Visibility.Hidden;
+            ListComboBox.Visibility = Visibility.Hidden;
+            multiSettingsContol.Visibility = Visibility.Hidden;
+            waitLabel.Visibility = Visibility.Visible;
+            backButton.Visibility = Visibility.Visible;
+
+            Task t = new Task(() =>
             {
-                ListGamesTextBlock.Visibility = Visibility.Hidden;
-                JoinButton.Visibility = Visibility.Hidden;
-                ListComboBox.Visibility = Visibility.Hidden;
-                multiSettingsContol.Visibility = Visibility.Hidden;
-                waitLabel.Visibility = Visibility.Visible;
-                backButton.Visibility = Visibility.Visible;
-
-                Task t = new Task(() =>
+                Maze maze = model.StartGame();
+                if (maze != null)
                 {
-                    Maze maze = model.StartGame();
-                    if (maze != null)
+                    Dispatcher.Invoke(() =>
                     {
-                        Dispatcher.Invoke(() =>
-                        {
-                            new MultiMazesWindow(maze).Show();
-                            Close();
-                        });
-                    }
-                    else
+                        new MultiMazesWindow(maze).Show();
+                        Close();
+                    });
+                }
+                else
+                {
+                    Dispatcher.Invoke(() =>
                     {
-                        MessageBox.Show("Maze:Problem occurred, please try again");
-                    }
+                        ListGamesTextBlock.Visibility = Visibility.Visible;
+                        JoinButton.Visibility = Visibility.Visible;
+                        ListComboBox.Visibility = Visibility.Visible;
+                        multiSettingsContol.Visibility = Visibility.Visible;
+                        waitLabel.Visibility = Visibility.Hidden;
+                        backButton.Visibility = Visibility.Hidden;
+                    });
+                }
 
-                });
-                t.Start();
-            }
+            });
+            t.Start();
         }
 
         private void JoinButton_Click(object sender, RoutedEventArgs e)

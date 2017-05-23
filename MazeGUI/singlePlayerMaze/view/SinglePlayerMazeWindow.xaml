@@ -7,11 +7,12 @@
         xmlns:local="clr-namespace:MazeGUI"
         xmlns:controls="clr-namespace:MazeGUI.userControls"
         mc:Ignorable="d"
-        Title="{Binding MazeName}" Height="300" Width="300" Closing="singlePlayerMazeWindow_Closing" Loaded="singlePlayerMazeWindow_Loaded">
+        Title="{Binding MazeName}" Height="400" Width="400" Closing="singlePlayerMazeWindow_Closing" Loaded="singlePlayerMazeWindow_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="10" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>

@@ -42,7 +42,6 @@ namespace MazeGUI.multiPlayerMaze.model
         public void SendMove(Direction direction)
         {
             Statues stat = ClientSingleton.Client.SendMesseage("play " + direction.ToString());
-            return;
         }
     }
 }

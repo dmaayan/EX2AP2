@@ -45,8 +45,11 @@ namespace MazeGUI
             else
             {
                 Maze maze = model.Connect();
-                new SinglePlayerMazeWindow(maze).Show();
-                Close();
+                if (maze != null)
+                {
+                    new SinglePlayerMazeWindow(maze).Show();
+                    Close();
+                }
             }
         }
 

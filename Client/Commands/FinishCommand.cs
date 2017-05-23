@@ -31,7 +31,7 @@ namespace Client.Commands
         public Status Execute(string[] args, TcpClient client)
         {
             // close connection with the server
-            messageRec.FinishGame();
+            messageRec.FinishGame(args);
             return Status.Finish;
         }
     }

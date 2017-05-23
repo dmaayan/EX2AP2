@@ -113,12 +113,17 @@ namespace MazeGUI
 
         private void MainMenuButton_Click(object sender, RoutedEventArgs e)
         {
-            // TODO force close when animating
             if (isAnimating == false)
             {
-                MainWindow win = (MainWindow)Application.Current.MainWindow;
-                win.Show();
-                Close();
+                MessageBoxResult messageBoxResult = MessageBox.Show("Do you want to go back?",
+                                                                    "Back to main menu",
+                                                                    MessageBoxButton.YesNo);
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
+                    MainWindow win = (MainWindow)Application.Current.MainWindow;
+                    win.Show();
+                    Close();
+                }
             }
         }
 
@@ -127,7 +132,10 @@ namespace MazeGUI
             if (isAnimating == false)
             {
                 string solution = model.SolveMaze();
-                AnimateFromAnotherThread(solution);
+                if (solution != null)
+                {
+                    AnimateFromAnotherThread(solution);
+                }
             }
         }
 
