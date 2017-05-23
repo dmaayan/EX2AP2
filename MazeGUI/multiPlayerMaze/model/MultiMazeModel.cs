@@ -21,7 +21,7 @@ namespace MazeGUI.multiPlayerMaze.model
 
         public void OnOpponentMove(object o, StatuesEventArgs e)
         {
-            registerForMasseger?.Invoke(this, e);
+            registerForMessages?.Invoke(this, e);
         }
 
         public Direction PlayMove()
