@@ -11,7 +11,7 @@ namespace MazeGUI.multiPlayerMaze.model
 {
     public interface IMultiMazeModel : IMazeModel
     {
-        event EventHandler<StatuesEventArgs> registerForMasseger;
+        event EventHandler<StatuesEventArgs> registerForMessages;
 
         Direction PlayMove();
         void CloseGame();

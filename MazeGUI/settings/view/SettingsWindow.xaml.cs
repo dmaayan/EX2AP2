@@ -46,7 +46,7 @@ namespace MazeGUI.settings.view
 
         private void SettingsWindow1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            viewModel.ReloadSettings();
+            //viewModel.ReloadSettings();
             MainWindow win = (MainWindow)Application.Current.MainWindow;
             win.Show();
         }

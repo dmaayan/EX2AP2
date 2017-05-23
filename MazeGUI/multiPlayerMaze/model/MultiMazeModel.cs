@@ -12,7 +12,7 @@ namespace MazeGUI.multiPlayerMaze.model
 {
     public class MultiMazeModel : AbstractMazeModel, IMultiMazeModel
     {
-        public event EventHandler<StatuesEventArgs> registerForMasseger;
+        public event EventHandler<StatuesEventArgs> registerForMessages;
 
         public MultiMazeModel(Maze m) : base(m)
         {
@@ -21,7 +21,7 @@ namespace MazeGUI.multiPlayerMaze.model
 
         public void OnOpponentMove(object o, StatuesEventArgs e)
         {
-            registerForMasseger?.Invoke(this, e);
+            registerForMessages?.Invoke(this, e);
         }
 
         public Direction PlayMove()

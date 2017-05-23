@@ -18,7 +18,7 @@ namespace MazeGUI.multiPlayerMaze.viewModel
         public MultiMazeViewModel(IMultiMazeModel m)
         {
             model = m;
-            model.registerForMasseger += OnOpponentMove;
+            model.registerForMessages += OnOpponentMove;
         }
 
         // close game 
